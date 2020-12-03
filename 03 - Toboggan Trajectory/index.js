@@ -1,4 +1,3 @@
-const { count } = require("console");
 const { promises } = require("fs");
 const { join } = require("path");
 
