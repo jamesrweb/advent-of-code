@@ -3,8 +3,8 @@ const { join } = require("path");
 
 function hits(grid, right, down) {
   let count = 0;
-  let x = 0;
-  let y = 0;
+  let x = down;
+  let y = right;
 
   do {
     grid[x][y % grid[x].length] && count++;
@@ -19,7 +19,7 @@ async function main() {
   const uri = join(__dirname, "input.txt");
   const file = await promises.readFile(uri, "utf8");
   const gradients = file.split("\r\n");
-  const grid = gradients.map(g => [...g].map(cell => cell === "#"));
+  const grid = gradients.map(g => [...g].map(char => char === "#"));
   const go = hits.bind(this, grid);
 
   console.log({
