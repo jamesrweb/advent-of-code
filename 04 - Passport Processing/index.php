@@ -60,7 +60,7 @@
     }
 
     private function count_digits(int $value): int {
-      return intval(floor(log10($this->expiration_year) + 1));
+      return intval(floor(log10($value) + 1));
     }
 
     private function validate_birth_year(): bool {
