@@ -10,7 +10,7 @@
         str_split($passcode)
       );
       $binary = implode("", $digits);
-			$this->id = +base_convert($binary, 2, 10);
+      $this->id = +base_convert($binary, 2, 10);
     }
 
     private function char_to_binary_digit(string $char): string {
