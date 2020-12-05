@@ -28,11 +28,10 @@
       fn(string $passcode) => new Seat($passcode),
       explode("\r\n", $contents)
     );
+    $seat_ids = array_map(fn(Seat $seat) => $seat->id, $seats);
 
     print_r([
-      "part_one" => max(
-        array_map(fn(Seat $seat) => $seat->id, $seats)
-      ),
+      "part_one" => max($seat_ids),
       "part_two" => array_reduce(
         range(0, pow(2, 10)),
         function(int $accumulator, int $current) use($seat_ids) {
