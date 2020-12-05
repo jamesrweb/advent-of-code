@@ -2,15 +2,15 @@
   declare(strict_types=1);
 
   class Passport {
-    public int $birth_year;
-    public int $country_id;
-    public int $expiration_year;
-    public int $height;
-    public int $issue_year;
-    public string $eye_colour;
-    public string $hair_colour;
-    public string $height_unit;
-    public string $passport_id;
+    private int $birth_year;
+    private int $country_id;
+    private int $expiration_year;
+    private int $height;
+    private int $issue_year;
+    private string $eye_colour;
+    private string $hair_colour;
+    private string $height_unit;
+    private string $passport_id;
 
     public static function create(string $data): Passport {
       $parsed = str_replace("\r\n", " ", $data);
@@ -56,6 +56,28 @@
         isset($this->height_unit) &&
         isset($this->issue_year) &&
         isset($this->passport_id)
+      );
+    }
+
+    public function validate_part_two(): bool {
+      if(!$this->validate_part_one()) return false;
+
+      $valid_birth_year = $this->validate_birth_year();
+      $valid_issue_year = $this->validate_issue_year();
+      $valid_expiration_year = $this->validate_expiration_year();
+      $valid_height = $this->validate_height();
+      $valid_hair_colour = $this->validate_hair_colour();
+      $valid_eye_colour = $this->validate_eye_colour();
+      $valid_passport_id = $this->validate_passport_id();
+
+      return (
+        $valid_birth_year &&
+        $valid_issue_year &&
+        $valid_expiration_year &&
+        $valid_height &&
+        $valid_hair_colour &&
+        $valid_eye_colour &&
+        $valid_passport_id
       );
     }
 
@@ -108,28 +130,6 @@
 
     private function validate_passport_id(): bool {
       return strlen($this->passport_id) === 9;
-    }
-
-    public function validate_part_two(): bool {
-      if(!$this->validate_part_one()) return false;
-
-      $valid_birth_year = $this->validate_birth_year();
-      $valid_issue_year = $this->validate_issue_year();
-      $valid_expiration_year = $this->validate_expiration_year();
-      $valid_height = $this->validate_height();
-      $valid_hair_colour = $this->validate_hair_colour();
-      $valid_eye_colour = $this->validate_eye_colour();
-      $valid_passport_id = $this->validate_passport_id();
-
-      return (
-        $valid_birth_year &&
-        $valid_issue_year &&
-        $valid_expiration_year &&
-        $valid_height &&
-        $valid_hair_colour &&
-        $valid_eye_colour &&
-        $valid_passport_id
-      );
     }
   }
 
