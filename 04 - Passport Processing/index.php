@@ -25,7 +25,7 @@
       return $passport;
     }
 
-    public function set(string $key, int|string $value) {
+    public function set(string $key, string $value) {
       if($key === "byr") {
         $this->birth_year = intval($value, 10);
       } else if($key === "cid") {
