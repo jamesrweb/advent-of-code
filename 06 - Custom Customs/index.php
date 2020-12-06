@@ -28,11 +28,11 @@
     public function everyone() {
       $total_answers = count($this->answers);
       $answer_counts = $this->answer_counts();
-      $all = array_filter(
+      $answered_by_all = array_filter(
         $answer_counts,
         fn(int $value) => $value === $total_answers
       );
-      return count($all);
+      return count($answered_by_all);
     }
   }
 
