@@ -25,7 +25,7 @@
       return count($keys);
     }
 
-    public function everyone() {
+    public function everyone(): int {
       $total_answers = count($this->answers);
       $answer_counts = $this->answer_counts();
       $answered_by_all = array_filter(
