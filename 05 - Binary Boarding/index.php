@@ -22,25 +22,35 @@
     }
   }
 
+  function part_two_filter(int $current, array $seat_ids): bool {
+    return (
+      in_array($current - 1, $seat_ids) &&
+      in_array($current + 1, $seat_ids) &&
+      !in_array($current, $seat_ids)
+    );
+  }
+
+  function solve_part_two(array $seat_ids): int {
+    $possibilities = range(0, pow(2, 10));
+    return array_reduce(
+      $possibilities,
+      fn(int $accumulator, int $current) => (
+        part_two_filter($current, $seat_ids) ? $current : $accumulator
+      ),
+      0
+    );
+  }
+
   function main() {
     $contents = file_get_contents(__DIR__ . "/input.txt", true);
-    $seats = array_map(
-      fn(string $passcode) => new Seat($passcode),
+    $seat_ids = array_map(
+      fn(string $passcode) => (new Seat($passcode))->id,
       explode("\r\n", $contents)
     );
-    $seat_ids = array_map(fn(Seat $seat) => $seat->id, $seats);
 
     print_r([
       "part_one" => max($seat_ids),
-      "part_two" => array_reduce(
-        range(0, pow(2, 10)),
-        function(int $accumulator, int $current) use($seat_ids) {
-          return (
-            in_array($current - 1, $seat_ids) &&
-            in_array($current + 1, $seat_ids) &&
-            !in_array($current, $seat_ids)
-          ) ? $current : $accumulator;
-      }, 0)
+      "part_two" => solve_part_two($seat_ids)
     ]);
   }
 
