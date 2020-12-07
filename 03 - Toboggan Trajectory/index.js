@@ -3,14 +3,14 @@ const { join } = require("path");
 
 function hits(grid, right, down) {
   let count = 0;
-  let x = down;
-  let y = right;
+  let x = right;
+  let y = down;
 
   do {
-    grid[x][y % grid[x].length] && count++;
-    x += down;
-    y += right;
-  } while (x < grid.length);
+    grid[y][x % grid[y].length] && count++;
+    y += down;
+    x += right;
+  } while (y < grid.length);
 
   return count;
 }
