@@ -15,12 +15,8 @@ function format(item) {
   }
 }
 
-async function main() {
-  const uri = join(__dirname, "input.txt");
-  const file = await promises.readFile(uri, "utf8");
-  const policies = file.split("\r\n").map(format);
-
-  const part_one = filter(policies, ({ char, count, password }) => {
+function solve_part_one(policies) {
+  return filter(policies, ({ char, count, password }) => {
     const [min, max] = count;
     const appearances = [...password].reduce((accumulator, letter) => {
       return letter === char ? accumulator + 1 : accumulator;
@@ -28,8 +24,10 @@ async function main() {
 
     return appearances >= min && appearances <= max;
   });
+}
 
-  const part_two = filter(policies, ({ char, count: positions, password }) => {
+function solve_part_two(policies) {
+  return filter(policies, ({ char, count: positions, password }) => {
     const [first, second] = positions;
 
     return (
@@ -37,10 +35,16 @@ async function main() {
       password[second - 1] === char && password[first - 1] !== char
     );
   });
+}
+
+async function main() {
+  const uri = join(__dirname, "input.txt");
+  const file = await promises.readFile(uri, "utf8");
+  const policies = file.split("\r\n").map(format);
 
   console.log({
-    part_one: part_one.length,
-    part_two: part_two.length
+    part_one: solve_part_one(policies).length,
+    part_two: solve_part_two(policies).length
   });
 }
 
