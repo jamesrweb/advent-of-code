@@ -129,7 +129,7 @@
     }
 
     private function validate_passport_id(): bool {
-      return strlen($this->passport_id) === 9;
+      return !!preg_match("/^\d{9}$/", $this->passport_id);
     }
   }
 
