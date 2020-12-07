@@ -11,9 +11,9 @@
     private function answer_counts(): array {
       $answers = array_reduce(
         $this->answers,
-        function(array $accumulator, string $group) {
-          return array_merge($accumulator, str_split($group));
-        },
+        fn(array $accumulator, string $group) => (
+          array_merge($accumulator, str_split($group))
+        ),
         []
       );
       return array_count_values($answers);
@@ -39,9 +39,9 @@
   function solve_part_one(array $groups): int {
     return array_reduce(
       $groups,
-      function(int $accumulator, Group $current) {
-        return $accumulator + $current->anyone();
-      },
+      fn(int $accumulator, Group $current) => (
+        $accumulator + $current->anyone()
+      ),
       0
     );
   }
@@ -49,9 +49,9 @@
   function solve_part_two(array $groups): int {
     return array_reduce(
       $groups,
-      function(int $accumulator, Group $current) {
-        return $accumulator + $current->everyone();
-      },
+      fn(int $accumulator, Group $current) => (
+        $accumulator + $current->everyone()
+      ),
       0
     );
   }
