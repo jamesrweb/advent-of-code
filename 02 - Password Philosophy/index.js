@@ -16,7 +16,7 @@ function format(item) {
 }
 
 function solve_part_one(policies) {
-  return filter(policies, ({ char, count, password }) => {
+  const valid = filter(policies, ({ char, count, password }) => {
     const [min, max] = count;
     const appearances = [...password].reduce((accumulator, letter) => {
       return letter === char ? accumulator + 1 : accumulator;
@@ -24,10 +24,12 @@ function solve_part_one(policies) {
 
     return appearances >= min && appearances <= max;
   });
+
+  return valid.length;
 }
 
 function solve_part_two(policies) {
-  return filter(policies, ({ char, count: positions, password }) => {
+  const valid = filter(policies, ({ char, count: positions, password }) => {
     const [first, second] = positions;
 
     return (
@@ -35,6 +37,8 @@ function solve_part_two(policies) {
       password[second - 1] === char && password[first - 1] !== char
     );
   });
+
+  return valid.length;
 }
 
 async function main() {
@@ -43,8 +47,8 @@ async function main() {
   const policies = file.split("\r\n").map(format);
 
   console.log({
-    part_one: solve_part_one(policies).length,
-    part_two: solve_part_two(policies).length
+    part_one: solve_part_one(policies),
+    part_two: solve_part_two(policies)
   });
 }
 
