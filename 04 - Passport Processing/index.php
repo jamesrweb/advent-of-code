@@ -133,24 +133,34 @@
     }
   }
 
+  function solve_part_one(array $passports): int {
+    $valid = array_filter(
+      $passports,
+      fn(Passport $passport) => $passport->validate_part_one()
+    );
+
+    return count($valid);
+  }
+
+  function solve_part_two(array $passports): int {
+    $valid = array_filter(
+      $passports,
+      fn(Passport $passport) => $passport->validate_part_two()
+    );
+
+    return count($valid);
+  }
+
   function main() {
     $contents = file_get_contents(__DIR__ . "/input.txt", true);
     $passports = array_map(
       fn(string $data) => Passport::create($data),
       explode("\r\n\r\n", $contents)
     );
-    $part_one = array_filter(
-      $passports,
-      fn(Passport $passport) => $passport->validate_part_one()
-    );
-    $part_two = array_filter(
-      $passports,
-      fn(Passport $passport) => $passport->validate_part_two()
-    );
 
     print_r([
-      "part_one" => count($part_one),
-      "part_two" => count($part_two)
+      "part_one" => solve_part_one($passports),
+      "part_two" => solve_part_two($passports)
     ]);
   }
 
