@@ -1,1 +1,3 @@
 .mypy_cache/
+*.exe
+*.pdb
