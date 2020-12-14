@@ -21,15 +21,10 @@ namespace Shuttle_Search
 
   class Program
   {
-    static Shuttle[] ParseInput(string data)
+    static Shuttle[] ParseInput(string[] lines)
     {
-      var parts = data.Split(
-        Environment.NewLine,
-        data.Length,
-        StringSplitOptions.RemoveEmptyEntries
-      );
-      var earliest = Convert.ToInt64(parts[0]);
-      var routes = parts[1].Split(",");
+      var earliest = Convert.ToInt64(lines[0]);
+      var routes = lines[1].Split(",");
       return routes.Select((string route, int index) =>
         {
           if (route == "x") return null;
@@ -61,7 +56,7 @@ namespace Shuttle_Search
 
     static void Main(string[] args)
     {
-      var input = File.ReadAllText("./input.txt", Encoding.UTF8);
+      var input = File.ReadAllLines("./input.txt", Encoding.UTF8);
       var buses = ParseInput(input);
       Console.WriteLine("part_one: " + SolvePartOne(buses));
       Console.WriteLine("part_two: " + SolvePartTwo(buses));
