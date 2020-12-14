@@ -33,8 +33,8 @@ namespace Shuttle_Search
       return routes.Select((string route, int index) =>
         {
           if (route == "x") return null;
-          var id = Convert.ToInt64(route);
-          return new Shuttle(index, id, id - earliest % id);
+          var interval = Convert.ToInt64(route);
+          return new Shuttle(index, interval, interval - earliest % interval);
         }
       ).Where(b => b != null).ToArray();
     }
