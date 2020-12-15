@@ -62,10 +62,9 @@ namespace Docking_Data
     {
       var mask = string.Empty;
       var memory = new Dictionary<long, long>();
+      var combinations = 0;
 
-      var combinations = 0L;
-
-      foreach (string line in data)
+      foreach (var line in data)
       {
         var info = line.Split(" = ");
 
@@ -73,7 +72,7 @@ namespace Docking_Data
         {
           mask = info[1];
           var xs = mask.Count(value => value == 'X');
-          combinations = Convert.ToInt64(Math.Pow(2, xs));
+          combinations = Convert.ToInt32(Math.Pow(2, xs));
           continue;
         }
 
