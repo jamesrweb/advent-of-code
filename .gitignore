@@ -2,5 +2,6 @@
 .mypy_cache/
 bin/
 obj/
+elm-stuff/
 *.exe
 *.pdb
