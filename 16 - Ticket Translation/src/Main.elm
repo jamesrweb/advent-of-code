@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser exposing (element)
-import Html exposing (Html, li, pre, text, ul)
+import Html exposing (Html, li, text, ul)
 import Http exposing (Error(..))
 import Maybe exposing (map, map2, map3, withDefault)
 import Maybe.Extra exposing (traverse)
