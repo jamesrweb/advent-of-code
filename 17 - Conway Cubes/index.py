@@ -37,5 +37,5 @@ def simulate(lines: List[str], dimensions: int) -> int:
 
 with open("input.txt", "r") as f:
     lines = f.readlines()
-    print("part_one:", simulate(lines, 3))
-    print("part_two:", simulate(lines, 4))
+    print(f"part_one: {simulate(lines, 3)}")
+    print(f"part_two: {simulate(lines, 4)}")
