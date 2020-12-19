@@ -3,5 +3,7 @@
 bin/
 obj/
 elm-stuff/
+node_modules/
+dist/
 *.exe
 *.pdb

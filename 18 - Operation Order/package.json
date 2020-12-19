@@ -1,0 +1,22 @@
+{
+  "name": "day-18",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc && cp ./src/input.txt ./dist",
+    "build:dev": "npx tsc -w",
+    "start": "npm run build && node ./dist"
+  },
+  "dependencies": {
+    "@types/mathjs": "^6.0.9",
+    "@types/node": "^14.14.14",
+    "mathjs": "^8.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
