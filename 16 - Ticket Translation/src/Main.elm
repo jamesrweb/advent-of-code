@@ -303,11 +303,9 @@ view model =
             text "Loading..."
 
         Success data ->
-            pre []
-                [ ul []
-                    [ li [] [ text ("part_one: " ++ part_one (getState data)) ]
-                    , li [] [ text ("part_two: " ++ part_two (getState data)) ]
-                    ]
+            ul []
+                [ li [] [ text ("part_one: " ++ part_one (getState data)) ]
+                , li [] [ text ("part_two: " ++ part_two (getState data)) ]
                 ]
 
         Failure error ->
@@ -336,7 +334,7 @@ view model =
 
 main : Program () Model Msg
 main =
-    Browser.element
+    element
         { init = init
         , update = update
         , subscriptions = subscriptions
