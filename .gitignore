@@ -8,3 +8,4 @@ dist/
 *.exe
 *.pdb
 .Rproj.user
+tempCodeRunnerFile.*
