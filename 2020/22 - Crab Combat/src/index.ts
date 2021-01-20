@@ -35,7 +35,7 @@ function solve_part_one(players: Player[]): number {
   } while (player_one.length && player_two.length);
 
   if (player_one.length) return score(player_one);
-  else return score(player_two);
+  return score(player_two);
 }
 
 function part_two_helper(players: Player[]): [Players, Player] {
