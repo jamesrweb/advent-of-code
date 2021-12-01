@@ -4,9 +4,14 @@ const { join } = require("path");
 type Lines = Array<string>;
 type Rules = Map<number, string>;
 
-function build_rules(rules: Rules, token: number | string, depth: number, special_rules: boolean): string {
+function build_rules(
+  rules: Rules,
+  token: number | string,
+  depth: number,
+  special_rules: boolean
+): string {
   if (Object.is(parseInt(`${token}`, 10), NaN)) {
-    return (token === "a" || token === "b") ? token : "";
+    return token === "a" || token === "b" ? token : "";
   }
 
   if (special_rules === true) {
@@ -19,7 +24,12 @@ function build_rules(rules: Rules, token: number | string, depth: number, specia
       const to = build_rules(rules, 31, depth, special_rules);
 
       if (depth < 5) {
-        return `(?:${ft}${build_rules(rules, 11, depth + 1, special_rules)}?${to})`;
+        return `(?:${ft}${build_rules(
+          rules,
+          11,
+          depth + 1,
+          special_rules
+        )}?${to})`;
       }
 
       return `(?:${ft}${to})`;
@@ -34,7 +44,7 @@ function build_rules(rules: Rules, token: number | string, depth: number, specia
   for (const part of rule.split("|")) {
     regex += "|";
     for (const item of part.split(" ")) {
-      regex += build_rules(rules, item.trim(), depth, special_rules)
+      regex += build_rules(rules, item.trim(), depth, special_rules);
     }
   }
 
@@ -59,7 +69,7 @@ function solve_part_two(rules: Rules, messages: Lines): number {
 
 async function main() {
   const uri = join(__dirname, "input.txt");
-  const file = await promises.readFile(uri, "utf8") as string;
+  const file = (await promises.readFile(uri, "utf8")) as string;
   const [rh, mh] = file.split("\r\n\r\n");
   const messages = mh.split("\r\n");
   const rules = rh.split("\r\n").reduce((accumulator, current) => {
@@ -71,7 +81,7 @@ async function main() {
   console.log({
     part_one: solve_part_one(rules, messages),
     part_two: solve_part_two(rules, messages)
-  })
+  });
 }
 
 main();

@@ -35,7 +35,7 @@ function part_one_helper(expression: string, index: number): [number, number] {
 function solve_part_one(expressions: Expressions): number {
   return expressions
     .map(expression => {
-      const [result, index] = part_one_helper(expression.replace(/\s/g, ''), 0);
+      const [result, index] = part_one_helper(expression.replace(/\s/g, ""), 0);
       return result;
     })
     .reduce((accumulator, current) => accumulator + current, 0);
@@ -47,7 +47,7 @@ function solve_part_two(expressions: Expressions): number {
       const tokens = expression.split(" ");
       tokens.forEach((token, index) => {
         if (token === "+") {
-          tokens[index - 1] = '(' + tokens[index - 1];
+          tokens[index - 1] = "(" + tokens[index - 1];
           tokens[index + 1] = tokens[index + 1] + ")";
         }
       });

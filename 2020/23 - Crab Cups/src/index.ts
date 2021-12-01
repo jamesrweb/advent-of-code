@@ -12,7 +12,11 @@ function extract_cups(file: string): Cups {
   return file.split("").map(v => +v);
 }
 
-function find_destination_cup(cups: Cups, removed: Cups, current: number): number {
+function find_destination_cup(
+  cups: Cups,
+  removed: Cups,
+  current: number
+): number {
   let guess = current - 1;
 
   while (removed.includes(guess) || !cups.includes(guess)) {
@@ -30,7 +34,11 @@ function find_next_current(cups: Cups, current: number): number {
   return cups[next_index];
 }
 
-function split(cups: Cups, element: number, keep_element: boolean): Array<Cups> {
+function split(
+  cups: Cups,
+  element: number,
+  keep_element: boolean
+): Array<Cups> {
   const index = cups.indexOf(element);
   return [
     cups.slice(0, keep_element ? index + 1 : index),
@@ -42,7 +50,7 @@ function remove(cups: Cups, current: number, count: number): Cups {
   const start = cups.indexOf(current) + 1;
 
   if (start + (count - 1) >= cups.length) {
-    const diff = (start + (count - 1)) - cups.length;
+    const diff = start + (count - 1) - cups.length;
     return [...cups.splice(start), ...cups.splice(0, diff + 1)];
   }
 
@@ -71,11 +79,7 @@ function part_two_move(lookup: Map<number, ListNode>) {
     const initial = current.next;
     current.next = initial.next.next.next;
 
-    const lifted = [
-      initial.id,
-      initial.next.id,
-      initial.next.next.id
-    ];
+    const lifted = [initial.id, initial.next.id, initial.next.next.id];
 
     let next = current.id;
     do {
@@ -125,12 +129,12 @@ function solve_part_two(cups: Cups): number {
 
 async function main() {
   const uri = join(__dirname, "input.txt");
-  const file = await promises.readFile(uri, "utf8") as string;
+  const file = (await promises.readFile(uri, "utf8")) as string;
 
   console.log({
     part_one: solve_part_one(extract_cups(file)),
     part_two: solve_part_two(extract_cups(file))
-  })
+  });
 }
 
 main();

@@ -12,7 +12,7 @@ function format(item) {
     char,
     password,
     count: counts.split("-").map(item => parseInt(item, 10))
-  }
+  };
 }
 
 function solve_part_one(policies) {
@@ -33,8 +33,8 @@ function solve_part_two(policies) {
     const [first, second] = positions;
 
     return (
-      password[first - 1] === char && password[second - 1] !== char ||
-      password[second - 1] === char && password[first - 1] !== char
+      (password[first - 1] === char && password[second - 1] !== char) ||
+      (password[second - 1] === char && password[first - 1] !== char)
     );
   });
 

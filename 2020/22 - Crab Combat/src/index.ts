@@ -5,7 +5,7 @@ const { EOL } = require("os");
 enum Players {
   One,
   Two
-};
+}
 
 type Player = Array<number>;
 
@@ -14,7 +14,10 @@ function clone(array: Array<any>): Array<any> {
 }
 
 function cards(player: string): Player {
-  return player.split(EOL).slice(1).map(v => +v);
+  return player
+    .split(EOL)
+    .slice(1)
+    .map(v => +v);
 }
 
 function score(player: Player): number {
@@ -60,7 +63,10 @@ function part_two_helper(players: Player[]): [Players, Player] {
     const [a, b] = [player_one.shift() || 0, player_two.shift() || 0];
 
     if (a <= player_one.length && b <= player_two.length) {
-      [winner] = part_two_helper([player_one.slice(0, a), player_two.slice(0, b)]);
+      [winner] = part_two_helper([
+        player_one.slice(0, a),
+        player_two.slice(0, b)
+      ]);
     } else if (a > b) {
       winner = Players.One;
     } else {
@@ -83,14 +89,14 @@ function solve_part_two(players: Player[]): number {
 
 async function main() {
   const uri = join(__dirname, "input.txt");
-  const file = await promises.readFile(uri, "utf8") as string;
+  const file = (await promises.readFile(uri, "utf8")) as string;
   const decks = file.split(EOL + EOL);
   const players = [cards(decks[0]), cards(decks[1])];
 
   console.log({
     part_one: solve_part_one(clone(players)),
     part_two: solve_part_two(clone(players))
-  })
+  });
 }
 
 main();

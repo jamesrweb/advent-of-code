@@ -12,7 +12,7 @@ const parse = statistics => {
     .map(row => row.replace(/\D/g, ""))
     .map(value => parseInt(value, 10))
     .filter(Boolean);
-}
+};
 
 /**
  * Chunk an array
@@ -27,7 +27,7 @@ const chunk = (array, size) => {
     accumulator[position].push(item);
     return accumulator;
   }, []);
-}
+};
 
 /**
  * Parse and display the statistics for the given year
@@ -52,7 +52,7 @@ const main = (points, chunkFn, displayFn) => {
   }
 
   return statistics;
-}
+};
 
 const statistics = document.querySelectorAll(".stats-firstonly, .stats-both");
 const points = parse(statistics);
