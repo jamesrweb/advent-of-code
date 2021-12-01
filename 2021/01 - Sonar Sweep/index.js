@@ -38,7 +38,7 @@ function sum(array) {
  *
  * @param {number} accumulator
  * @param {Array<number>} current
- * @returns {number} The total amount of increases found in the measurements.
+ * @returns {number} The count of occurrences where there was an increase in depth from the last reading to the current one.
  */
 function depthMeasurementIncreaseCounter(accumulator, current) {
   const [lastMeasurement, currentMeasurement] = current;
@@ -55,12 +55,12 @@ function depthMeasurementIncreaseCounter(accumulator, current) {
  *
  * @param {number} accumulator
  * @param {Array<[Array<number>, Array<number>]>} current
- * @returns
+ * @returns {number} The count of occurrences where there was an increase in the sum of each grouping of depths from the last set to the current set.
  */
 function depthGroupingSumIncreaseCounter(accumulator, current) {
-  const [lastMeasurement, currentMeasurement] = current;
-  const lastSum = sum(lastMeasurement);
-  const currentSum = sum(currentMeasurement);
+  const [lastSetOfReadings, currentSetOfReadings] = current;
+  const lastSum = sum(lastSetOfReadings);
+  const currentSum = sum(currentSetOfReadings);
 
   return currentSum > lastSum ? accumulator + 1 : accumulator;
 }
