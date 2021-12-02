@@ -1,4 +1,3 @@
-from functools import reduce
 from typing import List
 
 def solve_part_one(directions: List[str]) -> int:
