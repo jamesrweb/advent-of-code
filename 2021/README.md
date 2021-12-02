@@ -8,6 +8,7 @@ results for each challenge.
 | Day | Challenge Name | Language   | Stars |
 | --- | -------------- | ---------- | ----- |
 | 1   | Sonar Sweep    | JavaScript | ⭐⭐  |
+| 2   | Dive!          | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -32,10 +33,24 @@ Some items worth nothing here:
 
 | Time | Rank  | Score |
 | ---- | ----- | ----- |
-| >24h | 11293 | 0     |
+| >24h | 88940 | 0     |
 
 #### Part Two
 
 | Time | Rank  | Score |
 | ---- | ----- | ----- |
-| >24h | 71791 | 0     |
+| >24h | 78975 | 0     |
+
+### Day 2
+
+#### Part One
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 83633 | 0     |
+
+#### Part Two
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 84171 | 0     |
