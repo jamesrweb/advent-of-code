@@ -5,10 +5,11 @@
 These are my contributions for the Advent of Code 2021 event with corresponding
 results for each challenge.
 
-| Day | Challenge Name | Language   | Stars |
-| --- | -------------- | ---------- | ----- |
-| 1   | Sonar Sweep    | JavaScript | ⭐⭐  |
-| 2   | Dive!          | Python     | ⭐⭐  |
+| Day | Challenge Name    | Language   | Stars |
+| --- | ----------------- | ---------- | ----- |
+| 1   | Sonar Sweep       | JavaScript | ⭐⭐  |
+| 2   | Dive!             | Python     | ⭐⭐  |
+| 3   | Binary Diagnostic | PHP        | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -31,26 +32,40 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank  | Score |
-| ---- | ----- | ----- |
-| >24h | 88940 | 0     |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 16:25:13 | 88940 | 0     |
 
 #### Part Two
 
-| Time | Rank  | Score |
-| ---- | ----- | ----- |
-| >24h | 78975 | 0     |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 16:43:15 | 78975 | 0     |
 
 ### Day 2
 
 #### Part One
 
-| Time | Rank  | Score |
-| ---- | ----- | ----- |
-| >24h | 83633 | 0     |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 14:09:46 | 83633 | 0     |
 
 #### Part Two
 
-| Time | Rank  | Score |
-| ---- | ----- | ----- |
-| >24h | 84171 | 0     |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 15:35:21 | 84171 | 0     |
+
+### Day 3
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 20:36:30 | 89476 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 22:14:34 | 66865 | 0     |
