@@ -10,6 +10,7 @@ results for each challenge.
 | 1   | Sonar Sweep       | JavaScript | ⭐⭐  |
 | 2   | Dive!             | Python     | ⭐⭐  |
 | 3   | Binary Diagnostic | PHP        | ⭐⭐  |
+| 4   | Giant Squid       | TypeScript | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -69,3 +70,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 22:14:34 | 66865 | 0     |
+
+### Day 4
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 12:11:55 | 36987 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 13:03:48 | 34943 | 0     |
