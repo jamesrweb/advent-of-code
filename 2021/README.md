@@ -5,14 +5,15 @@
 These are my contributions for the Advent of Code 2021 event with corresponding
 results for each challenge.
 
-| Day | Challenge Name       | Language   | Stars |
-| --- | -------------------- | ---------- | ----- |
-| 1   | Sonar Sweep          | JavaScript | ⭐⭐  |
-| 2   | Dive!                | Python     | ⭐⭐  |
-| 3   | Binary Diagnostic    | PHP        | ⭐⭐  |
-| 4   | Giant Squid          | TypeScript | ⭐⭐  |
-| 5   | Hydrothermal Venture | C#         | ⭐⭐  |
-| 6   | Lanternfish          | Rust       | ⭐⭐  |
+| Day | Challenge Name          | Language   | Stars |
+| --- | ----------------------- | ---------- | ----- |
+| 1   | Sonar Sweep             | JavaScript | ⭐⭐  |
+| 2   | Dive!                   | Python     | ⭐⭐  |
+| 3   | Binary Diagnostic       | PHP        | ⭐⭐  |
+| 4   | Giant Squid             | TypeScript | ⭐⭐  |
+| 5   | Hydrothermal Venture    | C#         | ⭐⭐  |
+| 6   | Lanternfish             | Rust       | ⭐⭐  |
+| 7   | The Treachery of Whales | Elm        | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -114,3 +115,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 18:21:21 | 48468 | 0     |
+
+### Day 7
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 14:12:45 | 50644 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 15:56:43 | 50963 | 0     |
