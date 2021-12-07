@@ -1,0 +1,27 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "My advent of code contributions from 2020 onwards.",
+  "scripts": {
+    "format": "npx prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesrweb/advent-of-code.git"
+  },
+  "author": {
+    "name": "James Robb",
+    "url": "https://github.com/jamesrweb"
+  },
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jamesrweb/advent-of-code/issues"
+  },
+  "homepage": "https://github.com/jamesrweb/advent-of-code#readme",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.17.6",
+    "prettier": "^2.5.1",
+    "prettier-plugin-elm": "^0.8.0",
+    "prettier-plugin-toml": "^0.3.1"
+  }
+}
