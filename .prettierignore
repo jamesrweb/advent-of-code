@@ -1,0 +1,13 @@
+.vscode/
+.mypy_cache/
+bin/
+obj/
+elm-stuff/
+node_modules/
+dist/
+vendor/
+target/
+*.exe
+*.pdb
+.Rproj.user
+tempCodeRunnerFile.*
