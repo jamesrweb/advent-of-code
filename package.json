@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "My advent of code contributions from 2020 onwards.",
   "scripts": {
-    "format": "npx prettier . --write"
+    "format": "prettier . --write"
   },
   "repository": {
     "type": "git",
