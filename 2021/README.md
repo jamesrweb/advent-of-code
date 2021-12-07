@@ -12,6 +12,7 @@ results for each challenge.
 | 3   | Binary Diagnostic    | PHP        | ⭐⭐  |
 | 4   | Giant Squid          | TypeScript | ⭐⭐  |
 | 5   | Hydrothermal Venture | C#         | ⭐⭐  |
+| 6   | Lanternfish          | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -99,3 +100,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 17:15:21 | 43098 | 0     |
+
+### Day 6
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 16:53:14 | 53050 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 18:21:21 | 48468 | 0     |
