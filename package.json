@@ -22,6 +22,7 @@
     "@prettier/plugin-php": "^0.17.6",
     "prettier": "^2.5.1",
     "prettier-plugin-elm": "^0.8.0",
+    "prettier-plugin-sh": "^0.8.1",
     "prettier-plugin-toml": "^0.3.1"
   }
 }
