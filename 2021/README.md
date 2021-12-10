@@ -16,6 +16,7 @@ results for each challenge.
 | 7   | The Treachery of Whales | Elm        | ⭐⭐  |
 | 8   | Seven Segment Search    | TypeScript | ⭐⭐  |
 | 9   | Smoke Basin             | Python     | ⭐⭐  |
+| 10  | Syntax Scoring          | C#         | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -159,3 +160,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 19:40:39 | 37629 | 0     |
+
+### Day 10
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 05:59:21 | 24875 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 17:59:07 | 39407 | 0     |
