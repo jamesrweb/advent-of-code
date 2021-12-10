@@ -15,6 +15,7 @@ results for each challenge.
 | 6   | Lanternfish             | Rust       | ⭐⭐  |
 | 7   | The Treachery of Whales | Elm        | ⭐⭐  |
 | 8   | Seven Segment Search    | TypeScript | ⭐⭐  |
+| 9   | Smoke Basin             | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -144,3 +145,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 20:14:08 | 38900 | 0     |
+
+### Day 9
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 19:34:08 | 46545 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 19:40:39 | 37629 | 0     |
