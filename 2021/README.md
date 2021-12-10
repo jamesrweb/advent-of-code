@@ -14,6 +14,7 @@ results for each challenge.
 | 5   | Hydrothermal Venture    | C#         | ⭐⭐  |
 | 6   | Lanternfish             | Rust       | ⭐⭐  |
 | 7   | The Treachery of Whales | Elm        | ⭐⭐  |
+| 8   | Seven Segment Search    | TypeScript | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -129,3 +130,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 15:56:43 | 50963 | 0     |
+
+### Day 8
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 18:28:39 | 50774 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 20:14:08 | 38900 | 0     |
