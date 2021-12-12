@@ -61,31 +61,6 @@ fn sum_matrix(matrix: &mut Matrix2D<u8>) -> u32 {
         .sum::<u32>();
 }
 
-fn solve(matrix: &mut Matrix2D<u8>, part_one: bool) -> u32 {
-    let mut flash_count = 0;
-    let mut current_step = 0;
-    let dimensions = (matrix[0].len(), matrix.len());
-
-    loop {
-        increment_columns(matrix, dimensions);
-
-        current_step += 1;
-        flash_count += count_flashes_in_matrix(matrix, dimensions);
-
-        reset_flashing_columns(matrix);
-
-        if part_one && current_step == 100 {
-            return flash_count;
-        }
-
-        if sum_matrix(matrix) == 0 {
-            break;
-        }
-    }
-
-    return current_step;
-}
-
 fn flashes_in_vicinity(
     matrix: &mut Matrix2D<u8>,
     (width, height): Measurements2D,
@@ -160,6 +135,31 @@ fn flashes_in_vicinity(
         + bottom_left_neighbour
         + bottom_neighbour
         + bottom_right_neighbour;
+}
+
+fn solve(matrix: &mut Matrix2D<u8>, part_one: bool) -> u32 {
+    let mut flash_count = 0;
+    let mut current_step = 0;
+    let dimensions = (matrix[0].len(), matrix.len());
+
+    loop {
+        increment_columns(matrix, dimensions);
+
+        current_step += 1;
+        flash_count += count_flashes_in_matrix(matrix, dimensions);
+
+        reset_flashing_columns(matrix);
+
+        if part_one && current_step == 100 {
+            return flash_count;
+        }
+
+        if sum_matrix(matrix) == 0 {
+            break;
+        }
+    }
+
+    return current_step;
 }
 
 fn solve_part_one(matrix: &mut Matrix2D<u8>) -> u32 {
