@@ -17,6 +17,7 @@ results for each challenge.
 | 8   | Seven Segment Search    | TypeScript | ⭐⭐  |
 | 9   | Smoke Basin             | Python     | ⭐⭐  |
 | 10  | Syntax Scoring          | C#         | ⭐⭐  |
+| 11  | Dumbo Octopus           | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -174,3 +175,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 17:59:07 | 39407 | 0     |
+
+### Day 11
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 17:40:00 | 32990 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 17:58:55 | 32891 | 0     |
