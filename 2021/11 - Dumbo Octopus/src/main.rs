@@ -162,18 +162,18 @@ fn flashes_in_vicinity(
         + bottom_right_neighbour;
 }
 
-fn solve_part_one(matrix: Matrix2D<u8>) -> u32 {
-    return solve(matrix.clone().as_mut(), true);
+fn solve_part_one(matrix: &mut Matrix2D<u8>) -> u32 {
+    return solve(matrix, true);
 }
 
-fn solve_part_two(matrix: Matrix2D<u8>) -> u32 {
-    return solve(matrix.clone().as_mut(), false);
+fn solve_part_two(matrix: &mut Matrix2D<u8>) -> u32 {
+    return solve(matrix, false);
 }
 
 fn main() {
     let input = read_to_string("src/input.txt").expect("Something went wrong reading the file");
     let matrix = parse_matrix(input);
 
-    println!("Part one: {}", solve_part_one(matrix.clone()));
-    println!("Part two: {}", solve_part_two(matrix.clone()));
+    println!("Part one: {}", solve_part_one(matrix.clone().as_mut()));
+    println!("Part two: {}", solve_part_two(matrix.clone().as_mut()));
 }
