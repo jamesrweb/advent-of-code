@@ -18,6 +18,7 @@ results for each challenge.
 | 9   | Smoke Basin             | Python     | ⭐⭐  |
 | 10  | Syntax Scoring          | C#         | ⭐⭐  |
 | 11  | Dumbo Octopus           | Rust       | ⭐⭐  |
+| 12  | Passage Pathing         | Ruby       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -189,3 +190,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 17:58:55 | 32891 | 0     |
+
+### Day 12
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 20:46:03 | 31561 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 21:01:04 | 29727 | 0     |
