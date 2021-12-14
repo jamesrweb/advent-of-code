@@ -12,7 +12,9 @@ def convert(line: str) -> OpDefinition:
     return (operation, value)
 
 
-def solve_part_one(lines: Ops, index: int = 0, accumulator: int = 0, visited: ExecutedOps = set()) -> int:
+def solve_part_one(
+    lines: Ops, index: int = 0, accumulator: int = 0, visited: ExecutedOps = set()
+) -> int:
     if index in visited:
         return accumulator
 

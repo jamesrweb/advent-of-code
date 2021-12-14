@@ -27,8 +27,8 @@ class BagGraph(object):
         graph: Graph = {}
         for line in lines:
             index = line.find("bags")
-            start = line[:index-1]
-            details = line[index + len("bags contain "):]
+            start = line[: index - 1]
+            details = line[index + len("bags contain ") :]
             graph[start] = self.__parse_details(details)
         return graph
 

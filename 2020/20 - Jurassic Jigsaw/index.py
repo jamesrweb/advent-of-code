@@ -39,7 +39,7 @@ def generate_possibilities(tiles):
 
 
 def assemble(possibilities):
-    n = int(len(possibilities)**0.5)
+    n = int(len(possibilities) ** 0.5)
     assembled = [[(0, 0)] * n for _ in range(n)]
     remaining = set(possibilities.keys())
 
@@ -54,17 +54,11 @@ def assemble(possibilities):
                 if row > 0:
                     uid, ut = assembled[row - 1][column]
                     up_tile = possibilities[uid][ut]
-                    up = all(
-                        possibility[0][i] == up_tile[9][i]
-                        for i in range(10)
-                    )
+                    up = all(possibility[0][i] == up_tile[9][i] for i in range(10))
                 if column > 0:
                     lid, lt = assembled[row][column - 1]
                     left_tile = possibilities[lid][lt]
-                    left = all(
-                        possibility[i][0] == left_tile[i][9]
-                        for i in range(10)
-                    )
+                    left = all(possibility[i][0] == left_tile[i][9] for i in range(10))
                 if up and left:
                     assembled[row][column] = (id, pid)
                     remaining.remove(id)
@@ -81,7 +75,7 @@ def monster_indexes():
     monster_pattern = [
         "                  # ",
         "#    ##    ##    ###",
-        " #  #  #  #  #  #   "
+        " #  #  #  #  #  #   ",
     ]
     return [
         (row, column)

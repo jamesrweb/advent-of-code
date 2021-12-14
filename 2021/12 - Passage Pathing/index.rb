@@ -34,7 +34,7 @@ def find_paths_helper(from, to, graph, allowed_duplicate_node, visited_nodes = [
     end  
   
     valid_paths
-  end
+end
 
 def solve_part_one(graph)
     valid_paths = find_paths(graph, nil)

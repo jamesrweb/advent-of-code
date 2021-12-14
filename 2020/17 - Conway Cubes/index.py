@@ -17,7 +17,8 @@ def simulate(lines: List[str], dimensions: int) -> int:
     active: List[Coords] = [
         (x, y) + (0,) * (dimensions - 2)
         for y, line in enumerate(lines)
-        for x, cell in enumerate(line) if cell == '#'
+        for x, cell in enumerate(line)
+        if cell == "#"
     ]
 
     for _ in range(6):
@@ -28,7 +29,8 @@ def simulate(lines: List[str], dimensions: int) -> int:
         )
 
         active = [
-            coord for coord, count in neighbours.items()
+            coord
+            for coord, count in neighbours.items()
             if (coord in active and count == 2) or count == 3
         ]
 

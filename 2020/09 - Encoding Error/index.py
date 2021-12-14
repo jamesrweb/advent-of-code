@@ -12,7 +12,7 @@ def parse_lines(lines: InputData) -> ParsedData:
 def solve_part_one(lines: ParsedData, preamble: int) -> int:
     for index in range(preamble, len(lines)):
         current = lines[index]
-        haystack = lines[index-preamble:index]
+        haystack = lines[index - preamble : index]
         possibilities = combinations(haystack, 2)
 
         for a, b in possibilities:

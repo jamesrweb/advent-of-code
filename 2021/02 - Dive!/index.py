@@ -1,5 +1,6 @@
 from typing import List
 
+
 def solve_part_one(directions: List[str]) -> int:
     horizontal_position, depth = 0, 0
 
