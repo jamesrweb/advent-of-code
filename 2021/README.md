@@ -19,6 +19,7 @@ results for each challenge.
 | 10  | Syntax Scoring          | C#         | ⭐⭐  |
 | 11  | Dumbo Octopus           | Rust       | ⭐⭐  |
 | 12  | Passage Pathing         | Ruby       | ⭐⭐  |
+| 13  | Transparent Origami     | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -204,3 +205,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 21:01:04 | 29727 | 0     |
+
+### Day 13
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 18:52:41 | 33824 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 19:11:14 | 33067 | 0     |
