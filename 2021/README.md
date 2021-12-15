@@ -20,6 +20,7 @@ results for each challenge.
 | 11  | Dumbo Octopus           | Rust       | ⭐⭐  |
 | 12  | Passage Pathing         | Ruby       | ⭐⭐  |
 | 13  | Transparent Origami     | Python     | ⭐⭐  |
+| 14  | Extended Polymerization | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -219,3 +220,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 19:11:14 | 33067 | 0     |
+
+### Day 14
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 19:48:47 | 36109 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 23:24:52 | 29968 | 0     |
