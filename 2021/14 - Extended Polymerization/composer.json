@@ -1,0 +1,23 @@
+{
+  "name": "jamesrweb/advent-of-code-day-14",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AdventOfCodeDay14\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "James Robb",
+      "email": "47126579+jamesrweb@users.noreply.github.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "scripts": {
+    "start": "php src/index.php"
+  },
+  "require": {
+    "php-ds/php-ds": "^1.4"
+  }
+}

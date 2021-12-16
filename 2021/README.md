@@ -20,7 +20,7 @@ results for each challenge.
 | 11  | Dumbo Octopus           | Rust       | ⭐⭐  |
 | 12  | Passage Pathing         | Ruby       | ⭐⭐  |
 | 13  | Transparent Origami     | Python     | ⭐⭐  |
-| 14  | Extended Polymerization | Python     | ⭐⭐  |
+| 14  | Extended Polymerization | PHP        | ⭐⭐  |
 | 15  | Chilton                 | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
