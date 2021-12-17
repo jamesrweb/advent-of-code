@@ -22,6 +22,7 @@ results for each challenge.
 | 13  | Transparent Origami     | Python     | ⭐⭐  |
 | 14  | Extended Polymerization | PHP        | ⭐⭐  |
 | 15  | Chilton                 | Python     | ⭐⭐  |
+| 16  | Packet Decoder          | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -249,3 +250,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 20:25:12 | 22352 | 0     |
+
+### Day 16
+
+#### Part One
+
+| Time     | Rank | Score |
+| -------- | ---- | ----- |
+| 04:50:44 | 7714 | 0     |
+
+#### Part Two
+
+| Time     | Rank | Score |
+| -------- | ---- | ----- |
+| 04:54:27 | 6471 | 0     |
