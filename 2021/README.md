@@ -23,6 +23,7 @@ results for each challenge.
 | 14  | Extended Polymerization | PHP        | ⭐⭐  |
 | 15  | Chilton                 | Python     | ⭐⭐  |
 | 16  | Packet Decoder          | Python     | ⭐⭐  |
+| 17  | Trick Shot              | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -264,3 +265,17 @@ Some items worth nothing here:
 | Time     | Rank | Score |
 | -------- | ---- | ----- |
 | 04:54:27 | 6471 | 0     |
+
+### Day 17
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 19:55:57 | 21396 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 20:14:14 | 19961 | 0     |
