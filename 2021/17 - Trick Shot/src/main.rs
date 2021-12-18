@@ -1,19 +1,16 @@
 use regex::Regex;
 use std::fs::read_to_string;
 
-#[derive(Debug)]
 struct Point {
     x: i32,
     y: i32,
 }
 
-#[derive(Debug)]
 struct PointRange {
     from: Point,
     to: Point,
 }
 
-#[derive(Debug)]
 struct Probe {
     vx: i32,
     vy: i32,
