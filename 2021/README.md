@@ -24,6 +24,7 @@ results for each challenge.
 | 15  | Chilton                 | Python     | ⭐⭐  |
 | 16  | Packet Decoder          | Python     | ⭐⭐  |
 | 17  | Trick Shot              | Rust       | ⭐⭐  |
+| 18  | Snailfish               | F#         | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -279,3 +280,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 20:14:14 | 19961 | 0     |
+
+### Day 18
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 21:03:49 | 12714 | 0     |
+
+#### Part Two
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 21:11:54 | 12511 | 0     |
