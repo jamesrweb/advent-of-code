@@ -25,6 +25,7 @@ results for each challenge.
 | 16  | Packet Decoder          | Python     | ⭐⭐  |
 | 17  | Trick Shot              | Rust       | ⭐⭐  |
 | 18  | Snailfish               | F#         | ⭐⭐  |
+| 19  | Beacon Scanner          | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -294,3 +295,17 @@ Some items worth nothing here:
 | Time     | Rank  | Score |
 | -------- | ----- | ----- |
 | 21:11:54 | 12511 | 0     |
+
+### Day 19
+
+#### Part One
+
+| Time     | Rank | Score |
+| -------- | ---- | ----- |
+| 21:30:41 | 8171 | 0     |
+
+#### Part Two
+
+| Time     | Rank | Score |
+| -------- | ---- | ----- |
+| 21:35:05 | 7899 | 0     |
