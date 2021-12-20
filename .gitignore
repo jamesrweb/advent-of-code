@@ -1,5 +1,7 @@
 .vscode/
 .mypy_cache/
+.config/
+.ionide/
 bin/
 obj/
 elm-stuff/
@@ -9,5 +11,6 @@ vendor/
 target/
 *.exe
 *.pdb
+*.log
 .Rproj.user
 tempCodeRunnerFile.*
