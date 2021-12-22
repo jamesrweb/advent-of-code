@@ -225,8 +225,8 @@ impl QuantumBoard {
             return (0, 1);
         }
 
-        let mut total_p1_wins = 0;
-        let mut total_p2_wins = 0;
+        let mut total_player_one_wins = 0;
+        let mut total_player_two_wins = 0;
 
         for (roll, frequency) in self.quantum_roll_frequencies() {
             let mut new_position = player_one_position + roll;
@@ -236,7 +236,7 @@ impl QuantumBoard {
             }
 
             let new_score = player_one_score + new_position;
-            let (p2_wins, p1_wins) = self.solve_helper(
+            let (player_two_wins, player_one_wins) = self.solve_helper(
                 player_two_position,
                 new_position,
                 player_two_score,
@@ -244,8 +244,8 @@ impl QuantumBoard {
                 recursion_cache,
             );
 
-            total_p1_wins += frequency * p1_wins;
-            total_p2_wins += frequency * p2_wins;
+            total_player_one_wins += frequency * player_one_wins;
+            total_player_two_wins += frequency * player_two_wins;
         }
 
         recursion_cache.insert(
@@ -255,10 +255,10 @@ impl QuantumBoard {
                 player_one_score,
                 player_two_score,
             ),
-            (total_p1_wins, total_p2_wins),
+            (total_player_one_wins, total_player_two_wins),
         );
 
-        return (total_p1_wins, total_p2_wins);
+        return (total_player_one_wins, total_player_two_wins);
     }
 
     fn quantum_roll_frequencies(&mut self) -> HashMap<i128, i128> {
