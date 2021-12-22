@@ -27,6 +27,7 @@ results for each challenge.
 | 18  | Snailfish               | F#         | ⭐⭐  |
 | 19  | Beacon Scanner          | Rust       | ⭐⭐  |
 | 20  | Trench Map              | Rust       | ⭐⭐  |
+| 21  | Dirac Dice              | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -324,3 +325,17 @@ Some items worth nothing here:
 | Time | Rank  | Score |
 | ---- | ----- | ----- |
 | >24h | 16976 | 0     |
+
+### Day 21
+
+#### Part One
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 19819 | 0     |
+
+#### Part Two
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 14144 | 0     |
