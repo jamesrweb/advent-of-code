@@ -26,6 +26,7 @@ results for each challenge.
 | 17  | Trick Shot              | Rust       | ⭐⭐  |
 | 18  | Snailfish               | F#         | ⭐⭐  |
 | 19  | Beacon Scanner          | Rust       | ⭐⭐  |
+| 20  | Trench Map              | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -309,3 +310,17 @@ Some items worth nothing here:
 | Time     | Rank | Score |
 | -------- | ---- | ----- |
 | 21:35:05 | 7899 | 0     |
+
+### Day 20
+
+#### Part One
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 17270 | 0     |
+
+#### Part Two
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 16976 | 0     |
