@@ -28,6 +28,7 @@ results for each challenge.
 | 19  | Beacon Scanner          | Rust       | ⭐⭐  |
 | 20  | Trench Map              | Rust       | ⭐⭐  |
 | 21  | Dirac Dice              | Rust       | ⭐⭐  |
+| 22  | Reactor Reboot          | C#         | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -339,3 +340,17 @@ Some items worth nothing here:
 | Time | Rank  | Score |
 | ---- | ----- | ----- |
 | >24h | 14144 | 0     |
+
+### Day 22
+
+#### Part One
+
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 16:29:53 | 14208 | 0     |
+
+#### Part Two
+
+| Time     | Rank | Score |
+| -------- | ---- | ----- |
+| 16:37:25 | 7503 | 0     |
