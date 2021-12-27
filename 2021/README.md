@@ -30,6 +30,7 @@ results for each challenge.
 | 21  | Dirac Dice              | Rust           | ⭐⭐  |
 | 22  | Reactor Reboot          | C#             | ⭐⭐  |
 | 23  | Amphipod                | Not applicable | ⭐⭐  |
+| 24  | Arithmetic Logic Unit   | Python         | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -369,3 +370,17 @@ Some items worth nothing here:
 | Time | Rank | Score |
 | ---- | ---- | ----- |
 | >24h | 9540 | 0     |
+
+### Day 24
+
+#### Part One
+
+| Time | Rank | Score |
+| ---- | ---- | ----- |
+| >24h | 8978 | 0     |
+
+#### Part Two
+
+| Time | Rank | Score |
+| ---- | ---- | ----- |
+| >24h | 8861 | 0     |
