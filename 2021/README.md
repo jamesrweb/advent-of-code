@@ -5,30 +5,31 @@
 These are my contributions for the Advent of Code 2021 event with corresponding
 results for each challenge.
 
-| Day | Challenge Name          | Language   | Stars |
-| --- | ----------------------- | ---------- | ----- |
-| 1   | Sonar Sweep             | JavaScript | ⭐⭐  |
-| 2   | Dive!                   | Python     | ⭐⭐  |
-| 3   | Binary Diagnostic       | PHP        | ⭐⭐  |
-| 4   | Giant Squid             | TypeScript | ⭐⭐  |
-| 5   | Hydrothermal Venture    | C#         | ⭐⭐  |
-| 6   | Lanternfish             | Rust       | ⭐⭐  |
-| 7   | The Treachery of Whales | Elm        | ⭐⭐  |
-| 8   | Seven Segment Search    | TypeScript | ⭐⭐  |
-| 9   | Smoke Basin             | Python     | ⭐⭐  |
-| 10  | Syntax Scoring          | C#         | ⭐⭐  |
-| 11  | Dumbo Octopus           | Rust       | ⭐⭐  |
-| 12  | Passage Pathing         | Ruby       | ⭐⭐  |
-| 13  | Transparent Origami     | Python     | ⭐⭐  |
-| 14  | Extended Polymerization | PHP        | ⭐⭐  |
-| 15  | Chilton                 | Python     | ⭐⭐  |
-| 16  | Packet Decoder          | Python     | ⭐⭐  |
-| 17  | Trick Shot              | Rust       | ⭐⭐  |
-| 18  | Snailfish               | F#         | ⭐⭐  |
-| 19  | Beacon Scanner          | Rust       | ⭐⭐  |
-| 20  | Trench Map              | Rust       | ⭐⭐  |
-| 21  | Dirac Dice              | Rust       | ⭐⭐  |
-| 22  | Reactor Reboot          | C#         | ⭐⭐  |
+| Day | Challenge Name          | Language       | Stars |
+| --- | ----------------------- | -------------- | ----- |
+| 1   | Sonar Sweep             | JavaScript     | ⭐⭐  |
+| 2   | Dive!                   | Python         | ⭐⭐  |
+| 3   | Binary Diagnostic       | PHP            | ⭐⭐  |
+| 4   | Giant Squid             | TypeScript     | ⭐⭐  |
+| 5   | Hydrothermal Venture    | C#             | ⭐⭐  |
+| 6   | Lanternfish             | Rust           | ⭐⭐  |
+| 7   | The Treachery of Whales | Elm            | ⭐⭐  |
+| 8   | Seven Segment Search    | TypeScript     | ⭐⭐  |
+| 9   | Smoke Basin             | Python         | ⭐⭐  |
+| 10  | Syntax Scoring          | C#             | ⭐⭐  |
+| 11  | Dumbo Octopus           | Rust           | ⭐⭐  |
+| 12  | Passage Pathing         | Ruby           | ⭐⭐  |
+| 13  | Transparent Origami     | Python         | ⭐⭐  |
+| 14  | Extended Polymerization | PHP            | ⭐⭐  |
+| 15  | Chilton                 | Python         | ⭐⭐  |
+| 16  | Packet Decoder          | Python         | ⭐⭐  |
+| 17  | Trick Shot              | Rust           | ⭐⭐  |
+| 18  | Snailfish               | F#             | ⭐⭐  |
+| 19  | Beacon Scanner          | Rust           | ⭐⭐  |
+| 20  | Trench Map              | Rust           | ⭐⭐  |
+| 21  | Dirac Dice              | Rust           | ⭐⭐  |
+| 22  | Reactor Reboot          | C#             | ⭐⭐  |
+| 23  | Amphipod                | Not applicable | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -354,3 +355,17 @@ Some items worth nothing here:
 | Time     | Rank | Score |
 | -------- | ---- | ----- |
 | 16:37:25 | 7503 | 0     |
+
+### Day 23
+
+#### Part One
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 11946 | 0     |
+
+#### Part Two
+
+| Time | Rank | Score |
+| ---- | ---- | ----- |
+| >24h | 9540 | 0     |
