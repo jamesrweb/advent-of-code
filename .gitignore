@@ -2,6 +2,7 @@
 .mypy_cache/
 .config/
 .ionide/
+.fake/
 bin/
 obj/
 elm-stuff/
