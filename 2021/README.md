@@ -31,6 +31,7 @@ results for each challenge.
 | 22  | Reactor Reboot          | C#             | ⭐⭐  |
 | 23  | Amphipod                | Not applicable | ⭐⭐  |
 | 24  | Arithmetic Logic Unit   | Python         | ⭐⭐  |
+| 25  | Sea Cucumber            | Rust           | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -384,3 +385,17 @@ Some items worth nothing here:
 | Time | Rank | Score |
 | ---- | ---- | ----- |
 | >24h | 8861 | 0     |
+
+### Day 25
+
+#### Part One
+
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 11923 | 0     |
+
+#### Part Two
+
+| Time | Rank | Score |
+| ---- | ---- | ----- |
+| >24h | 7242 | 0     |
