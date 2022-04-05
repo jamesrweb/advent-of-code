@@ -54,7 +54,7 @@ function main()
 
   print_r([
     "part_one" => max($seat_ids),
-    "part_two" => solve_part_two($seat_ids),
+    "part_two" => solve_part_two($seat_ids)
   ]);
 }
 

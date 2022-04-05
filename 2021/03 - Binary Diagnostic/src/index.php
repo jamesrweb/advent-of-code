@@ -239,7 +239,7 @@ function main(): void
 
   print_r([
     "part_one" => solve_part_one($report),
-    "part_two" => solve_part_two($report),
+    "part_two" => solve_part_two($report)
   ]);
 }
 

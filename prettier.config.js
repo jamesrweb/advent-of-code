@@ -16,6 +16,9 @@ module.exports = {
   trailingComma: "none",
   useTabs: false,
   vueIndentScriptAndStyle: false,
-  // enforces that padding of columns in sh files should be kept where possible
-  keepPadding: true
+  // Enforces that padding of columns in sh files should be kept where possible
+  keepPadding: true,
+  // When possible, convert blocks to the more concise Symbol#to_proc syntax.
+  rubyToProc: true,
+  trailingCommaPHP: false
 };

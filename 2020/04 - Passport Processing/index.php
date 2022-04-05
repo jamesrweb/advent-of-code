@@ -168,7 +168,7 @@ function main()
 
   print_r([
     "part_one" => solve_part_one($passports),
-    "part_two" => solve_part_two($passports),
+    "part_two" => solve_part_two($passports)
   ]);
 }
 
