@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "My advent of code contributions from 2020 onwards.",
   "scripts": {
-    "format:csharp": "foreach -g \"**/*.csproj\" -x \"cd '#{dir}' && dotnet format\" -c",
+    "format:csharp": "foreach -g \"**/*.csproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
     "format:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt\" -c",
     "format:python": "python3 -m black .",
-    "format:rest": "prettier . --write",
+    "format:rest": "prettier . --write --ignore-path .gitignore",
     "format": "run-p format:**"
   },
   "repository": {
@@ -17,19 +17,19 @@
     "name": "James Robb",
     "url": "https://github.com/jamesrweb"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jamesrweb/advent-of-code/issues"
   },
   "homepage": "https://github.com/jamesrweb/advent-of-code#readme",
   "devDependencies": {
-    "@prettier/plugin-php": "^0.18.4",
+    "@prettier/plugin-php": "^0.19.2",
     "@prettier/plugin-ruby": "^2.1.0",
     "foreach-cli": "^1.8.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.6.2",
-    "prettier-plugin-elm": "^0.8.0",
-    "prettier-plugin-sh": "^0.10.0",
+    "prettier": "^2.8.0",
+    "prettier-plugin-elm": "^0.9.0",
+    "prettier-plugin-sh": "^0.12.8",
     "prettier-plugin-toml": "^0.3.1"
   }
 }
