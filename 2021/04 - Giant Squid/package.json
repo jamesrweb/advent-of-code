@@ -19,7 +19,7 @@
   },
   "keywords": [],
   "author": "James Robb <47126579+jamesrweb@users.noreply.github.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.11.11",
     "ts-node": "^10.4.0",
