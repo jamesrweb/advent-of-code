@@ -1,5 +1,5 @@
 {
-  "name": "04---giant-squid",
+  "name": "04-giant-squid",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -18,7 +18,7 @@
     "start": "node --loader ts-node/esm --no-warnings ./src/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "James Robb <47126579+jamesrweb@users.noreply.github.com>",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.11.11",
