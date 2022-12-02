@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Dict exposing (Dict)
 import Html exposing (..)
 import Http
 import List
@@ -68,71 +69,6 @@ subscriptions _ =
 -- VIEW
 
 
-type Action
-    = Rock
-    | Paper
-    | Scissors
-    | Invalid
-
-
-type Move
-    = Us Action
-    | Them Action
-
-
-type RoundResults
-    = Win Action
-    | Draw Action
-    | Loss Action
-
-
-type DesiredOutcome
-    = WinDesired
-    | LossDesired
-    | DrawDesired
-
-
-toMove : String -> Result String Move
-toMove v =
-    case v of
-        "A" ->
-            Ok (Them Rock)
-
-        "B" ->
-            Ok (Them Paper)
-
-        "C" ->
-            Ok (Them Scissors)
-
-        "X" ->
-            Ok (Us Rock)
-
-        "Y" ->
-            Ok (Us Paper)
-
-        "Z" ->
-            Ok (Us Scissors)
-
-        _ ->
-            Err "Unknown move"
-
-
-toOutcome : String -> Result String DesiredOutcome
-toOutcome v =
-    case v of
-        "X" ->
-            Ok LossDesired
-
-        "Y" ->
-            Ok DrawDesired
-
-        "Z" ->
-            Ok WinDesired
-
-        _ ->
-            Err "Unknown outcome"
-
-
 view : Model -> Html Msg
 view model =
     case model of
@@ -145,16 +81,24 @@ view model =
             p [] [ text "Loading input data..." ]
 
         Success contents ->
+            let
+                steps : List ( Char, Char )
+                steps =
+                    String.lines contents
+                        |> List.filter filterEmptyStrings
+                        |> List.map removeSpaces
+                        |> List.filterMap toActions
+            in
             ul []
                 [ li []
-                    [ convertInputToMoves contents
+                    [ steps
                         |> solvePartOne
                         |> String.fromInt
                         |> (++) "Part one: "
                         |> text
                     ]
                 , li []
-                    [ convertInputToMovesWithDesiredOutcome contents
+                    [ steps
                         |> solvePartTwo
                         |> String.fromInt
                         |> (++) "Part two: "
@@ -163,181 +107,123 @@ view model =
                 ]
 
 
-solvePartOne : List ( Move, Move ) -> Int
+solvePartOne : List ( Char, Char ) -> Int
 solvePartOne =
-    List.foldl followStrategyGuide 0
+    List.map simulateGameStep >> List.sum
 
 
-solvePartTwo : List ( Move, DesiredOutcome ) -> Int
+solvePartTwo : List ( Char, Char ) -> Int
 solvePartTwo =
-    List.map desiredOutcomeToMoves >> List.foldl followStrategyGuide 0
+    List.map simulateDesiredOutcome >> List.sum
 
 
-desiredOutcomeToMoves : ( Move, DesiredOutcome ) -> ( Move, Move )
-desiredOutcomeToMoves ( move, outcome ) =
-    case ( actionFromMove move, outcome ) of
-        ( Rock, WinDesired ) ->
-            ( move, Us Paper )
+simulateGameStep : ( Char, Char ) -> Int
+simulateGameStep ( theirs, ours ) =
+    let
+        ourMoveScore : Int
+        ourMoveScore =
+            Dict.get ours inputDict |> Maybe.withDefault 0
 
-        ( Paper, WinDesired ) ->
-            ( Them Paper, Us Scissors )
-
-        ( Scissors, WinDesired ) ->
-            ( Them Scissors, Us Rock )
-
-        ( Rock, LossDesired ) ->
-            ( Them Rock, Us Scissors )
-
-        ( Paper, LossDesired ) ->
-            ( Them Paper, Us Rock )
-
-        ( Scissors, LossDesired ) ->
-            ( Them Scissors, Us Paper )
-
-        ( Rock, DrawDesired ) ->
-            ( Them Rock, Us Rock )
-
-        ( Paper, DrawDesired ) ->
-            ( Them Paper, Us Paper )
-
-        ( Scissors, DrawDesired ) ->
-            ( Them Scissors, Us Scissors )
-
-        _ ->
-            ( Them Invalid, Us Invalid )
+        theirMoveScore : Int
+        theirMoveScore =
+            Dict.get theirs inputDict |> Maybe.withDefault 0
+    in
+    score { ours = ourMoveScore, theirs = theirMoveScore }
 
 
-actionFromMove : Move -> Action
-actionFromMove move =
-    case move of
-        Us u ->
-            u
+simulateDesiredOutcome : ( Char, Char ) -> Int
+simulateDesiredOutcome ( theirs, ours ) =
+    let
+        ourMoveScore : Int
+        ourMoveScore =
+            Dict.get theirs desiredSolutionDict
+                |> Maybe.withDefault Dict.empty
+                |> Dict.get ours
+                |> Maybe.withDefault 0
 
-        Them t ->
-            t
-
-
-followStrategyGuide : ( Move, Move ) -> Int -> Int
-followStrategyGuide moves score =
-    score + (calculateRoundResults moves |> roundResultsToPoints)
-
-
-calculateRoundResults : ( Move, Move ) -> RoundResults
-calculateRoundResults moves =
-    case moves of
-        ( Us u, Them t ) ->
-            compareActions ( u, t )
-
-        ( Them t, Us u ) ->
-            compareActions ( u, t )
-
-        _ ->
-            Loss Invalid
+        theirMoveScore : Int
+        theirMoveScore =
+            Dict.get theirs inputDict
+                |> Maybe.withDefault 0
+    in
+    score { ours = ourMoveScore, theirs = theirMoveScore }
 
 
-compareActions : ( Action, Action ) -> RoundResults
-compareActions actions =
-    case actions of
-        ( Rock, Paper ) ->
-            Loss Rock
+score : { ours : Int, theirs : Int } -> Int
+score ({ ours, theirs } as scores) =
+    if isWin scores then
+        ours + winScore
 
-        ( Rock, Scissors ) ->
-            Win Rock
+    else if ours == theirs then
+        ours + drawScore
 
-        ( Scissors, Paper ) ->
-            Win Scissors
-
-        ( Scissors, Rock ) ->
-            Loss Scissors
-
-        ( Paper, Rock ) ->
-            Win Paper
-
-        ( Paper, Scissors ) ->
-            Loss Paper
-
-        ( Rock, Rock ) ->
-            Draw Rock
-
-        ( Paper, Paper ) ->
-            Draw Paper
-
-        ( Scissors, Scissors ) ->
-            Draw Scissors
-
-        _ ->
-            Loss Invalid
+    else
+        ours + lossScore
 
 
-roundResultsToPoints : RoundResults -> Int
-roundResultsToPoints result =
-    case result of
-        Win action ->
-            winScore + actionToPoints action
-
-        Draw action ->
-            drawScore + actionToPoints action
-
-        Loss action ->
-            lossScore + actionToPoints action
+isWin : { ours : Int, theirs : Int } -> Bool
+isWin { ours, theirs } =
+    (theirs == rockPoints && ours == paperPoints)
+        || (theirs == paperPoints && ours == scissorsPoints)
+        || (theirs == scissorsPoints && ours == rockPoints)
 
 
-actionToPoints : Action -> Int
-actionToPoints action =
-    case action of
-        Rock ->
-            rockPoints
-
-        Paper ->
-            paperPoints
-
-        Scissors ->
-            scissorsPoints
-
-        Invalid ->
-            0
+inputDict : Dict Char Int
+inputDict =
+    Dict.empty
+        |> Dict.insert 'A' rockPoints
+        |> Dict.insert 'B' paperPoints
+        |> Dict.insert 'C' scissorsPoints
+        |> Dict.insert 'X' rockPoints
+        |> Dict.insert 'Y' paperPoints
+        |> Dict.insert 'Z' scissorsPoints
 
 
-convertInputToMoves : String -> List ( Move, Move )
-convertInputToMoves input =
-    input
-        |> String.lines
-        |> List.map (String.split " " >> List.map toMove)
-        |> List.filterMap
-            (\x ->
-                case x of
-                    [ Ok them, Ok us ] ->
-                        Just ( them, us )
+desiredSolutionDict : Dict Char (Dict Char Int)
+desiredSolutionDict =
+    let
+        aDict =
+            Dict.empty
+                |> Dict.insert 'X' scissorsPoints
+                |> Dict.insert 'Y' rockPoints
+                |> Dict.insert 'Z' paperPoints
 
-                    _ ->
-                        Nothing
-            )
+        bDict =
+            Dict.empty
+                |> Dict.insert 'X' rockPoints
+                |> Dict.insert 'Y' paperPoints
+                |> Dict.insert 'Z' scissorsPoints
 
-
-convertInputToMovesWithDesiredOutcome : String -> List ( Move, DesiredOutcome )
-convertInputToMovesWithDesiredOutcome input =
-    input
-        |> String.lines
-        |> List.map (String.split " " >> toMoveWithOutcome)
-        |> List.filterMap
-            (\x ->
-                case x of
-                    Ok ( move, outcome ) ->
-                        Just ( move, outcome )
-
-                    _ ->
-                        Nothing
-            )
+        cDict =
+            Dict.empty
+                |> Dict.insert 'X' paperPoints
+                |> Dict.insert 'Y' scissorsPoints
+                |> Dict.insert 'Z' rockPoints
+    in
+    Dict.empty
+        |> Dict.insert 'A' aDict
+        |> Dict.insert 'B' bDict
+        |> Dict.insert 'C' cDict
 
 
-toMoveWithOutcome : List String -> Result String ( Move, DesiredOutcome )
-toMoveWithOutcome v =
-    case v of
-        [ move, outcome ] ->
-            Result.map2 Tuple.pair (toMove move) (toOutcome outcome)
+filterEmptyStrings : String -> Bool
+filterEmptyStrings =
+    String.trim >> String.isEmpty >> not
+
+
+removeSpaces : String -> String
+removeSpaces =
+    String.filter ((==) ' ' >> not)
+
+
+toActions : String -> Maybe ( Char, Char )
+toActions line =
+    case String.toList line of
+        [ theirs, ours ] ->
+            Just ( theirs, ours )
 
         _ ->
-            Err "Invalid input"
+            Nothing
 
 
 winScore : Int
