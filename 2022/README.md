@@ -5,9 +5,10 @@
 These are my contributions for the Advent of Code 2022 event with corresponding
 results for each challenge.
 
-| Day | Challenge Name   | Language   | Stars |
-| --- | ---------------- | ---------- | ----- |
-| 1   | Calorie Counting | JavaScript | ⭐⭐  |
+| Day | Challenge Name      | Language   | Stars |
+| --- | ------------------- | ---------- | ----- |
+| 1   | Calorie Counting    | JavaScript | ⭐⭐  |
+| 2   | Rock Paper Scissors | JavaScript | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -44,13 +45,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 10:40:39 | 83151 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 11:25:04 | 80422 | 0     |
 
 ### Day 3
 
