@@ -1,0 +1,20 @@
+{
+  "name": "jamesrweb/rucksack-reorganization",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AdventOfCode\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "James Robb",
+      "email": "47126579+jamesrweb@users.noreply.github.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "scripts": {
+    "start": "php src/index.php"
+  }
+}
