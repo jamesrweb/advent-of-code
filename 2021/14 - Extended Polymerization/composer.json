@@ -1,10 +1,10 @@
 {
-  "name": "jamesrweb/advent-of-code-day-14",
+  "name": "jamesrweb/extended-polymerization",
   "type": "project",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "AdventOfCodeDay14\\": "src/"
+      "AdventOfCode\\": "src/"
     }
   },
   "authors": [

@@ -1,10 +1,10 @@
 {
-  "name": "jamesrweb/advent-of-code-day-3",
+  "name": "jamesrweb/binary-diagnosis",
   "type": "project",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "AdventOfCodeDay3\\": "src/"
+      "AdventOfCode\\": "src/"
     }
   },
   "authors": [

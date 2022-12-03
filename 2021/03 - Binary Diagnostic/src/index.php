@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AdventOfCodeDay3;
+namespace AdventOfCode;
 
 use Exception;
 
