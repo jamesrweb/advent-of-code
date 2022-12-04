@@ -10,6 +10,7 @@ results for each challenge.
 | 1   | Calorie Counting        | JavaScript | ⭐⭐  |
 | 2   | Rock Paper Scissors     | Elm        | ⭐⭐  |
 | 3   | Rucksack Reorganization | PHP        | ⭐⭐  |
+| 4   | Camp Cleanup            | C#         | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -74,13 +75,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 14:23:37 | 82780 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 14:34:03 | 80980 | 0     |
 
 ### Day 5
 
