@@ -3,7 +3,9 @@
 .config/
 .ionide/
 .fake/
+.idea/
 bin/
+out/
 obj/
 elm-stuff/
 node_modules/

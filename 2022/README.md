@@ -11,6 +11,7 @@ results for each challenge.
 | 2   | Rock Paper Scissors     | Elm        | ⭐⭐  |
 | 3   | Rucksack Reorganization | PHP        | ⭐⭐  |
 | 4   | Camp Cleanup            | C#         | ⭐⭐  |
+| 5   | Supply Stacks           | Kotlin     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -89,13 +90,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 20:36:16 | 85916 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 20:47:03 | 83797 | 0     |
 
 ### Day 6
 
