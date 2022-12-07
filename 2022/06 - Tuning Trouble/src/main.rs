@@ -1,3 +1,4 @@
+use std::collections::hash_map::RandomState;
 use std::collections::HashSet;
 use std::error::Error;
 use std::fs::read_to_string;
@@ -29,63 +30,31 @@ fn solve_part_two(datastream_buffer: String) -> Option<usize> {
 }
 
 fn search_packet(datastream_buffer: String, skip_size: usize) -> Option<usize> {
-    let mut marker_index = None;
-    let mut seen = HashSet::new();
-    let mut start = 0;
-    let end = datastream_buffer.len() - 1;
+    Vec::from_iter(datastream_buffer.chars().into_iter())
+        .as_slice()
+        .windows(skip_size)
+        .enumerate()
+        .fold(None, |marker_index, (index, window)| {
+            if marker_index.is_some() {
+                return marker_index;
+            }
 
-    loop {
-        if start > end - skip_size {
-            break;
-        }
+            if String::from_iter(window.to_vec().iter()).unique().len() == skip_size {
+                return Some(index + skip_size);
+            }
 
-        let packet: Vec<char> = datastream_buffer
-            .chars()
-            .skip(start)
-            .take(skip_size)
-            .collect();
+            marker_index
+        })
+}
 
-        let unique_packet = packet
-            .clone()
-            .into_iter()
-            .fold(true, |accumulator, signal| {
-                if accumulator == false {
-                    return accumulator;
-                }
+trait Unique {
+    fn unique(&self) -> Self;
+}
 
-                if packet.clone().into_iter().filter(|&c| c == signal).count() > 1 {
-                    return false;
-                }
+impl Unique for String {
+    fn unique(&self) -> Self {
+        let unique_chars: HashSet<char, RandomState> = HashSet::from_iter(self.chars().into_iter());
 
-                true
-            });
-
-        let letters_not_seen = packet
-            .clone()
-            .into_iter()
-            .fold(false, |accumulator, signal| {
-                if accumulator == true {
-                    return accumulator;
-                }
-
-                if seen.contains(&signal) {
-                    return true;
-                }
-
-                accumulator
-            });
-
-        packet.clone().into_iter().for_each(|signal| {
-            seen.insert(signal);
-        });
-
-        if unique_packet && letters_not_seen {
-            marker_index = Some(start + skip_size);
-            break;
-        }
-
-        start += 1;
+        unique_chars.into_iter().collect()
     }
-
-    marker_index
 }
