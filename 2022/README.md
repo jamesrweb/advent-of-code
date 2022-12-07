@@ -13,6 +13,7 @@ results for each challenge.
 | 4   | Camp Cleanup            | C#         | ⭐⭐  |
 | 5   | Supply Stacks           | Kotlin     | ⭐⭐  |
 | 6   | Tuning Trouble          | Rust       | ⭐⭐  |
+| 7   | No Space Left On Device | Ruby       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -119,13 +120,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 14:55:21 | 50805 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 15:01:31 | 48606 | 0     |
 
 ### Day 8
 
