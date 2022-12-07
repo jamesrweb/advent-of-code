@@ -12,6 +12,7 @@ results for each challenge.
 | 3   | Rucksack Reorganization | PHP        | ⭐⭐  |
 | 4   | Camp Cleanup            | C#         | ⭐⭐  |
 | 5   | Supply Stacks           | Kotlin     | ⭐⭐  |
+| 6   | Tuning Trouble          | Rust       | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -104,13 +105,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 18:30:37 | 90652 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 18:36:04 | 89663 | 0     |
 
 ### Day 7
 
