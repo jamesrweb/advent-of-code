@@ -25,7 +25,7 @@ def parse_instruction(folder_sizes, stack, line)
     end
   end
 
-  return folder_sizes, stack
+  [folder_sizes, stack]
 end
 
 # @param [Array<Hash<Integer>, Array<String>>] accumulator
@@ -35,7 +35,7 @@ end
 def instruction_accumulator(accumulator, line)
   folder_sizes, stack = accumulator
 
-  return parse_instruction(folder_sizes, stack, line)
+  parse_instruction(folder_sizes, stack, line)
 end
 
 # @param [Array<String>] instructions
