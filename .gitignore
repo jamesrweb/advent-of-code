@@ -17,3 +17,6 @@ target/
 *.log
 .Rproj.user
 tempCodeRunnerFile.*
+.stack-work/
+stack.yaml.lock
+*.cabal

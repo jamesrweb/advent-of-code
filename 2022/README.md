@@ -14,6 +14,7 @@ results for each challenge.
 | 5   | Supply Stacks           | Kotlin     | ⭐⭐  |
 | 6   | Tuning Trouble          | Rust       | ⭐⭐  |
 | 7   | No Space Left On Device | Ruby       | ⭐⭐  |
+| 8   | Treetop Tree House      | Haskell    | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -134,13 +135,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 22:22:48 | 66514 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time     | Rank  | Score |
+| -------- | ----- | ----- |
+| 22:31:21 | 60084 | 0     |
 
 ### Day 9
 
