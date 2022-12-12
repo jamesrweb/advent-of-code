@@ -15,6 +15,7 @@ results for each challenge.
 | 6   | Tuning Trouble          | Rust       | ⭐⭐  |
 | 7   | No Space Left On Device | Ruby       | ⭐⭐  |
 | 8   | Treetop Tree House      | Haskell    | ⭐⭐  |
+| 9   | Rope Bridge             | Python     | ⭐⭐  |
 
 ## My statistics for each days challenge
 
@@ -149,13 +150,15 @@ Some items worth nothing here:
 
 #### Part One
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 68733 | 0     |
 
 #### Part Two
 
-| Time | Rank | Score |
-| ---- | ---- | ----- |
+| Time | Rank  | Score |
+| ---- | ----- | ----- |
+| >24h | 60128 | 0     |
 
 ### Day 10
 
