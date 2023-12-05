@@ -6,7 +6,10 @@ type Matches = Map<number, MatchValue>;
 type DisplayPatternValue = Display["patterns"][number];
 
 class Display {
-  constructor(public patterns: string[], public outputs: string[]) {}
+  constructor(
+    public patterns: string[],
+    public outputs: string[]
+  ) {}
 }
 
 function uniqueCharacterMatch(haystack: string = "", needles: string = "") {

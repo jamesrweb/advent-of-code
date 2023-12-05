@@ -110,7 +110,7 @@ function solve_part_one(cups: Cups): number {
 function solve_part_two(cups: Cups): number {
   const data = cups
     .concat(range(Math.max(...cups), 10 ** 6))
-    .map(cup => ({ id: cup } as ListNode))
+    .map(cup => ({ id: cup }) as ListNode)
     .map((cup, index, array) => {
       cup.next = array[(array.length + index + 1) % array.length];
       return cup;

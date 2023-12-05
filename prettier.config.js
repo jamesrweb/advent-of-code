@@ -15,8 +15,5 @@ module.exports = {
   tabWidth: 2,
   trailingComma: "none",
   useTabs: false,
-  vueIndentScriptAndStyle: false,
-  // Enforces that padding of columns in sh files should be kept where possible
-  keepPadding: true,
-  trailingCommaPHP: false
+  vueIndentScriptAndStyle: false
 };
