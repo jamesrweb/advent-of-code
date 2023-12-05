@@ -278,7 +278,7 @@ readonly final class EngineSchematic
           $pair = array_unique($pair);
         }
 
-        if (count($pair) == 2) {
+        if (count($pair) === 2) {
           $pairs[] = $pair;
         }
       }
