@@ -72,7 +72,7 @@ def solve_part_two(folder_sizes)
 end
 
 def main
-  instructions = read_lines_from_file('input.txt')
+  instructions = read_lines_from_file(__dir__ + '/input.txt')
   folder_sizes = folder_sizes_from_instructions(instructions)
 
   puts 'Part one: ' + solve_part_one(folder_sizes).to_s

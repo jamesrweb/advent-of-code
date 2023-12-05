@@ -7,17 +7,6 @@ final class EngineSchematic
   {
   }
 
-  public function __toString(): string
-  {
-    return array_reduce(
-      $this->schematic,
-      function ($accumulator, $current) {
-        return $accumulator . implode($current) . PHP_EOL;
-      },
-      ""
-    );
-  }
-
   public static function fromFile(string $file): self
   {
     $handle = fopen($file, "r");
@@ -48,10 +37,9 @@ final class EngineSchematic
 
     foreach ($this->schematic as $row_index => $row) {
       $number = null;
-      $row_string = implode($row);
 
       foreach ($row as $char_index => $char) {
-        if ($char === "." && !is_null($number)) {
+        if (!is_numeric($char) && is_string($number)) {
           for (
             $i = $char_index - mb_strlen($number);
             $i <= $char_index;
@@ -66,17 +54,17 @@ final class EngineSchematic
 
             // Row above
             $top_left =
-              !is_null($above) &&
+              is_array($above) &&
               array_key_exists($i - 1, $above) &&
               is_string($above[$i - 1]) &&
               $this->isSymbolMarker($above[$i - 1]);
             $top =
-              !is_null($above) &&
+              is_array($above) &&
               array_key_exists($i, $above) &&
               is_string($above[$i]) &&
               $this->isSymbolMarker($above[$i]);
             $top_right =
-              !is_null($above) &&
+              is_array($above) &&
               array_key_exists($i + 1, $above) &&
               is_string($above[$i + 1]) &&
               $this->isSymbolMarker($above[$i + 1]);
@@ -93,17 +81,17 @@ final class EngineSchematic
 
             // Row below
             $bottom_left =
-              !is_null($below) &&
+              is_array($below) &&
               array_key_exists($i - 1, $below) &&
               is_string($below[$i - 1]) &&
               $this->isSymbolMarker($below[$i - 1]);
             $bottom =
-              !is_null($below) &&
+              is_array($below) &&
               array_key_exists($i, $below) &&
               is_string($below[$i]) &&
               $this->isSymbolMarker($below[$i]);
             $bottom_right =
-              !is_null($below) &&
+              is_array($below) &&
               array_key_exists($i + 1, $below) &&
               is_string($below[$i + 1]) &&
               $this->isSymbolMarker($below[$i + 1]);
@@ -148,11 +136,30 @@ final class EngineSchematic
   {
     return 2;
   }
+
+  public function __toString(): string
+  {
+    return array_reduce(
+      $this->schematic,
+      function ($accumulator, $current) {
+        $key = array_search($current, $this->schematic);
+
+        if ($key === false) {
+          return $accumulator;
+        }
+
+        $end = $key === count($this->schematic) - 1 ? "" : PHP_EOL;
+        return $accumulator . json_encode(implode($current)) . $end;
+      },
+      ""
+    );
+  }
 }
 
 $engineSchematic = EngineSchematic::fromFile(__DIR__ . "/input.txt");
 
 print_r([
   "part_one" => $engineSchematic->solvePartOne(),
-  "part_two" => $engineSchematic->solvePartTwo()
+  "part_two" => $engineSchematic->solvePartTwo(),
+  "schematic" => PHP_EOL . strval($engineSchematic)
 ]);

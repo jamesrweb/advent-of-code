@@ -1,9 +1,9 @@
 def read_lines_from_file(filename)
-  File.open(filename, 'r', &:readlines)
+  File.open(filename, "r", &:readlines)
 end
 
 def build_graph(lines)
-  symbols = lines.map { |l| l.chomp.split('-').map(&:to_sym) }
+  symbols = lines.map { |l| l.chomp.split("-").map(&:to_sym) }
   graph = {}
 
   symbols.each do |a, b|
@@ -58,10 +58,9 @@ end
 
 def solve_part_two(graph)
   valid_paths = []
-  allowed_duplicate_nodes =
-    graph.keys.select do |node|
-      node.downcase == node && %i[start end].include?(node) == false
-    end
+  allowed_duplicate_nodes = graph.keys.select do |node|
+    node.downcase == node && %i[start end].include?(node) == false
+  end
 
   allowed_duplicate_nodes.each do |allowed_duplicate_node|
     valid_paths += find_paths(graph, allowed_duplicate_node)
@@ -70,8 +69,8 @@ def solve_part_two(graph)
   valid_paths.uniq.size
 end
 
-lines = read_lines_from_file('input.txt')
+lines = read_lines_from_file("input.txt")
 graph = build_graph(lines)
 
-puts 'Part one: ' + solve_part_one(graph).to_s
-puts 'Part two: ' + solve_part_two(graph).to_s
+puts("Part one: " + solve_part_one(graph).to_s)
+puts("Part two: " + solve_part_two(graph).to_s)
