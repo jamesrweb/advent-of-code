@@ -18,7 +18,7 @@ function main(): void
 
   print_r([
     "part_one" => solve_part_one($backpacks),
-    "part_two" => solve_part_two($backpacks)
+    "part_two" => solve_part_two($backpacks),
   ]);
 }
 

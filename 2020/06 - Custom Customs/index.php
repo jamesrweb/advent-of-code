@@ -70,7 +70,7 @@ function main()
 
   print_r([
     "part_one" => solve_part_one($groups),
-    "part_two" => solve_part_two($groups)
+    "part_two" => solve_part_two($groups),
   ]);
 }
 

@@ -20,7 +20,7 @@ class Seat
     return match ($char) {
       "F", "L" => "0",
       "B", "R" => "1",
-      _ => throw new Exception("Unrecognised char provided.")
+      _ => throw new Exception("Unrecognised char provided."),
     };
   }
 }
@@ -54,7 +54,7 @@ function main()
 
   print_r([
     "part_one" => max($seat_ids),
-    "part_two" => solve_part_two($seat_ids)
+    "part_two" => solve_part_two($seat_ids),
   ]);
 }
 

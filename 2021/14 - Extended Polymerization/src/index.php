@@ -73,7 +73,7 @@ function updatePolymerWindowsWithCounts(
 
     $new_polymer_windows->putAll([
       $insertion_polymer[0] => $left_element_count + $polymer_window_count,
-      $insertion_polymer[1] => $right_element_count + $polymer_window_count
+      $insertion_polymer[1] => $right_element_count + $polymer_window_count,
     ]);
   }
 
@@ -176,7 +176,7 @@ function parseInputData(string $data): Polymer
 
     $created_elements = [
       $polymer_pair[0] . $insertion_element,
-      $insertion_element . $polymer_pair[1]
+      $insertion_element . $polymer_pair[1],
     ];
     $insertion_rules->put($polymer_pair, $created_elements);
   }
@@ -191,7 +191,7 @@ function main(): void
 
   print_r([
     "part_one" => solve($polymer, 10),
-    "part_two" => solve($polymer, 40)
+    "part_two" => solve($polymer, 40),
   ]);
 }
 

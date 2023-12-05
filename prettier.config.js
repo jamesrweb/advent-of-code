@@ -1,4 +1,5 @@
 module.exports = {
+  plugins: ["@prettier/plugin-php"],
   arrowParens: "avoid",
   bracketSpacing: true,
   embeddedLanguageFormatting: "auto",
