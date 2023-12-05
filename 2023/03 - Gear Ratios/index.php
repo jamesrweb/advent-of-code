@@ -51,78 +51,65 @@ readonly final class EngineSchematic
       foreach ($row as $char_index => $char) {
         if (is_numeric($char)) {
           $number = is_null($number) ? $char : $number . $char;
-        } elseif (is_string($number)) {
-          for (
-            $i = $char_index - mb_strlen($number);
-            $i < $char_index;
-            $i = $i + 1
-          ) {
-            assert(is_numeric($row[$i]));
 
-            $above = array_key_exists($row_index - 1, $this->schematic)
-              ? $this->schematic[$row_index - 1]
-              : null;
-            $below = array_key_exists($row_index + 1, $this->schematic)
-              ? $this->schematic[$row_index + 1]
-              : null;
-
-            // Row above
-            $top_left =
-              is_array($above) &&
-              array_key_exists($i - 1, $above) &&
-              $this->isSymbolMarker($above[$i - 1]);
-            $top =
-              is_array($above) &&
-              array_key_exists($i, $above) &&
-              $this->isSymbolMarker($above[$i]);
-            $top_right =
-              is_array($above) &&
-              array_key_exists($i + 1, $above) &&
-              $this->isSymbolMarker($above[$i + 1]);
-
-            // Current row
-            $left =
-              array_key_exists($i - 1, $row) &&
-              $this->isSymbolMarker($row[$i - 1]);
-            $right =
-              array_key_exists($i + 1, $row) &&
-              $this->isSymbolMarker($row[$i + 1]);
-
-            // Row below
-            $bottom_left =
-              is_array($below) &&
-              array_key_exists($i - 1, $below) &&
-              $this->isSymbolMarker($below[$i - 1]);
-            $bottom =
-              is_array($below) &&
-              array_key_exists($i, $below) &&
-              $this->isSymbolMarker($below[$i]);
-            $bottom_right =
-              is_array($below) &&
-              array_key_exists($i + 1, $below) &&
-              $this->isSymbolMarker($below[$i + 1]);
-
-            if (
-              $top_left ||
-              $top ||
-              $top_right ||
-              $left ||
-              $right ||
-              $bottom_left ||
-              $bottom ||
-              $bottom_right
-            ) {
-              $numbers[] = intval($number, 10);
-              break;
-            }
+          if($char_index === count($row) - 1) {
+            $numbers = $this->tryPushPartNumberToNumbers($number, $row, $char_index + 1, $row_index, $numbers);
           }
-
+        } else if (is_string($number)) {
+          $numbers = $this->tryPushPartNumberToNumbers($number, $row, $char_index, $row_index, $numbers);
           $number = null;
         }
       }
     }
 
     return $numbers;
+  }
+
+  /**
+   * @param array<string> $row
+   * @param array<int> $numbers
+   * 
+   * @return array<int>
+   */
+  private function tryPushPartNumberToNumbers(string $number, array $row, int $char_index, int $row_index, array $numbers): array {
+    $partNumber = $this->checkForPartNumber($number, $row, $char_index, $row_index);
+
+    if(is_int($partNumber)) {
+      $numbers[] = $partNumber;
+    }
+
+    return $numbers;
+  }
+
+  /**
+   * @param array<string> $row
+   */
+  private function checkForPartNumber(string $number, array $row, int $char_index, int $row_index): int|false {
+    for ($i = $char_index - mb_strlen($number); $i < $char_index; $i = $i + 1) {
+      assert(is_numeric($row[$i]));
+
+      // Row above
+      $above = array_key_exists($row_index - 1, $this->schematic) ? $this->schematic[$row_index - 1] : null;
+      $top_left = is_array($above) && array_key_exists($i - 1, $above) && $this->isSymbolMarker($above[$i - 1]);
+      $top = is_array($above) && array_key_exists($i, $above) && $this->isSymbolMarker($above[$i]);
+      $top_right = is_array($above) && array_key_exists($i + 1, $above) && $this->isSymbolMarker($above[$i + 1]);
+
+      // Current row
+      $left = array_key_exists($i - 1, $row) && $this->isSymbolMarker($row[$i - 1]);
+      $right = array_key_exists($i + 1, $row) && $this->isSymbolMarker($row[$i + 1]);
+
+      // Row below
+      $below = array_key_exists($row_index + 1, $this->schematic) ? $this->schematic[$row_index + 1] : null;
+      $bottom_left = is_array($below) && array_key_exists($i - 1, $below) && $this->isSymbolMarker($below[$i - 1]);
+      $bottom = is_array($below) && array_key_exists($i, $below) && $this->isSymbolMarker($below[$i]);
+      $bottom_right = is_array($below) && array_key_exists($i + 1, $below) && $this->isSymbolMarker($below[$i + 1]);
+
+      if ($top_left || $top || $top_right || $left || $right || $bottom_left || $bottom || $bottom_right) {
+        return intval($number, 10);
+      }
+    }
+
+    return false;
   }
 
   public function solvePartOne(): int
