@@ -20,5 +20,7 @@ tempCodeRunnerFile.*
 .stack-work/
 stack.yaml.lock
 *.cabal
+*.o
+*.hi
 index
 index.dSYm
