@@ -54,6 +54,7 @@ def solve_part_two(grid: Grid) -> int:
     offset = states.index(current_iteration)
     cycle_length = index - offset
     next_iteration = states[floor((1e9 - offset) % cycle_length + offset)]
+
     return sum(
         row.count("O") * (len(grid) - row_index)
         for row_index, row in enumerate(next_iteration)
