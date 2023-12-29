@@ -1,5 +1,10 @@
 module.exports = {
-  plugins: ["@prettier/plugin-php"],
+  plugins: [
+    "@prettier/plugin-php",
+    "prettier-plugin-elm",
+    "prettier-plugin-sh",
+    "prettier-plugin-toml"
+  ],
   arrowParens: "avoid",
   bracketSpacing: true,
   embeddedLanguageFormatting: "auto",

@@ -3,7 +3,6 @@ module Main exposing (main)
 import Html exposing (Html)
 import Input
 import List.Extra
-import Html.Attributes exposing (kind)
 
 
 main : Html msg
@@ -24,17 +23,20 @@ main =
             ]
         ]
 
+
 jokerValuePartOne : Int
 jokerValuePartOne =
     11
 
+
 jokerValuePartTwo : Int
-jokerValuePartTwo = 
+jokerValuePartTwo =
     1
+
 
 solvePartOne : List String -> Int
 solvePartOne =
-    List.filterMap (toHand True) 
+    List.filterMap (toHand True)
         >> List.sortWith sortByRank
         >> List.map .bid
         >> List.indexedMap (\index bid -> (index + 1) * bid)
@@ -43,15 +45,15 @@ solvePartOne =
 
 solvePartTwo : List String -> Int
 solvePartTwo =
-    List.filterMap (toHand False) 
+    List.filterMap (toHand False)
         >> List.sortWith sortByRank
         >> List.map .bid
         >> List.indexedMap (\index bid -> (index + 1) * bid)
         >> List.sum
 
 
-type alias CardValue
-    = Int
+type alias CardValue =
+    Int
 
 
 toCardValue : Bool -> Char -> Maybe CardValue
@@ -67,7 +69,13 @@ toCardValue isPartOne input =
             Just 12
 
         'J' ->
-            (if isPartOne then jokerValuePartOne else jokerValuePartTwo) |> Just
+            (if isPartOne then
+                jokerValuePartOne
+
+             else
+                jokerValuePartTwo
+            )
+                |> Just
 
         'T' ->
             Just 10
@@ -109,9 +117,10 @@ type Rank
     | OnePair
     | HighCard
 
+
 rankOrder : List Rank
-rankOrder = [
-    FiveOfAKind
+rankOrder =
+    [ FiveOfAKind
     , FourOfAKind
     , FullHouse
     , ThreeOfAKind
@@ -119,6 +128,7 @@ rankOrder = [
     , OnePair
     , HighCard
     ]
+
 
 type alias Hand =
     List CardValue
@@ -134,11 +144,18 @@ type alias HandInfo =
 toRank : Bool -> Hand -> Rank
 toRank isPartOne hand =
     let
-        (wildcardValues, fixedValues) = 
+        ( wildcardValues, fixedValues ) =
             List.partition
-            ((if isPartOne then jokerValuePartOne else jokerValuePartTwo) |> (==))
-            hand
-        
+                ((if isPartOne then
+                    jokerValuePartOne
+
+                  else
+                    jokerValuePartTwo
+                 )
+                    |> (==)
+                )
+                hand
+
         wildCardValuesCount : Int
         wildCardValuesCount =
             List.length wildcardValues
@@ -147,20 +164,25 @@ toRank isPartOne hand =
         List.Extra.gatherEquals hand
             |> List.map (\( _, list ) -> List.length list + 1)
             |> groupCountsToRank
+
     else if wildCardValuesCount == 5 then
         FiveOfAKind
+
     else
         List.Extra.gatherEquals fixedValues
-            |> List.sortBy (\(_, tail) -> negate (List.length tail)) 
-            |> List.indexedMap (\index (_, list) ->
-                let
-                    next : Int
-                    next = 1 + List.length list
-                in
-                if index == 0 then
-                    next + wildCardValuesCount
-                else
-                    next
+            |> List.sortBy (\( _, tail ) -> negate (List.length tail))
+            |> List.indexedMap
+                (\index ( _, list ) ->
+                    let
+                        next : Int
+                        next =
+                            1 + List.length list
+                    in
+                    if index == 0 then
+                        next + wildCardValuesCount
+
+                    else
+                        next
                 )
             |> groupCountsToRank
 
@@ -191,7 +213,7 @@ groupCountsToRank groupCounts =
         isOnePair : Bool
         isOnePair =
             List.member 2 groupCounts
-            in
+    in
     if isFiveOfAKind then
         FiveOfAKind
 
@@ -212,6 +234,7 @@ groupCountsToRank groupCounts =
 
     else
         HighCard
+
 
 toHand : Bool -> String -> Maybe HandInfo
 toHand isPartOne input =
@@ -240,19 +263,22 @@ sortByRank : HandInfo -> HandInfo -> Order
 sortByRank handA handB =
     let
         rankAIndex : Int
-        rankAIndex = List.Extra.elemIndex handA.rank rankOrder
-            |> Maybe.withDefault 0
+        rankAIndex =
+            List.Extra.elemIndex handA.rank rankOrder
+                |> Maybe.withDefault 0
 
         rankBIndex : Int
-        rankBIndex = List.Extra.elemIndex handB.rank rankOrder
-            |> Maybe.withDefault 0
-        
+        rankBIndex =
+            List.Extra.elemIndex handB.rank rankOrder
+                |> Maybe.withDefault 0
     in
     if rankAIndex < rankBIndex then
         GT
+
     else if rankAIndex > rankBIndex then
         LT
+
     else
-    List.map2 compare handA.hand handB.hand
-        |> List.Extra.find ((/=) EQ)
-        |> Maybe.withDefault EQ
+        List.map2 compare handA.hand handB.hand
+            |> List.Extra.find ((/=) EQ)
+            |> Maybe.withDefault EQ

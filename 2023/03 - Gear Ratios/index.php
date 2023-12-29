@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-readonly final class EngineSchematic
+final readonly class EngineSchematic
 {
   /** @param array<array<string>> $schematic */
   public function __construct(private array $schematic)
