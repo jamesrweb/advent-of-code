@@ -6,7 +6,7 @@
     "format:csharp": "foreach -g \"**/*.csproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
     "format:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt\" -c",
     "format:ruby": "foreach -g \"**/index.rb\" -x \"cd '#{dir}' && rubyfmt -i .\" -c",
-    "format:python": "python3 -m black .",
+    "format:python": "python3 -m black . || black .",
     "format:rest": "prettier . --write --ignore-path .gitignore",
     "format": "run-p format:**"
   },
