@@ -24,3 +24,4 @@ stack.yaml.lock
 *.hi
 index
 index.dSYm
+*.sln*
