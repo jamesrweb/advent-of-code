@@ -1,0 +1,16 @@
+{
+  "name": "01 - Secret Entrance",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node --watch index.ts"
+  },
+  "keywords": [],
+  "author": "James Robb <47126579+jamesrweb@users.noreply.github.com>",
+  "license": "ISC",
+  "packageManager": "pnpm@10.24.0",
+  "devDependencies": {
+    "@types/node": "^24.10.1"
+  }
+}
