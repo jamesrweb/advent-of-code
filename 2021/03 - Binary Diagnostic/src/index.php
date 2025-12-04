@@ -57,11 +57,11 @@ class ReportManager
     $this->report = $report;
     $this->gamma_rate_binary = $this->generateGammaBits(
       $digit_counts,
-      $line_length
+      $line_length,
     );
     $this->epsilon_rate_binary = $this->generateEpsilonBits(
       $digit_counts,
-      $line_length
+      $line_length,
     );
     $this->gamma_rate_decimal = bindec($this->gamma_rate_binary);
     $this->epsilon_rate_decimal = bindec($this->epsilon_rate_binary);
@@ -125,7 +125,7 @@ class ReportManager
    */
   private function generateGammaBits(
     array $digit_counts,
-    int $line_length
+    int $line_length,
   ): string {
     $gamma_rate_binary = "";
 
@@ -142,7 +142,7 @@ class ReportManager
    */
   private function generateEpsilonBits(
     array $digit_counts,
-    int $line_length
+    int $line_length,
   ): string {
     $epsilon_bits = "";
 
@@ -161,17 +161,17 @@ class ReportManager
     for ($index = 0; $index < strlen($lines[1]); $index++) {
       $ones = array_filter(
         $lines,
-        static fn(string $line) => $line[$index] === "1"
+        static fn(string $line) => $line[$index] === "1",
       );
       $zeros = array_filter(
         $lines,
-        static fn(string $line) => $line[$index] === "0"
+        static fn(string $line) => $line[$index] === "0",
       );
       $character = count($ones) >= count($zeros) ? $onesChar : $zerosChar;
       $lines = array_reduce(
         $lines,
         $this->keepLinesWithCharacterAtIndex($character, $index),
-        []
+        [],
       );
 
       if (count($lines) === 1) {
@@ -187,11 +187,11 @@ class ReportManager
    */
   private function keepLinesWithCharacterAtIndex(
     string $character,
-    int $index
+    int $index,
   ): callable {
     return static function (array $carry, string $line) use (
       $character,
-      $index
+      $index,
     ) {
       if ($line[$index] === $character) {
         return array_merge($carry, [$line]);

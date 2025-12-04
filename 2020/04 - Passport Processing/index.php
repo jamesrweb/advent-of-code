@@ -142,7 +142,7 @@ function solve_part_one(array $passports): int
 {
   $valid = array_filter(
     $passports,
-    fn(Passport $passport) => $passport->validate_part_one()
+    fn(Passport $passport) => $passport->validate_part_one(),
   );
 
   return count($valid);
@@ -152,7 +152,7 @@ function solve_part_two(array $passports): int
 {
   $valid = array_filter(
     $passports,
-    fn(Passport $passport) => $passport->validate_part_two()
+    fn(Passport $passport) => $passport->validate_part_two(),
   );
 
   return count($valid);
@@ -163,7 +163,7 @@ function main()
   $contents = file_get_contents(__DIR__ . "/input.txt", true);
   $passports = array_map(
     fn(string $data) => Passport::create($data),
-    explode("\r\n\r\n", $contents)
+    explode("\r\n\r\n", $contents),
   );
 
   print_r([

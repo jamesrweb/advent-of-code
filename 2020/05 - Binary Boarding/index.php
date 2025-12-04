@@ -9,7 +9,7 @@ class Seat
   {
     $digits = array_map(
       fn(string $char) => $this->char_to_binary_digit($char),
-      str_split($passcode)
+      str_split($passcode),
     );
     $binary = implode("", $digits);
     $this->id = +base_convert($binary, 2, 10);
@@ -40,7 +40,7 @@ function solve_part_two(array $seat_ids): int
     fn(int $accumulator, int $current) => part_two_filter($current, $seat_ids)
       ? $current
       : $accumulator,
-    0
+    0,
   );
 }
 
@@ -48,8 +48,8 @@ function main()
 {
   $contents = file_get_contents(__DIR__ . "/input.txt", true);
   $seat_ids = array_map(
-    fn(string $passcode) => (new Seat($passcode))->id,
-    explode("\r\n", $contents)
+    fn(string $passcode) => new Seat($passcode)->id,
+    explode("\r\n", $contents),
   );
 
   print_r([

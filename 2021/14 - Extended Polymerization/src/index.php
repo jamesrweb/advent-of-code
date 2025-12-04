@@ -61,7 +61,7 @@ function createPolymerWindowsWithCounts(string $string): Map
  */
 function updatePolymerWindowsWithCounts(
   Map $polymer_windows,
-  Map $insertion_rules
+  Map $insertion_rules,
 ): Map {
   $new_polymer_windows = new Map();
 
@@ -87,7 +87,7 @@ function updatePolymerWindowsWithCounts(
  */
 function countAtomsInPolymerWindows(
   Map $polymer_windows,
-  string $initial_polymer
+  string $initial_polymer,
 ) {
   $atom_counts = new Map();
   $final_element = $initial_polymer[strlen($initial_polymer) - 1];
@@ -112,14 +112,14 @@ function solve(Polymer $polymer, int $steps): int
     range(0, $steps - 1),
     fn(Map $polymer_windows) => updatePolymerWindowsWithCounts(
       $polymer_windows,
-      $insertion_rules
+      $insertion_rules,
     ),
-    createPolymerWindowsWithCounts($initial_polymer)
+    createPolymerWindowsWithCounts($initial_polymer),
   );
 
   $element_counts = countAtomsInPolymerWindows(
     $polymer_windows,
-    $initial_polymer
+    $initial_polymer,
   );
   $element_counts->sort();
   $values = $element_counts->values()->toArray();
@@ -168,7 +168,7 @@ function parseInputData(string $data): Polymer
 
     if ($insertion_rule_parts === false) {
       throw new Exception(
-        "Could not parse insertion rule: '$raw_insertion_rule'."
+        "Could not parse insertion rule: '$raw_insertion_rule'.",
       );
     }
 

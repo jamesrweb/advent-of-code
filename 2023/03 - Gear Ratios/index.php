@@ -3,9 +3,7 @@
 final readonly class EngineSchematic
 {
   /** @param array<array<string>> $schematic */
-  public function __construct(private array $schematic)
-  {
-  }
+  public function __construct(private array $schematic) {}
 
   public static function fromFile(string $file): self
   {
@@ -58,7 +56,7 @@ final readonly class EngineSchematic
               $row,
               $char_index + 1,
               $row_index,
-              $numbers
+              $numbers,
             );
           }
         } elseif (is_string($number)) {
@@ -67,7 +65,7 @@ final readonly class EngineSchematic
             $row,
             $char_index,
             $row_index,
-            $numbers
+            $numbers,
           );
           $number = null;
         }
@@ -88,13 +86,13 @@ final readonly class EngineSchematic
     array $row,
     int $char_index,
     int $row_index,
-    array $numbers
+    array $numbers,
   ): array {
     $partNumber = $this->checkForPartNumber(
       $number,
       $row,
       $char_index,
-      $row_index
+      $row_index,
     );
 
     if (is_int($partNumber)) {
@@ -111,7 +109,7 @@ final readonly class EngineSchematic
     string $number,
     array $row,
     int $char_index,
-    int $row_index
+    int $row_index,
   ): int|false {
     for ($i = $char_index - mb_strlen($number); $i < $char_index; $i = $i + 1) {
       assert(is_numeric($row[$i]));
@@ -179,7 +177,7 @@ final readonly class EngineSchematic
   private function tryPushPartNumberToPair(
     int $start_index,
     array $row,
-    array $pair
+    array $pair,
   ): array {
     $partNumber = $this->readPartNumberWithIndexReset($start_index, $row);
 
@@ -195,7 +193,7 @@ final readonly class EngineSchematic
    */
   private function readPartNumberWithIndexReset(
     int $start_index,
-    array $row
+    array $row,
   ): int|false {
     $index = $start_index;
     $partNumber = "";
@@ -249,13 +247,13 @@ final readonly class EngineSchematic
           $pair = $this->tryPushPartNumberToPair(
             $char_index - 1,
             $above,
-            $pair
+            $pair,
           );
           $pair = $this->tryPushPartNumberToPair($char_index, $above, $pair);
           $pair = $this->tryPushPartNumberToPair(
             $char_index + 1,
             $above,
-            $pair
+            $pair,
           );
           $pair = array_unique($pair);
         }
@@ -267,13 +265,13 @@ final readonly class EngineSchematic
           $pair = $this->tryPushPartNumberToPair(
             $char_index - 1,
             $below,
-            $pair
+            $pair,
           );
           $pair = $this->tryPushPartNumberToPair($char_index, $below, $pair);
           $pair = $this->tryPushPartNumberToPair(
             $char_index + 1,
             $below,
-            $pair
+            $pair,
           );
           $pair = array_unique($pair);
         }
@@ -314,7 +312,7 @@ final readonly class EngineSchematic
         $end = $key === count($this->schematic) - 1 ? "" : PHP_EOL;
         return $accumulator . json_encode(implode($current)) . $end;
       },
-      ""
+      "",
     );
   }
 }

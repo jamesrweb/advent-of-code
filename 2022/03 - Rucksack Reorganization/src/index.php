@@ -13,7 +13,7 @@ function main(): void
   $data = load_file_contents(__DIR__ . "/input.txt");
   $backpacks = array_map(
     fn(string $line) => Backpack::fromString($line),
-    explode(PHP_EOL, $data)
+    explode(PHP_EOL, $data),
   );
 
   print_r([
@@ -35,7 +35,7 @@ function solve_part_one(array $backpacks): int
 {
   $scores = array_map(
     fn(Backpack $backpack) => $backpack->commonCompartmentItemsScore(),
-    $backpacks
+    $backpacks,
   );
 
   return array_sum($scores);
@@ -53,7 +53,7 @@ function solve_part_two(array $backpacks): int
   $groups = array_chunk($backpacks, 3);
   $sharedGroupItems = array_map(
     fn(array $group) => Backpack::empty()->shared($group),
-    $groups
+    $groups,
   );
   $line = join("", array_merge(...$sharedGroupItems));
 

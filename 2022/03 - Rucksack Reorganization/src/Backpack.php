@@ -20,7 +20,7 @@ final class Backpack
    */
   public function __construct(
     array $compartmentA = [],
-    array $compartmentB = []
+    array $compartmentB = [],
   ) {
     $this->compartmentA = $compartmentA;
     $this->compartmentB = $compartmentB;
@@ -40,7 +40,7 @@ final class Backpack
 
     if ($chunkSize < 1) {
       throw new Exception(
-        "Unable to construct a Backpack instance with the given line: \"$line\""
+        "Unable to construct a Backpack instance with the given line: \"$line\"",
       );
     }
 
@@ -64,7 +64,7 @@ final class Backpack
   {
     $scores = array_map(
       fn(string $char) => $this->scoreForItem($char),
-      $this->items()
+      $this->items(),
     );
 
     return array_sum($scores);
@@ -77,12 +77,12 @@ final class Backpack
   {
     $intersections = $this->findUniqueIntersections(
       $this->compartmentA,
-      $this->compartmentB
+      $this->compartmentB,
     );
 
     $scores = array_map(
       fn(string $char) => $this->scoreForItem($char),
-      $intersections
+      $intersections,
     );
 
     return array_sum($scores);
@@ -105,7 +105,7 @@ final class Backpack
     }
 
     return $this->findUniqueIntersections(
-      ...array_merge([$ourItems], $othersItems)
+      ...array_merge([$ourItems], $othersItems),
     );
   }
 

@@ -16,9 +16,9 @@ class Group
       $this->answers,
       fn(array $accumulator, string $group) => array_merge(
         $accumulator,
-        str_split($group)
+        str_split($group),
       ),
-      []
+      [],
     );
     return array_count_values($answers);
   }
@@ -36,7 +36,7 @@ class Group
     $answer_counts = $this->answer_counts();
     $answered_by_all = array_filter(
       $answer_counts,
-      fn(int $value) => $value === $total_answers
+      fn(int $value) => $value === $total_answers,
     );
     return count($answered_by_all);
   }
@@ -47,7 +47,7 @@ function solve_part_one(array $groups): int
   return array_reduce(
     $groups,
     fn(int $accumulator, Group $current) => $accumulator + $current->anyone(),
-    0
+    0,
   );
 }
 
@@ -56,7 +56,7 @@ function solve_part_two(array $groups): int
   return array_reduce(
     $groups,
     fn(int $accumulator, Group $current) => $accumulator + $current->everyone(),
-    0
+    0,
   );
 }
 
@@ -65,7 +65,7 @@ function main()
   $contents = file_get_contents(__DIR__ . "/input.txt", true);
   $groups = array_map(
     fn(string $group) => new Group($group),
-    explode("\r\n\r\n", $contents)
+    explode("\r\n\r\n", $contents),
   );
 
   print_r([
