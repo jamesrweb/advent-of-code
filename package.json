@@ -4,11 +4,19 @@
   "description": "My advent of code contributions from 2020 onwards.",
   "scripts": {
     "format:csharp": "foreach -g \"**/*.csproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
+    "format:fsharp": "foreach -g \"**/*.fsproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
     "format:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt\" -c",
     "format:ruby": "foreach -g \"**/index.rb\" -x \"cd '#{dir}' && rubyfmt -i .\" -c",
+    "format:haskell": "foreach -g \"**/*.hs\" -x \"stylish-haskell -i '#{file}'\" -c",
     "format:python": "python3 -m black . || black .",
-    "format:rest": "prettier . --write --ignore-path .gitignore",
-    "format": "run-p format:**"
+    "format:js": "biome check --write .",
+    "format": "run-s format:js format:csharp format:fsharp format:rust format:ruby format:haskell format:python",
+    "lint": "run-s lint:js lint:python lint:rust lint:ruby lint:haskell",
+    "lint:js": "biome check .",
+    "lint:python": "black --check .",
+    "lint:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt --check\" -c",
+    "lint:ruby": "foreach -g \"**/index.rb\" -x \"rubyfmt --check '#{file}'\" -c",
+    "lint:haskell": "for f in $(git ls-files '*.hs'); do stylish-haskell < \"$f\" | diff -u \"$f\" - || exit 1; done"
   },
   "repository": {
     "type": "git",
@@ -20,16 +28,16 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jamesrweb/advent-of-code/issues"
+    "url": "https://github.com/advent-of-code/advent-of-code/issues"
   },
   "homepage": "https://github.com/jamesrweb/advent-of-code#readme",
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=24.21.0"
+  },
   "devDependencies": {
-    "@prettier/plugin-php": "^0.24.0",
+    "@biomejs/biome": "^2.5.13",
     "foreach-cli": "^1.8.1",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^3.7.4",
-    "prettier-plugin-elm": "^0.12.0",
-    "prettier-plugin-sh": "^0.18.0",
-    "prettier-plugin-toml": "^2.0.6"
+    "npm-run-all": "^4.1.5"
   }
 }
