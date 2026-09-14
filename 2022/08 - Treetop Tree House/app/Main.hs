@@ -1,7 +1,7 @@
 module Main (main) where
 
-import Forest (Forest, countVisible, setForestVisibility, scenicScore)
-import Tree (readTree)
+import           Forest (Forest, countVisible, scenicScore, setForestVisibility)
+import           Tree   (readTree)
 
 main :: IO ()
 main = do

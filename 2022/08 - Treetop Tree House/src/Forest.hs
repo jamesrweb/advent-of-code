@@ -1,7 +1,8 @@
 module Forest (Forest, setForestVisibilityOrient, setForestVisibility, countVisible, scenicScore) where
 
-import Data.List (foldl', transpose, reverse)
-import Tree (Tree, setTreeVisibility, isTreeVisible, viewDistance, treeHeight)
+import           Data.List (foldl', reverse, transpose)
+import           Tree      (Tree, isTreeVisible, setTreeVisibility, treeHeight,
+                            viewDistance)
 
 type Forest = [[Tree]]
 

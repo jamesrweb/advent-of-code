@@ -1,7 +1,7 @@
 module Tree (Tree, readTree, isTreeVisible, treeHeight, setTreeVisibility, viewDistance) where
 
-import Data.List (foldl')
-import Lib (takeWhile1)
+import           Data.List (foldl')
+import           Lib       (takeWhile1)
 
 type Height = Int
 type Visible = Bool

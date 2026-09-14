@@ -1,6 +1,6 @@
 createPairs :: [Integer] -> [(Integer, Integer)]
-createPairs [] = []
-createPairs [_] = []
+createPairs []       = []
+createPairs [_]      = []
 createPairs (x:y:xs) = (x, y) : createPairs (y:xs)
 
 difference :: (Integer, Integer) -> Integer
