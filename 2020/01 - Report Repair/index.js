@@ -1,5 +1,5 @@
-const { promises } = require("fs");
-const { join } = require("path");
+const { promises } = require("node:fs");
+const { join } = require("node:path");
 
 function solve_part_one(expenses) {
   const checked = new Set();
@@ -28,11 +28,11 @@ function solve_part_two(expenses) {
 async function main() {
   const uri = join(__dirname, "input.txt");
   const file = await promises.readFile(uri, "utf8");
-  const expenses = file.split("\n").map(item => parseInt(item, 10));
+  const expenses = file.split("\n").map((item) => parseInt(item, 10));
 
   console.log({
     part_one: solve_part_one(expenses),
-    part_two: solve_part_two(expenses)
+    part_two: solve_part_two(expenses),
   });
 }
 

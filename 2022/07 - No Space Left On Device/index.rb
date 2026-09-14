@@ -2,7 +2,7 @@
 #
 # @return [Array<String>]
 def read_lines_from_file(filename)
-  File.open(filename, 'r', chomp: true)
+  File.open(filename, "r", chomp: true)
 end
 
 # @param [Hash<Integer>] folder_sizes
@@ -11,12 +11,12 @@ end
 #
 # @return [Array<Hash<Integer>, Array<String>>]
 def parse_instruction(folder_sizes, stack, line)
-  if line in ['$', 'cd', '..']
+  if line in ["$", "cd", ".."]
     stack.pop
-  elsif line in ['$', 'cd', folder]
-    stack.push folder
+  elsif line in ["$", "cd", folder]
+    stack.push(folder)
   elsif line in [size, _] and size.match?(/^\d+$/)
-    stack.reduce('') do |previous_path, current_path|
+    stack.reduce("") do |previous_path, current_path|
       path_key = previous_path + current_path
 
       folder_sizes[path_key] += size.to_i
@@ -67,16 +67,16 @@ def solve_part_two(folder_sizes)
 
   folder_sizes
     .values
-    .reject { |folder_size| folder_size < folder_sizes['/'] - difference }
+    .reject { |folder_size| folder_size < folder_sizes["/"] - difference }
     .min
 end
 
 def main
-  instructions = read_lines_from_file(__dir__ + '/input.txt')
+  instructions = read_lines_from_file(__dir__ + "/input.txt")
   folder_sizes = folder_sizes_from_instructions(instructions)
 
-  puts 'Part one: ' + solve_part_one(folder_sizes).to_s
-  puts 'Part two: ' + solve_part_two(folder_sizes).to_s
+  puts("Part one: " + solve_part_one(folder_sizes).to_s)
+  puts("Part two: " + solve_part_two(folder_sizes).to_s)
 end
 
 main

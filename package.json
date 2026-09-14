@@ -7,16 +7,16 @@
     "format:fsharp": "foreach -g \"**/*.fsproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
     "format:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt\" -c",
     "format:ruby": "foreach -g \"**/index.rb\" -x \"cd '#{dir}' && rubyfmt -i .\" -c",
-    "format:haskell": "foreach -g \"**/*.hs\" -x \"stylish-haskell -i '#{file}'\" -c",
+    "format:haskell": "foreach -g \"**/*.hs\" -x \"cd '#{dir}' && stylish-haskell -i '#{base}'\" -c",
     "format:python": "python3 -m black . || black .",
     "format:js": "biome check --write .",
-    "format": "run-s format:js format:csharp format:fsharp format:rust format:ruby format:haskell format:python",
+    "format": "run-s format:js format:csharp format:rust format:ruby format:haskell format:python",
     "lint": "run-s lint:js lint:python lint:rust lint:ruby lint:haskell",
     "lint:js": "biome check .",
     "lint:python": "black --check .",
     "lint:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt --check\" -c",
-    "lint:ruby": "foreach -g \"**/index.rb\" -x \"rubyfmt --check '#{file}'\" -c",
-    "lint:haskell": "for f in $(git ls-files '*.hs'); do stylish-haskell < \"$f\" | diff -u \"$f\" - || exit 1; done"
+    "lint:ruby": "foreach -g \"**/index.rb\" -x \"cd '#{dir}' && rubyfmt --check '#{base}'\" -c",
+    "lint:haskell": "foreach -g \"**/*.hs\" -x \"cd '#{dir}' && stylish-haskell < '#{base}' | diff -u '#{base}' -\" -c"
   },
   "repository": {
     "type": "git",

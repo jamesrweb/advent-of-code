@@ -1,5 +1,5 @@
-import { promises } from "fs";
-import { EOL } from "os";
+import { promises } from "node:fs";
+import { EOL } from "node:os";
 
 type MatchValue = string | undefined;
 type Matches = Map<number, MatchValue>;
@@ -8,17 +8,17 @@ type DisplayPatternValue = Display["patterns"][number];
 class Display {
   constructor(
     public patterns: string[],
-    public outputs: string[]
+    public outputs: string[],
   ) {}
 }
 
 function uniqueCharacterMatch(haystack: string = "", needles: string = "") {
   const stack = new Set([...haystack]);
-  return [...needles].every(needle => stack.has(needle));
+  return [...needles].every((needle) => stack.has(needle));
 }
 
 function formatDisplayPart(part: string) {
-  return part.split(" ").map(code => code.split("").sort().join(""));
+  return part.split(" ").map((code) => code.split("").sort().join(""));
 }
 
 function reverseArray<T>(array: T[]) {
@@ -28,10 +28,10 @@ function reverseArray<T>(array: T[]) {
 function initialiseMatchesFromPatterns(patterns: Display["patterns"]) {
   const matches: Matches = new Map();
 
-  const ones = patterns.find(pattern => pattern.length === 2);
-  const fours = patterns.find(pattern => pattern.length === 4);
-  const sevens = patterns.find(pattern => pattern.length === 3);
-  const eights = patterns.find(pattern => pattern.length === 7);
+  const ones = patterns.find((pattern) => pattern.length === 2);
+  const fours = patterns.find((pattern) => pattern.length === 4);
+  const sevens = patterns.find((pattern) => pattern.length === 3);
+  const eights = patterns.find((pattern) => pattern.length === 7);
 
   matches.set(1, ones);
   matches.set(2, undefined);
@@ -105,11 +105,11 @@ function findTwos(threes: MatchValue, fives: MatchValue) {
 
 function solvePartOne(displays: Display[]) {
   return displays
-    .map(display => display.outputs)
-    .map(outputs =>
-      outputs.filter(output => [2, 4, 3, 7].includes(output.length))
+    .map((display) => display.outputs)
+    .map((outputs) =>
+      outputs.filter((output) => [2, 4, 3, 7].includes(output.length)),
     )
-    .map(outputs => outputs.length)
+    .map((outputs) => outputs.length)
     .reduce((accumulator, current) => accumulator + current, 0);
 }
 
@@ -133,7 +133,7 @@ function solvePartTwo(displays: Display[]) {
     const flippedMatches = Array.from(matches.entries()).map(reverseArray);
     const translationTable = Object.fromEntries(flippedMatches);
     const translatedOutputValues = display.outputs.map<string>(
-      signal => translationTable[signal]
+      (signal) => translationTable[signal],
     );
 
     return accumulator + parseInt(translatedOutputValues.join(""), 10);
@@ -145,7 +145,7 @@ async function main() {
   const file_contents = await promises.readFile(file_url, "utf8");
   const lines = file_contents.split(EOL);
   const displays = lines
-    .map(line => line.split(" | "))
+    .map((line) => line.split(" | "))
     .map(([patterns, outputs]) => {
       const formattedPatterns = formatDisplayPart(patterns);
       const formattedOutputs = formatDisplayPart(outputs);
@@ -155,7 +155,7 @@ async function main() {
 
   console.log({
     part_one: solvePartOne(displays),
-    part_two: solvePartTwo(displays)
+    part_two: solvePartTwo(displays),
   });
 }
 

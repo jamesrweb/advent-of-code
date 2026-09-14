@@ -1,5 +1,5 @@
-const { promises } = require("fs");
-const { join } = require("path");
+const { promises } = require("node:fs");
+const { join } = require("node:path");
 const { evaluate } = require("mathjs");
 
 type Expressions = Array<string>;
@@ -9,7 +9,7 @@ function part_one_helper(expression: string, index: number): [number, number] {
   let operation = "+";
 
   while (index < expression.length) {
-    let char = expression[index];
+    const char = expression[index];
 
     if (["+", "*"].includes(char)) {
       operation = char;
@@ -17,10 +17,10 @@ function part_one_helper(expression: string, index: number): [number, number] {
       let value = 0;
 
       if (/[0-9]/.test(char)) {
-        value = parseInt(char);
-      } else if (char == "(") {
+        value = parseInt(char, 10);
+      } else if (char === "(") {
         [value, index] = part_one_helper(expression, index + 1);
-      } else if (char == ")") {
+      } else if (char === ")") {
         return [result, index];
       }
 
@@ -34,8 +34,11 @@ function part_one_helper(expression: string, index: number): [number, number] {
 }
 function solve_part_one(expressions: Expressions): number {
   return expressions
-    .map(expression => {
-      const [result, index] = part_one_helper(expression.replace(/\s/g, ""), 0);
+    .map((expression) => {
+      const [result, _index] = part_one_helper(
+        expression.replace(/\s/g, ""),
+        0,
+      );
       return result;
     })
     .reduce((accumulator, current) => accumulator + current, 0);
@@ -43,17 +46,17 @@ function solve_part_one(expressions: Expressions): number {
 
 function solve_part_two(expressions: Expressions): number {
   return expressions
-    .map(expression => {
+    .map((expression) => {
       const tokens = expression.split(" ");
       tokens.forEach((token, index) => {
         if (token === "+") {
-          tokens[index - 1] = "(" + tokens[index - 1];
-          tokens[index + 1] = tokens[index + 1] + ")";
+          tokens[index - 1] = `(${tokens[index - 1]}`;
+          tokens[index + 1] = `${tokens[index + 1]})`;
         }
       });
       return tokens.join(" ");
     })
-    .map(expression => evaluate(expression))
+    .map((expression) => evaluate(expression))
     .reduce((accumulator, current) => accumulator + current, 0);
 }
 
@@ -64,7 +67,7 @@ async function main() {
 
   console.log({
     part_one: solve_part_one(expressions),
-    part_two: solve_part_two(expressions)
+    part_two: solve_part_two(expressions),
   });
 }
 

@@ -22,7 +22,7 @@ function solve_part_two(instructions: string[]): string[][] {
   let cycle = 1;
   let x = 1;
   let row = "";
-  let image = [];
+  const image = [];
 
   for (const line of instructions) {
     const [op, v] = line.split(" ");
@@ -52,13 +52,17 @@ function solve_part_two(instructions: string[]): string[][] {
 }
 
 function outputResults(part_one: number, part_two: string[][]): void {
-  const app = document.getElementById("app")!;
+  const app = document.getElementById("app");
   const pre = document.createElement("pre");
+
+  if (!app) {
+    return;
+  }
 
   pre.textContent = JSON.stringify(
     { part_one, part_two },
     (_, value) => {
-      if (value instanceof Array) {
+      if (Array.isArray(value)) {
         return value.reduce((accumulator: any[], current: any[]) => {
           accumulator.push(current.join(""));
 
@@ -68,7 +72,7 @@ function outputResults(part_one: number, part_two: string[][]): void {
 
       return value;
     },
-    2
+    2,
   );
 
   app.appendChild(pre);
@@ -79,8 +83,8 @@ async function main() {
   const content = await response.text();
   const instructions = content
     .split("\n")
-    .map(line => line.trim())
-    .filter(line => line !== "");
+    .map((line) => line.trim())
+    .filter((line) => line !== "");
   const part_one = solve_part_one(instructions);
   const part_two = solve_part_two(instructions);
 

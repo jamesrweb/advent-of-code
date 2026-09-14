@@ -1,5 +1,5 @@
-const { promises } = require("fs");
-const { join } = require("path");
+const { promises } = require("node:fs");
+const { join } = require("node:path");
 
 type Lines = Array<string>;
 type Rules = Map<number, string>;
@@ -8,7 +8,7 @@ function build_rules(
   rules: Rules,
   token: number | string,
   depth: number,
-  special_rules: boolean
+  special_rules: boolean,
 ): string {
   if (Object.is(parseInt(`${token}`, 10), NaN)) {
     return token === "a" || token === "b" ? token : "";
@@ -28,7 +28,7 @@ function build_rules(
           rules,
           11,
           depth + 1,
-          special_rules
+          special_rules,
         )}?${to})`;
       }
 
@@ -48,7 +48,7 @@ function build_rules(
     }
   }
 
-  return "(?:" + regex.slice(1) + ")";
+  return `(?:${regex.slice(1)})`;
 }
 
 function solve_part_one(rules: Rules, messages: Lines): number {
@@ -74,13 +74,13 @@ async function main() {
   const messages = mh.split("\r\n");
   const rules = rh.split("\r\n").reduce((accumulator, current) => {
     const [id, rule] = current.split(": ");
-    accumulator.set(+id, rule.replace(/\"/g, ""));
+    accumulator.set(+id, rule.replace(/"/g, ""));
     return accumulator;
   }, new Map() as Rules);
 
   console.log({
     part_one: solve_part_one(rules, messages),
-    part_two: solve_part_two(rules, messages)
+    part_two: solve_part_two(rules, messages),
   });
 }
 

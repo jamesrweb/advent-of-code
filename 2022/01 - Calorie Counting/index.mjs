@@ -1,6 +1,6 @@
-import { promises } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { promises } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const directory = dirname(import.meta.url);
 const __dirname = fileURLToPath(directory);
@@ -48,11 +48,11 @@ async function main() {
   const file = await promises.readFile(uri, "utf8");
   const caloriesByElf = file
     .split("\n\n")
-    .map(line => line.split("\n").map(item => parseInt(item, 10)));
+    .map((line) => line.split("\n").map((item) => parseInt(item, 10)));
 
   console.log({
     part_one: solve_part_one(caloriesByElf),
-    part_two: solve_part_two(caloriesByElf)
+    part_two: solve_part_two(caloriesByElf),
   });
 }
 

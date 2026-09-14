@@ -1,5 +1,5 @@
-import { promises } from "fs";
-import { EOL } from "os";
+import { promises } from "node:fs";
+import { EOL } from "node:os";
 
 type Draws = number[];
 type Boards = Board[];
@@ -31,31 +31,33 @@ class Board {
     return row
       .trim()
       .split(/\s+/)
-      .map(item => new Column(parseInt(item, 10)));
+      .map((item) => new Column(parseInt(item, 10)));
   }
 
   updateColumnsBasedOnCurrentDraw(draw: number) {
-    this.#rows.forEach(row =>
-      row.forEach(column => {
+    this.#rows.forEach((row) => {
+      row.forEach((column) => {
         if (column.value === draw) {
           column.marked = true;
         }
-      })
-    );
+      });
+    });
   }
 
   bingo() {
-    const row_match = this.#rows.map(row => row.every(column => column.marked));
+    const row_match = this.#rows.map((row) =>
+      row.every((column) => column.marked),
+    );
     const column_match = this.#rows
-      .map((_, index) => this.#rows.map(r => r[index]))
-      .some(columns => columns.every(column => column.marked));
+      .map((_, index) => this.#rows.map((r) => r[index]))
+      .some((columns) => columns.every((column) => column.marked));
 
     return row_match.includes(true) || column_match === true;
   }
 
   sumUnmarked() {
     return this.#rows.reduce((accumulator, row) => {
-      row.forEach(column => {
+      row.forEach((column) => {
         if (column.marked === false) {
           accumulator += column.value;
         }
@@ -96,7 +98,7 @@ function solve_part_two(draws: Draws, boards: Boards) {
 
       if (bingos.length === boards.length) {
         const last_winner_id = bingos[bingos.length - 1];
-        const last_winner = boards.find(board => board.id === last_winner_id);
+        const last_winner = boards.find((board) => board.id === last_winner_id);
 
         return (last_winner?.sumUnmarked() ?? 1) * draw;
       }
@@ -110,14 +112,14 @@ async function main() {
   const file_url = new URL("input.txt", import.meta.url);
   const file_contents = await promises.readFile(file_url, "utf8");
   const [draw_items, ...board_data] = file_contents.split(EOL + EOL);
-  const draws = draw_items.split(",").map(draw => parseInt(draw, 10));
+  const draws = draw_items.split(",").map((draw) => parseInt(draw, 10));
   const boards = board_data.map((board, index) =>
-    Board.createFromStringWithId(board, index + 1)
+    Board.createFromStringWithId(board, index + 1),
   );
 
   console.log({
     part_one: solve_part_one(draws, boards),
-    part_two: solve_part_two(draws, boards)
+    part_two: solve_part_two(draws, boards),
   });
 }
 

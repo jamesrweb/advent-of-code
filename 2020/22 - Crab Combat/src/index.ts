@@ -1,10 +1,10 @@
-const { promises } = require("fs");
-const { join } = require("path");
-const { EOL } = require("os");
+const { promises } = require("node:fs");
+const { join } = require("node:path");
+const { EOL } = require("node:os");
 
 enum Players {
   One,
-  Two
+  Two,
 }
 
 type Player = Array<number>;
@@ -17,7 +17,7 @@ function cards(player: string): Player {
   return player
     .split(EOL)
     .slice(1)
-    .map(v => +v);
+    .map((v) => +v);
 }
 
 function score(player: Player): number {
@@ -45,7 +45,7 @@ function part_two_helper(players: Player[]): [Players, Player] {
   const [player_one, player_two] = players;
   const seen = {
     player_one: new Set<string>(),
-    player_two: new Set<string>()
+    player_two: new Set<string>(),
   };
 
   while (player_one.length && player_two.length) {
@@ -65,7 +65,7 @@ function part_two_helper(players: Player[]): [Players, Player] {
     if (a <= player_one.length && b <= player_two.length) {
       [winner] = part_two_helper([
         player_one.slice(0, a),
-        player_two.slice(0, b)
+        player_two.slice(0, b),
       ]);
     } else if (a > b) {
       winner = Players.One;
@@ -83,7 +83,7 @@ function part_two_helper(players: Player[]): [Players, Player] {
 }
 
 function solve_part_two(players: Player[]): number {
-  const [winner, cards] = part_two_helper(players);
+  const [_winner, cards] = part_two_helper(players);
   return score(cards);
 }
 
@@ -95,7 +95,7 @@ async function main() {
 
   console.log({
     part_one: solve_part_one(clone(players)),
-    part_two: solve_part_two(clone(players))
+    part_two: solve_part_two(clone(players)),
   });
 }
 

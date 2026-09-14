@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 
 /**
  * The result of the recursion per line of the input to find the relevant digits.
@@ -33,16 +33,16 @@ function collectDigitsHelper(line, digitMappings, isPartOne, digits) {
   if (line === "") {
     return {
       head: digits[0],
-      tail: digits[digits.length - 1]
+      tail: digits[digits.length - 1],
     };
   }
 
   const current = parseInt(line[0], 10);
-  const textDigitKey = Array.from(digitMappings.keys()).find(key =>
-    line.startsWith(key)
+  const textDigitKey = Array.from(digitMappings.keys()).find((key) =>
+    line.startsWith(key),
   );
 
-  if (!isNaN(current)) {
+  if (!Number.isNaN(current)) {
     digits.push(current);
   }
 
@@ -89,7 +89,7 @@ function main() {
 
   console.log({
     part_one: partOne,
-    part_two: partTwo
+    part_two: partTwo,
   });
 }
 

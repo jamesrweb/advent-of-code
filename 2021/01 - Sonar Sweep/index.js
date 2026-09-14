@@ -1,5 +1,5 @@
-const { promises } = require("fs");
-const { join } = require("path");
+const { promises } = require("node:fs");
+const { join } = require("node:path");
 
 /**
  * Create a windowed view of a given array where each window is of a given size when output.
@@ -91,11 +91,11 @@ function solve_part_two(measurements) {
 async function main() {
   const uri = join(__dirname, "input.txt");
   const file = await promises.readFile(uri, "utf8");
-  const measurements = file.split("\n").map(item => parseInt(item, 10));
+  const measurements = file.split("\n").map((item) => parseInt(item, 10));
 
   console.log({
     part_one: solve_part_one(measurements),
-    part_two: solve_part_two(measurements)
+    part_two: solve_part_two(measurements),
   });
 }
 

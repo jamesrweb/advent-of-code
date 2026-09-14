@@ -33,6 +33,10 @@ jobs:
           chmod +x /usr/local/bin/rubyfmt
         shell: bash
 
+      - name: Install black
+        run: pip install black
+        shell: bash
+
       - run: pnpm install --frozen-lockfile
         shell: bash
 

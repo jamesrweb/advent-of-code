@@ -1,5 +1,5 @@
-const { promises } = require("fs");
-const { join } = require("path");
+const { promises } = require("node:fs");
+const { join } = require("node:path");
 
 function filter(policies, predicate) {
   return policies.filter(predicate);
@@ -11,7 +11,7 @@ function format(item) {
   return {
     char,
     password,
-    count: counts.split("-").map(item => parseInt(item, 10))
+    count: counts.split("-").map((item) => parseInt(item, 10)),
   };
 }
 
@@ -48,7 +48,7 @@ async function main() {
 
   console.log({
     part_one: solve_part_one(policies),
-    part_two: solve_part_two(policies)
+    part_two: solve_part_two(policies),
   });
 }
 

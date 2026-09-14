@@ -1,8 +1,8 @@
-const { resolve } = require("path");
+const { resolve } = require("node:path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const path = require("path");
+const path = require("node:path");
 
 const outputDirectory = resolve(__dirname, "dist");
 
@@ -10,8 +10,8 @@ const elmLoader = {
   loader: "elm-webpack-loader",
   options: {
     debug: false,
-    cwd: __dirname
-  }
+    cwd: __dirname,
+  },
 };
 
 const loaders = [{ loader: "elm-hot-webpack-loader" }, elmLoader];
@@ -22,29 +22,29 @@ module.exports = {
   devServer: {
     static: outputDirectory,
     port: 8000,
-    hot: true
+    hot: true,
   },
   output: {
     publicPath: "/",
     path: outputDirectory,
-    filename: "[name].[contenthash].bundle.js"
+    filename: "[name].[contenthash].bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.elm$/,
         exclude: [/elm-stuff/, /node_modules/],
-        use: loaders
-      }
-    ]
+        use: loaders,
+      },
+    ],
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyPlugin({
-      patterns: [{ from: path.resolve(__dirname, "src", "input.txt") }]
+      patterns: [{ from: path.resolve(__dirname, "src", "input.txt") }],
     }),
     new HtmlWebpackPlugin({
-      title: "Day 7 | The Treachery of Whales"
-    })
-  ]
+      title: "Day 7 | The Treachery of Whales",
+    }),
+  ],
 };

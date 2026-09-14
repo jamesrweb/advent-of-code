@@ -34,7 +34,7 @@ def solve(grid: Grid, grid_dimension_multiplier: int) -> int:
     # While we still have items in the heap to check
     while len(vertices) > 0:
         # Take the next position from the heap
-        (distance, row, column) = heappop(vertices)
+        distance, row, column = heappop(vertices)
 
         # If it is out of bounds, discard it
         if (

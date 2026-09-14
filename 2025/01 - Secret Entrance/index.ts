@@ -27,8 +27,8 @@ async function loadInstructions(): Promise<Instruction[]> {
   return instructions
     .trim()
     .split(os.EOL)
-    .map(line => line.trim())
-    .map(line => {
+    .map((line) => line.trim())
+    .map((line) => {
       const direction = line[0];
       const steps = parseInt(line.slice(1), 10);
 
@@ -62,11 +62,11 @@ function createRange(start: number, end: number): number[] {
  */
 function timesCrossedZeroDuringRotation(
   previous: PasswordSolverConfiguration,
-  current: PasswordSolverConfiguration
+  current: PasswordSolverConfiguration,
 ): number {
   const range = createRange(current.dial, previous.dial);
 
-  return range.filter(n => n % 100 === 0).length;
+  return range.filter((n) => n % 100 === 0).length;
 }
 
 /**
@@ -79,7 +79,7 @@ function timesCrossedZeroDuringRotation(
  */
 function passwordReducer(
   configuration: PasswordSolverConfiguration,
-  instruction: Instruction
+  instruction: Instruction,
 ): PasswordSolverConfiguration {
   const dial =
     instruction.kind === "left"
@@ -90,7 +90,7 @@ function passwordReducer(
   const crosses = timesCrossedZeroDuringRotation(configuration, {
     ...configuration,
     landings,
-    dial
+    dial,
   });
 
   return { dial, landings, touches: configuration.touches + crosses };
@@ -102,12 +102,12 @@ async function main() {
     instructions.reduce<PasswordSolverConfiguration>(passwordReducer, {
       landings: 0,
       touches: 0,
-      dial: 50
+      dial: 50,
     });
 
   console.log({
     part_one: landings,
-    part_two: touches - landings
+    part_two: touches - landings,
   });
 }
 
