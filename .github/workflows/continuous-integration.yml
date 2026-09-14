@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: package.json
+          cache: pnpm
+
+      - uses: pnpm/action-setup@v5
+
+      - name: Install stylish-haskell
+        run: curl -sL https://raw.github.com/haskell/stylish-haskell/master/scripts/latest.sh | sh -s .
+        shell: bash
+
+      - name: Install rubyfmt
+        run: |
+          curl -sL https://github.com/fables-tales/rubyfmt/releases/download/v0.14.1/rubyfmt-v0.14.1-Linux-x86_64.tar.gz | tar -xz
+          sudo mv rubyfmt-main /usr/local/bin/rubyfmt
+          chmod +x /usr/local/bin/rubyfmt
+        shell: bash
+
+      - run: pnpm install --frozen-lockfile
+        shell: bash
+
+      - run: pnpm run lint
+        shell: bash
