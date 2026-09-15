@@ -55,6 +55,11 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 - **Toolchain expectations:** Biome (JS/TS/JSON/CSS/HTML), black (Python),
   cargo fmt (Rust), rubyfmt (Ruby), stylish-haskell (Haskell), dotnet format
   (C#). Missing language toolchains are runner-installed in CI
+- **Implicit pnpm workspace:** the root \`pnpm-workspace.yaml\` declares the
+  year directories (\`2020/*\` ... \`2025/*\`) as workspace packages. Nested
+  per-puzzle \`package.json\`s are workspace importers resolved by the single
+  root \`pnpm-lock.yaml\` — run \`pnpm install\` at the root after changing any
+  nested manifest, and never create nested lockfiles
 
 ### Package Management
 

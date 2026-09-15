@@ -6,7 +6,11 @@
   "scripts": {
     "start": "webpack serve --mode development --open"
   },
-  "author": "James Robb <47126579+jamesrweb@users.noreply.github.com>",
+  "author": {
+    "name": "James Robb",
+    "url": "https://github.com/jamesrweb",
+    "email": "47126579+jamesrweb@users.noreply.github.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "copy-webpack-plugin": "^14.0.0",
@@ -15,5 +19,9 @@
     "webpack": "^5.105.4",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^5.2.1"
+  },
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=24.21.0"
   }
 }

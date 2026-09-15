@@ -1,2 +1,11 @@
-onlyBuiltDependencies:
-  - elm-format
+packages:
+  - '2020/*'
+  - '2021/*'
+  - '2022/*'
+  - '2023/*'
+  - '2025/*'
+
+allowBuilds:
+  elm: true
+  elm-format: true
+  esbuild: true
