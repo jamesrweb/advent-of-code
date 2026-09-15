@@ -26,3 +26,14 @@ stack.yaml.lock
 index
 index.dSYm
 *.sln*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# npm/yarn lockfiles (pnpm-managed repositories)
+package-lock.json
+yarn.lock
+
+# PR description draft (gitignored)
+PR_DESCRIPTION.md
