@@ -23,7 +23,10 @@ jobs:
           cache: pnpm
 
       - name: Install stylish-haskell
-        run: curl -sL https://raw.github.com/haskell/stylish-haskell/master/scripts/latest.sh | sh -s .
+        run: |
+          curl -sL https://github.com/haskell/stylish-haskell/releases/download/v0.15.1.0/stylish-haskell-v0.15.1.0-linux-x86_64.tar.gz | tar -xz
+          sudo mv stylish-haskell-v0.15.1.0-linux-x86_64/stylish-haskell /usr/local/bin/stylish-haskell
+          chmod +x /usr/local/bin/stylish-haskell
         shell: bash
 
       - name: Install rubyfmt
