@@ -33,14 +33,10 @@ def in_bounds(factory: FactoryMap, row_index: int, column_index: int) -> bool:
     Returns:
         True when both indices fall within the map otherwise False.
     """
-    return 0 <= row_index < len(factory) and 0 <= column_index < len(
-        factory[row_index]
-    )
+    return 0 <= row_index < len(factory) and 0 <= column_index < len(factory[row_index])
 
 
-def get_cell(
-    factory: FactoryMap, row_index: int, column_index: int
-) -> Optional[Cell]:
+def get_cell(factory: FactoryMap, row_index: int, column_index: int) -> Optional[Cell]:
     """
     Attempts to get the value of a cell at a given row / column index pair within the factory map.
 
