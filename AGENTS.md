@@ -178,6 +178,11 @@ Coding Assistants — The Linux Kernel documentation]
 (https://docs.kernel.org/process/coding-assistants.html), integrated into this
 ruleset on 2026-09-14.
 
+**Sign-offs:** Commits may carry a `Signed-off-by` trailer only when made
+through the user's own `gc` helper (`~/.bash_aliases`) or on the user's explicit
+per-occasion instruction. Certification stays with the human — the agent never
+asserts it itself.
+
 **Assisted-by attribution:** Where attribution for AI assistance is wanted, use
 an `Assisted-by: LLM` trailer in the commit message body rather than a co-author
 or sign-off trailer. It records that the contribution was produced with AI
