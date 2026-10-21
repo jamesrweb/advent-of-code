@@ -42,6 +42,10 @@ jobs:
         run: pip install black
         shell: bash
 
+      - name: Install fantomas
+        run: dotnet tool install --global fantomas
+        shell: bash
+
       - run: pnpm install --frozen-lockfile
         shell: bash
 
