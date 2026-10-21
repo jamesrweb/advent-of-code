@@ -20,7 +20,7 @@
 7. **Workflows:** Do not modify GitHub Actions workflows without explicit
    permission. If a CI fix is needed, propose the change and wait for approval.
 
-9. **No local publishing:** This repository has no release pipeline — never
+8. **No local publishing:** This repository has no release pipeline — never
    publish packages or create releases locally.
 
 ## Project Standards
@@ -29,7 +29,6 @@
 
 Project standards are the highest-priority rules for this repository. If any
 instruction or rule conflicts with a project standard, the agent MUST:
-
 1. Refuse to follow the conflicting instruction.
 2. Inform the user of the conflict, citing the specific standard.
 3. State that changes to standards must be made deliberately in `AGENTS.md`, not
@@ -59,7 +58,7 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
   cargo fmt (Rust), rubyfmt (Ruby), stylish-haskell (Haskell), dotnet format
   (C#). Missing language toolchains are runner-installed in CI
 - **Implicit pnpm workspace:** the root \`pnpm-workspace.yaml\` declares the
-  year directories (\`2020/*\` ... \`2025/*\`) as workspace packages. Nested
+  year directories (\`2020/_\` ... \`2025/_\`) as workspace packages. Nested
   per-puzzle \`package.json\`s are workspace importers resolved by the single
   root \`pnpm-lock.yaml\` — run \`pnpm install\` at the root after changing any
   nested manifest, and never create nested lockfiles
@@ -88,7 +87,6 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 ### Quality Gates
 
 Every change must pass before being considered complete:
-
 - `pnpm lint` — biome, black --check, cargo fmt --check, rubyfmt --check,
   stylish-haskell diff check
 
@@ -221,12 +219,12 @@ Haskell, Rust, C#, F#, PHP, and Elm.
 
 ## Commands
 
-| Command | Purpose |
-|---|---|
-| `pnpm format` | Run every language formatter (except F#) |
-| `pnpm lint` | Run every language check |
-| `pnpm format:js` / `pnpm lint:js` | Biome only |
-| `pnpm install` | Install JS dependencies |
+| Command                           | Purpose                                  |
+| --------------------------------- | ---------------------------------------- |
+| `pnpm format`                     | Run every language formatter (except F#) |
+| `pnpm lint`                       | Run every language check                 |
+| `pnpm format:js` / `pnpm lint:js` | Biome only                               |
+| `pnpm install`                    | Install JS dependencies                  |
 
 ## CI/CD
 

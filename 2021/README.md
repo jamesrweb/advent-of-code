@@ -39,7 +39,6 @@ Below you will find some statistics regarding my contributions to the advent of
 code this year.
 
 Some items worth nothing here:
-
 - The _Time_ column represents how long the challenge solution was submitted
   after the challenge was originally posted.
 - The _Rank_ column represents who completed the challenge the fastest compared
