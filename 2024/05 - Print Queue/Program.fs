@@ -18,8 +18,10 @@ let toRules (input: string) : Rules =
         match List.ofArray <| rule.Split "|" with
         | before :: [ after ] ->
             Some
-                {| before = int before
-                   after = int after |}
+                {|
+                    before = int before
+                    after = int after
+                |}
         | _ -> None)
     |> Array.filter Option.isSome
     |> Array.map Option.get
@@ -40,8 +42,10 @@ let toRulesAndPages (input: string array) : Result<{| rules: Rules; book: Book |
     match List.ofArray input with
     | rules :: [ pages ] ->
         Ok
-            {| rules = toRules rules
-               book = toPages pages |}
+            {|
+                rules = toRules rules
+                book = toPages pages
+            |}
     | _ -> Error "Missing enough information to generate rules and pages."
 
 let rulesAndPages: {| book: Book; rules: Rules |} =
@@ -105,15 +109,19 @@ let reorderUntilOrderingRulesAreMet (pageWithOrdering: PageWithOrdering) (rules:
             (fun (accumulator: PageWithOrdering) (current: int) ->
                 let reorderedPages = reorderPages accumulator.pages rules
 
-                {| pages = reorderedPages
-                   ordering = orderingOfPages reorderedPages rules |})
+                {|
+                    pages = reorderedPages
+                    ordering = orderingOfPages reorderedPages rules
+                |})
             pageWithOrdering
             [ 0 .. Seq.length pageWithOrdering.pages ]
 
 let toPagesWithOrdering (accumulator: PagesWithOrdering) (pages: Pages) : PagesWithOrdering =
     let pagesWithOrdering =
-        {| pages = pages
-           ordering = orderingOfPages pages rulesAndPages.rules |}
+        {|
+            pages = pages
+            ordering = orderingOfPages pages rulesAndPages.rules
+        |}
 
     Seq.append [ pagesWithOrdering ] accumulator
 

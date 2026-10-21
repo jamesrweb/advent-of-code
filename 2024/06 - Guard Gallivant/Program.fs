@@ -79,10 +79,12 @@ let isObstacle ((x, y): int * int) (map: Map) : bool =
         false
 
 type SimulatedGuardMoveState =
-    {| map: Map
-       exited: bool
-       stuck: bool
-       visited: (int * int) seq |}
+    {|
+        map: Map
+        exited: bool
+        stuck: bool
+        visited: (int * int) seq
+    |}
 
 let simulateGuardMove (simulatedGuardMoveState: SimulatedGuardMoveState) (index: int) : SimulatedGuardMoveState =
     if simulatedGuardMoveState.exited then
@@ -90,14 +92,16 @@ let simulateGuardMove (simulatedGuardMoveState: SimulatedGuardMoveState) (index:
     else if index = int Int16.MaxValue then
         {| simulatedGuardMoveState with
             exited = true
-            stuck = true |}
+            stuck = true
+        |}
     else
         let x, y = tryFindGuardCoordinates simulatedGuardMoveState.map |> Option.get
         let facing = tryGetFacingForGuard (simulatedGuardMoveState.map[y][x]) |> Option.get
 
         let nextSimulatedGuardMoveState =
             {| simulatedGuardMoveState with
-                visited = Seq.append simulatedGuardMoveState.visited [ (x, y) ] |}
+                visited = Seq.append simulatedGuardMoveState.visited [ (x, y) ]
+            |}
 
         match facing with
         | Up ->
@@ -105,19 +109,22 @@ let simulateGuardMove (simulatedGuardMoveState: SimulatedGuardMoveState) (index:
                 nextSimulatedGuardMoveState.map[y][x] <- Guard Right
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
             else if y > 0 then
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
                 nextSimulatedGuardMoveState.map[y - 1][x] <- Guard Up
 
                 {| nextSimulatedGuardMoveState with
                     exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
-                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x, y - 1) ] |}
+                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x, y - 1) ]
+                |}
             else
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
 
         | Down ->
             if
@@ -127,37 +134,43 @@ let simulateGuardMove (simulatedGuardMoveState: SimulatedGuardMoveState) (index:
                 nextSimulatedGuardMoveState.map[y][x] <- Guard Left
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
             else if y < Array.length nextSimulatedGuardMoveState.map - 1 then
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
                 nextSimulatedGuardMoveState.map[y + 1][x] <- Guard Down
 
                 {| nextSimulatedGuardMoveState with
                     exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
-                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x, y + 1) ] |}
+                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x, y + 1) ]
+                |}
             else
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
         | Left ->
             if x > 0 && isObstacle (x - 1, y) nextSimulatedGuardMoveState.map then
                 nextSimulatedGuardMoveState.map[y][x] <- Guard Up
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
             else if x > 0 then
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
                 nextSimulatedGuardMoveState.map[y][x - 1] <- Guard Left
 
                 {| nextSimulatedGuardMoveState with
                     exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
-                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x - 1, y) ] |}
+                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x - 1, y) ]
+                |}
             else
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
 
         | Right ->
             if
@@ -167,28 +180,33 @@ let simulateGuardMove (simulatedGuardMoveState: SimulatedGuardMoveState) (index:
                 nextSimulatedGuardMoveState.map[y][x] <- Guard Down
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
             else if x < Array.length nextSimulatedGuardMoveState.map[y] - 1 then
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
                 nextSimulatedGuardMoveState.map[y][x + 1] <- Guard Right
 
                 {| nextSimulatedGuardMoveState with
                     exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
-                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x + 1, y) ] |}
+                    visited = Seq.append nextSimulatedGuardMoveState.visited [ (x + 1, y) ]
+                |}
             else
                 nextSimulatedGuardMoveState.map[y][x] <- Empty
 
                 {| nextSimulatedGuardMoveState with
-                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map |}
+                    exited = guardHasExitedTheArea nextSimulatedGuardMoveState.map
+                |}
 
 let guardMoves (map: Map) : SimulatedGuardMoveState =
     Seq.ofList [ 0 .. int Int16.MaxValue ]
     |> Seq.fold
         simulateGuardMove
-        {| map = map
-           exited = guardHasExitedTheArea map
-           stuck = false
-           visited = Seq.empty |}
+        {|
+            map = map
+            exited = guardHasExitedTheArea map
+            stuck = false
+            visited = Seq.empty
+        |}
 
 let collectDuplicateVisitationPoints
     (visitedPoints: (int * int) seq)

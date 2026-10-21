@@ -9,34 +9,44 @@ type SafetyReport =
     | Unsafe
 
 type LevelSafetyAggregator =
-    {| previousLevel: Level
-       safetyLevel: SafetyReport |}
+    {|
+        previousLevel: Level
+        safetyLevel: SafetyReport
+    |}
 
 let toLevels (line: string) : Levels =
     line.Split(null) |> Array.filter (fun entry -> entry <> "") |> Array.map int
 
 let calculateIfLevelIsSafeInAggregate (accumulator: LevelSafetyAggregator) (level: Level) : LevelSafetyAggregator =
     if accumulator.safetyLevel = Unsafe then
-        {| safetyLevel = Unsafe
-           previousLevel = level |}
+        {|
+            safetyLevel = Unsafe
+            previousLevel = level
+        |}
     else if
         level <> accumulator.previousLevel
         && level >= accumulator.previousLevel - 3
         && level <= accumulator.previousLevel + 3
     then
-        {| safetyLevel = Safe
-           previousLevel = level |}
+        {|
+            safetyLevel = Safe
+            previousLevel = level
+        |}
     else
-        {| safetyLevel = Unsafe
-           previousLevel = level |}
+        {|
+            safetyLevel = Unsafe
+            previousLevel = level
+        |}
 
 let calculateIfLevelsAreSafe (levels: Levels) : SafetyReport =
     match Array.toList levels with
     | head :: tail ->
         Seq.fold
             calculateIfLevelIsSafeInAggregate
-            {| safetyLevel = Safe
-               previousLevel = head |}
+            {|
+                safetyLevel = Safe
+                previousLevel = head
+            |}
             tail
         |> _.safetyLevel
     | [] -> Safe

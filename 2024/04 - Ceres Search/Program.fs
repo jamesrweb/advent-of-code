@@ -2,9 +2,11 @@
 open System.IO
 
 type LetterWithCoordinate =
-    { row: int
-      column: int
-      character: char }
+    {
+        row: int
+        column: int
+        character: char
+    }
 
 type CharMapWithCoords = LetterWithCoordinate array
 type Crossword = CharMapWithCoords array
@@ -72,9 +74,11 @@ let toCharMapWithCoords ((rowIndex, line): int * string) : CharMapWithCoords =
     line.ToCharArray()
     |> Seq.indexed
     |> Seq.map (fun (columnIndex, character) ->
-        { row = rowIndex
-          column = columnIndex
-          character = character })
+        {
+            row = rowIndex
+            column = columnIndex
+            character = character
+        })
     |> Seq.toArray
 
 let crossword: Crossword =

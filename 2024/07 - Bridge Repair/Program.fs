@@ -14,8 +14,10 @@ let apply (operator: Operator) (lhs: int64) (rhs: int64) : int64 =
     | Concatenate -> int64 <| string lhs + string rhs
 
 type PotentialEquationsForOutput =
-    {| output: int64
-       equations: string seq |}
+    {|
+        output: int64
+        equations: string seq
+    |}
 
 let parseLineToEquation (line: string) : Equation option =
     match List.ofArray <| line.Split(":") with
@@ -23,8 +25,10 @@ let parseLineToEquation (line: string) : Equation option =
         let parts = rest.Trim() |> _.Split(" ") |> Array.map int64 |> Seq.ofArray
 
         Some
-            { test = int64 result
-              integers = parts }
+            {
+                test = int64 result
+                integers = parts
+            }
     | _ -> None
 
 let equations () : Equation seq =

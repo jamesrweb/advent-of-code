@@ -21,8 +21,7 @@ type LeftAndRightMappings(lefts: Side, rights: Side) =
 
         LeftAndRightMappings(this.lefts, nextRights)
 
-    member this.appendLeftRight(left: int, right: int) =
-        this.appendLeft(left).appendRight right
+    member this.appendLeftRight(left: int, right: int) = this.appendLeft(left).appendRight right
 
 let aggregateLeftsAndRightsMappings (lrm: LeftAndRightMappings) ((left, right): LeftRight) : LeftAndRightMappings =
     lrm.appendLeftRight (left, right)

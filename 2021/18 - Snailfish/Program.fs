@@ -11,16 +11,12 @@ type 'T SnailFishNumber =
 let explode snailFishNumber =
     let rec traverseLeft snailFishNumber =
         function
-        | IntegerList values ->
-            IntegerList [ traverseLeft snailFishNumber values.[0]
-                          values.[1] ]
+        | IntegerList values -> IntegerList [ traverseLeft snailFishNumber values.[0]; values.[1] ]
         | IntegerLiteral value -> IntegerLiteral(value + snailFishNumber)
 
     let rec traverseRight snailFishNumber =
         function
-        | IntegerList values ->
-            IntegerList [ values.[0]
-                          traverseRight snailFishNumber values.[1] ]
+        | IntegerList values -> IntegerList [ values.[0]; traverseRight snailFishNumber values.[1] ]
         | IntegerLiteral value -> IntegerLiteral(value + snailFishNumber)
 
     let rec loop depth =
@@ -37,27 +33,14 @@ let explode snailFishNumber =
                 let (rightExplosion, rightResult, restRight, restRightLeft) = loop (depth + 1) right
 
                 match leftExplosion, rightExplosion with
-                | true, _ ->
-                    true,
-                    IntegerList [ leftResult
-                                  traverseLeft restLeftRight right ],
-                    restLeft,
-                    0
-                | _, true ->
-                    true,
-                    IntegerList [ traverseRight restRight left
-                                  rightResult ],
-                    0,
-                    restRightLeft
+                | true, _ -> true, IntegerList [ leftResult; traverseLeft restLeftRight right ], restLeft, 0
+                | _, true -> true, IntegerList [ traverseRight restRight left; rightResult ], 0, restRightLeft
                 | _, _ -> false, IntegerList values, 0, 0
 
-    snailFishNumber
-    |> loop 0
-    |> fun (exploded, number, _, _) -> exploded, number
+    snailFishNumber |> loop 0 |> fun (exploded, number, _, _) -> exploded, number
 
 let integerLiteralToIntegerList integerLiteral =
-    IntegerList [ IntegerLiteral(integerLiteral / 2)
-                  IntegerLiteral((integerLiteral + 1) / 2) ]
+    IntegerList [ IntegerLiteral(integerLiteral / 2); IntegerLiteral((integerLiteral + 1) / 2) ]
 
 let rec split =
     function
@@ -100,9 +83,7 @@ let parse line =
                 let (rightFirstPairMember, restRight) = loop leftSecondPairMember
                 let rightSecondPairMember = List.tail restRight
 
-                IntegerList [ leftFirstPairMember
-                              rightFirstPairMember ],
-                rightSecondPairMember
+                IntegerList [ leftFirstPairMember; rightFirstPairMember ], rightSecondPairMember
             | _ -> IntegerLiteral(head |> string |> int), tail
 
     line |> Seq.toList |> loop |> fst
@@ -118,10 +99,7 @@ let solvePartTwo =
     snailFishNumbers
     |> Seq.allPairs snailFishNumbers
     |> Seq.distinct
-    |> Seq.map (fun (augend, addend) ->
-        augend + addend
-        |> reduceSnailfishNumber
-        |> calculateMagnitude)
+    |> Seq.map (fun (augend, addend) -> augend + addend |> reduceSnailfishNumber |> calculateMagnitude)
     |> Seq.max
 
 printfn "Part one: %d" solvePartOne
