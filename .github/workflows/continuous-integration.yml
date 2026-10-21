@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Install Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
       - uses: pnpm/action-setup@v6
 
       - uses: actions/setup-node@v7
@@ -24,22 +27,8 @@ jobs:
           node-version-file: package.json
           cache: pnpm
 
-      - name: Install stylish-haskell
-        run: |
-          curl -sL https://github.com/haskell/stylish-haskell/releases/download/v0.15.1.0/stylish-haskell-v0.15.1.0-linux-x86_64.tar.gz | tar -xz
-          sudo mv stylish-haskell-v0.15.1.0-linux-x86_64/stylish-haskell /usr/local/bin/stylish-haskell
-          chmod +x /usr/local/bin/stylish-haskell
-        shell: bash
-
-      - name: Install rubyfmt
-        run: |
-          curl -sL https://github.com/fables-tales/rubyfmt/releases/download/v0.14.1/rubyfmt-v0.14.1-Linux-x86_64.tar.gz | tar -xz
-          sudo mv tmp/releases/v0.14.1-Linux/rubyfmt /usr/local/bin/rubyfmt
-          chmod +x /usr/local/bin/rubyfmt
-        shell: bash
-
-      - name: Install black
-        run: pip install black
+      - name: Install stylish-haskell, rubyfmt, dotnet, and black
+        run: brew install stylish-haskell rubyfmt dotnet black
         shell: bash
 
       - name: Install fantomas
