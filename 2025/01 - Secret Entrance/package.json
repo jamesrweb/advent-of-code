@@ -13,9 +13,9 @@
     "email": "47126579+jamesrweb@users.noreply.github.com"
   },
   "license": "ISC",
-  "packageManager": "pnpm@12.4.1",
+  "packageManager": "pnpm@12.14.0",
   "devDependencies": {
-    "@types/node": "^24.10.1"
+    "@types/node": "^26.6.5"
   },
   "engines": {
     "node": ">=24.21.0"

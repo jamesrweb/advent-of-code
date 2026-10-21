@@ -3,20 +3,22 @@
   "version": "1.0.0",
   "description": "My advent of code contributions from 2020 onwards.",
   "scripts": {
-    "format:csharp": "foreach -g \"**/*.csproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
-    "format:fsharp": "foreach -g \"**/*.fsproj\" -x \"cd '#{dir}' && dotnet restore && dotnet format\" -c",
-    "format:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt\" -c",
-    "format:ruby": "foreach -g \"**/index.rb\" -x \"cd '#{dir}' && rubyfmt -i .\" -c",
-    "format:haskell": "foreach -g \"**/*.hs\" -x \"cd '#{dir}' && stylish-haskell -i '#{base}'\" -c",
-    "format:python": "python3 -m black . || black .",
-    "format:js": "biome check --write .",
-    "format": "run-s format:js format:csharp format:rust format:ruby format:haskell format:python",
-    "lint": "run-s lint:js lint:python lint:rust lint:ruby lint:haskell",
-    "lint:js": "biome check .",
-    "lint:python": "black --check .",
-    "lint:rust": "foreach -g \"**/Cargo.toml\" -x \"cd '#{dir}' && cargo fmt --check\" -c",
-    "lint:ruby": "foreach -g \"**/index.rb\" -x \"cd '#{dir}' && rubyfmt --check '#{base}'\" -c",
-    "lint:haskell": "foreach -g \"**/*.hs\" -x \"cd '#{dir}' && stylish-haskell < '#{base}' | diff -u '#{base}' -\" -c"
+    "format:csharp": "git ls-files -z --cached --others --exclude-standard -- '*.csproj' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && dotnet format --verbosity quiet' _ {}",
+    "format:fsharp": "git ls-files -z --cached --others --exclude-standard -- '*.fsproj' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && dotnet fantomas --json . > /dev/null' _ {}",
+    "format:rust": "git ls-files -z --cached --others --exclude-standard -- '*/Cargo.toml' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && cargo fmt' _ {}",
+    "format:ruby": "git ls-files -z --cached --others --exclude-standard -- '*.rb' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && rubyfmt --in-place .' _ {}",
+    "format:haskell": "git ls-files -z --cached --others --exclude-standard -- '*.hs' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && stylish-haskell --inplace \"${1##*/}\"' _ {}",
+    "format:python": "black --quiet . || python3 -m black --quiet .",
+    "format:js": "biome check --write . > /dev/null",
+    "format": "run-p --silent format:js format:csharp format:fsharp format:rust format:ruby format:haskell format:python",
+    "lint": "run-p --silent lint:js lint:python lint:rust lint:ruby lint:haskell lint:csharp lint:fsharp",
+    "lint:js": "biome check . > /dev/null",
+    "lint:python": "black --check --quiet .",
+    "lint:rust": "git ls-files -z --cached --others --exclude-standard -- '*/Cargo.toml' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && cargo fmt --check' _ {}",
+    "lint:ruby": "git ls-files -z --cached --others --exclude-standard -- '*.rb' | xargs --null --max-args=1 rubyfmt --check",
+    "lint:haskell": "git ls-files -z --cached --others --exclude-standard -- '*.hs' | xargs --null --replace={} sh -c 'stylish-haskell < \"{}\" | diff --unified \"{}\" -' _",
+    "lint:csharp": "git ls-files -z --cached --others --exclude-standard -- '*.csproj' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && dotnet format --verify-no-changes --verbosity quiet' _ {}",
+    "lint:fsharp": "git ls-files -z --cached --others --exclude-standard -- '*.fsproj' | xargs --null --max-procs=4 --replace={} sh -c 'cd \"${1%/*}\" && dotnet fantomas check .' _ {}"
   },
   "repository": {
     "type": "git",
@@ -34,11 +36,10 @@
   "homepage": "https://github.com/jamesrweb/advent-of-code#readme",
   "packageManager": "pnpm@12.14.0",
   "engines": {
-    "node": ">=24.21.0"
+    "node": ">=26.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.2",
-    "foreach-cli": "^1.8.1",
     "npm-run-all": "^4.1.5"
   }
 }
