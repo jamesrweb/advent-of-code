@@ -47,16 +47,27 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
   in that year's language of choice (`index.js`, `index.ts`, `index.rb`,
   `index.hs`, `index.py`, `Program.cs`, `Cargo.toml` + `src/`, `composer.json`,
   `package.yaml`, `elm.json`, ...)
-- **foreach-cli placeholder contract:** cross-language scripts use
-  `foreach -g "<glob>" -x "cd '#{dir}' && <tool> '#{base}'" -c`. Valid
-  placeholders are `#{path}` (relative full path), `#{dir}` (absolute
-  directory), `#{base}` (file name), `#{name}`, `#{ext}` — `#{file}` is NOT a
-  placeholder and passes through literally
-- **F# exception:** `format:fsharp` exists but `dotnet format` does not
-  support F# projects — it is excluded from the `format` parade
+- **File iteration lane:** every script lists files with
+  `git ls-files -z --cached --others --exclude-standard -- '<pathspec>'` piped
+  into `xargs --null`, so tracked, staged and untracked-but-not-ignored files
+  are all covered while gitignored output (`obj/`, `bin/`, `node_modules/`)
+  never is. Dir-level tools `cd` into each project directory first
+  (`xargs ... --replace={} sh -c 'cd "${1%/*}" && <tool>' _ {}`); file-level
+  tools are handed paths directly. foreach-cli is retired from scripts: it
+  always exits 0, so it can never gate a check, and its progress output is
+  noise. Scripts use long flags everywhere the tool offers one —
+  `git ls-files -z` is the sole exception, as git publishes no long spelling
+- **F# formatter:** `dotnet format` does not support F# projects, so F# uses
+  Fantomas via `dotnet fantomas` for both `format:fsharp` and `lint:fsharp`.
+  Directory mode is safe by design: Fantomas never opens compiler or package
+  manager folders such as `obj`, so generated files stay out of scope.
+  `format:fsharp` runs with `--json` and discards stdout (`> /dev/null`) so
+  formatting runs are silent — review actual changes via `git diff`; the exit
+  code is unaffected. `lint:fsharp` (check mode) prints nothing on success and
+  names every file needing formatting on failure
 - **Toolchain expectations:** Biome (JS/TS/JSON/CSS/HTML), black (Python),
   cargo fmt (Rust), rubyfmt (Ruby), stylish-haskell (Haskell), dotnet format
-  (C#). Missing language toolchains are runner-installed in CI
+  (C#), Fantomas (F#). Missing language toolchains are runner-installed in CI
 - **Implicit pnpm workspace:** the root \`pnpm-workspace.yaml\` declares the
   year directories (\`2020/_\` ... \`2025/_\`) as workspace packages. Nested
   per-puzzle \`package.json\`s are workspace importers resolved by the single
@@ -65,13 +76,20 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 
 ### Package Management
 
-- **Package manager:** pnpm (`pnpm@12.4.1` via the `packageManager` field —
+- **Package manager:** pnpm (`pnpm@12.14.0` via the `packageManager` field —
   Corepack manages the exact version, never install pnpm globally)
-- **Node.js engine:** `>=24.21.0` (declared in `package.json` `engines`)
+- **Node.js engine:** `>=26.0.0` (declared in `package.json` `engines`)
 - **Lock file:** `pnpm-lock.yaml` is committed. NEVER delete or regenerate it
   casually — run `pnpm install` after dependency changes and commit the result
 - **Install:** `pnpm install --frozen-lockfile` in CI and automation; plain
   `pnpm install` locally
+- **Silent runner:** the `format` and `lint` chains run `run-p --silent`,
+  which suppresses pnpm's per-task command banners while child diagnostics
+  still stream through and failing or missing tasks still exit non-zero.
+  Biome's summary line is silenced by discarding its stdout (`> /dev/null`)
+  — its diagnostics go to stderr, so failures stay visible and exit codes
+  are unaffected. The top `$ …` line pnpm prints for `pnpm format` itself is
+  only avoidable by invoking `pnpm run --silent <script>`
 - **Rust toolchain:** `rust-toolchain.toml` pins `stable`; Dependabot opens
   monthly toolchain update PRs
 
@@ -79,8 +97,9 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 
 - **Per language:** Biome (JS/TS/JSON), black (Python), cargo fmt (Rust),
   rubyfmt (Ruby), stylish-haskell (Haskell, zero-config defaults), dotnet
-  format (C#). Each language formatter runs via the `format:<lang>` scripts
-- **Biome** (`@biomejs/biome@^2.5.13`, schema 2.5.13) is the sole tool for
+  format (C#), Fantomas (F#). Each language formatter runs via the
+  `format:<lang>` scripts
+- **Biome** (`@biomejs/biome@^2.6.2`, schema 2.6.2) is the sole tool for
   JS/TS/JSON/CSS/HTML — never introduce Prettier or ESLint
 - `noExplicitAny` is disabled repo-wide by user choice (puzzle code)
 
@@ -88,7 +107,13 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 
 Every change must pass before being considered complete:
 - `pnpm lint` — biome, black --check, cargo fmt --check, rubyfmt --check,
-  stylish-haskell diff check
+  stylish-haskell diff check, dotnet format --verify-no-changes, fantomas
+  --check
+
+Agents MUST use the `pnpm` scripts rather than invoking the underlying tools
+directly for anything the scripts already take care of (e.g. `pnpm
+format:csharp`, not a hand-typed `dotnet format`). Only step outside the
+scripts for work no script covers.
 
 ### Git Safety
 
@@ -219,30 +244,26 @@ Haskell, Rust, C#, F#, PHP, and Elm.
 
 ## Commands
 
-| Command                           | Purpose                                  |
-| --------------------------------- | ---------------------------------------- |
-| `pnpm format`                     | Run every language formatter (except F#) |
-| `pnpm lint`                       | Run every language check                 |
-| `pnpm format:js` / `pnpm lint:js` | Biome only                               |
-| `pnpm install`                    | Install JS dependencies                  |
+| Command                           | Purpose                      |
+| --------------------------------- | ---------------------------- |
+| `pnpm format`                     | Run every language formatter |
+| `pnpm lint`                       | Run every language check     |
+| `pnpm format:js` / `pnpm lint:js` | Biome only                   |
+| `pnpm install`                    | Install JS dependencies      |
 
 ## CI/CD
 
 - **CI** (`continuous-integration.yml`): Runs on PRs to `main` and
   `workflow_dispatch`. Job: `lint` (all language checks; installs rubyfmt,
-  stylish-haskell, black). Concurrency cancels in-progress runs
+  stylish-haskell, black, fantomas). Concurrency cancels in-progress runs
 - **Dependabot:** Monthly for npm, NuGet, Composer, Cargo, Elm, and
   rust-toolchain ecosystems (wildcard directory scan), each limited to one
   grouped pull request. Semver-major updates are ignored by config
 
 ## Guardrails
 
-- **Never break the placeholder contract** in foreach-based scripts — wrong
-  placeholders pass through literally and fail silently at the tool level
+- **Never gate a check on foreach** — foreach-cli always exits 0 regardless of
+  the underlying command's result; anything that must fail CI iterates files
+  with the `git ls-files` + `xargs` lane instead
 - **Never disable or skip checks** to make a change pass
 - **Never commit generated build output** (`target/`, `bin/`, `obj/`)
-
-## Future Topics
-
-- **F# formatting:** `dotnet format` does not support F# — revisit if an F#
-  formatter becomes viable
