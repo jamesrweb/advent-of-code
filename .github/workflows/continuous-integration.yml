@@ -34,6 +34,7 @@ jobs:
       - name: Install fantomas
         run: |
           dotnet tool install --global fantomas
+          ln -sf fantomas "$HOME/.dotnet/tools/dotnet-fantomas"
           echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
         shell: bash
 

@@ -257,7 +257,8 @@ Haskell, Rust, C#, F#, PHP, and Elm.
   `workflow_dispatch`. Job: `lint` (all language checks; installs
   stylish-haskell, rubyfmt, dotnet, and black via homebrew, plus fantomas as an
   unpinned dotnet tool whose global tools directory is registered on the
-  workflow PATH). Concurrency cancels in-progress runs
+  workflow PATH, with a `dotnet-fantomas` alias shim created for the
+  `dotnet` verb). Concurrency cancels in-progress runs
 - **Dependabot:** Monthly for npm, NuGet, Composer, Cargo, Elm, and
   rust-toolchain ecosystems (wildcard directory scan), each limited to one
   grouped pull request. Semver-major updates are ignored by config
