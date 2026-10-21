@@ -255,8 +255,9 @@ Haskell, Rust, C#, F#, PHP, and Elm.
 
 - **CI** (`continuous-integration.yml`): Runs on PRs to `main` and
   `workflow_dispatch`. Job: `lint` (all language checks; installs
-  stylish-haskell, rubyfmt, dotnet, and black via homebrew, plus fantomas as a
-  dotnet tool). Concurrency cancels in-progress runs
+  stylish-haskell, rubyfmt, dotnet, and black via homebrew, plus fantomas as an
+  unpinned dotnet tool whose global tools directory is registered on the
+  workflow PATH). Concurrency cancels in-progress runs
 - **Dependabot:** Monthly for npm, NuGet, Composer, Cargo, Elm, and
   rust-toolchain ecosystems (wildcard directory scan), each limited to one
   grouped pull request. Semver-major updates are ignored by config

@@ -32,7 +32,9 @@ jobs:
         shell: bash
 
       - name: Install fantomas
-        run: dotnet tool install --global fantomas
+        run: |
+          dotnet tool install --global fantomas
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
         shell: bash
 
       - run: pnpm install --frozen-lockfile
