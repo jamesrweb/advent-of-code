@@ -254,8 +254,8 @@ Haskell, Rust, C#, F#, PHP, and Elm.
 
 ## CI/CD
 
-- **CI** (`continuous-integration.yml`): Runs on PRs to `main` and
-  `workflow_dispatch`. Job: `lint` (all language checks; installs
+- **CI** (`continuous-integration.yml`): Runs on pushes to `main`, all pull
+  requests, and `workflow_dispatch`. Job: `lint` (all language checks; installs
   stylish-haskell, rubyfmt, dotnet, and black via homebrew, plus fantomas as an
   unpinned dotnet tool whose global tools directory is registered on the
   workflow PATH, with a `dotnet-fantomas` alias shim created for the `dotnet`
