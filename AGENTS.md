@@ -4,8 +4,8 @@
 
 1. **Plan first:** Create a detailed plan and get explicit user approval before
    making changes.
-2. **Quality gates:** Every change must pass `pnpm lint` before being
-   considered complete.
+2. **Quality gates:** Every change must pass `pnpm lint` before being considered
+   complete.
 3. **Documentation:** Update `README.md`, `AGENTS.md`, configuration files, and
    any other documentation affected by your changes. Clean as you go — take
    ownership of every file you touch.
@@ -65,9 +65,9 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
   formatting runs are silent — review actual changes via `git diff`; the exit
   code is unaffected. `lint:fsharp` (check mode) prints nothing on success and
   names every file needing formatting on failure
-- **Toolchain expectations:** Biome (JS/TS/JSON/CSS/HTML), black (Python),
-  cargo fmt (Rust), rubyfmt (Ruby), stylish-haskell (Haskell), dotnet format
-  (C#), Fantomas (F#). Missing language toolchains are runner-installed in CI
+- **Toolchain expectations:** Biome (JS/TS/JSON/CSS/HTML), black (Python), cargo
+  fmt (Rust), rubyfmt (Ruby), stylish-haskell (Haskell), dotnet format (C#),
+  Fantomas (F#). Missing language toolchains are runner-installed in CI
 - **Implicit pnpm workspace:** the root \`pnpm-workspace.yaml\` declares the
   year directories (\`2020/_\` ... \`2025/_\`) as workspace packages. Nested
   per-puzzle \`package.json\`s are workspace importers resolved by the single
@@ -83,22 +83,22 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
   casually — run `pnpm install` after dependency changes and commit the result
 - **Install:** `pnpm install --frozen-lockfile` in CI and automation; plain
   `pnpm install` locally
-- **Silent runner:** the `format` and `lint` chains run `run-p --silent`,
-  which suppresses pnpm's per-task command banners while child diagnostics
-  still stream through and failing or missing tasks still exit non-zero.
-  Biome's summary line is silenced by discarding its stdout (`> /dev/null`)
-  — its diagnostics go to stderr, so failures stay visible and exit codes
-  are unaffected. The top `$ …` line pnpm prints for `pnpm format` itself is
-  only avoidable by invoking `pnpm run --silent <script>`
+- **Silent runner:** the `format` and `lint` chains run `run-p --silent`, which
+  suppresses pnpm's per-task command banners while child diagnostics still
+  stream through and failing or missing tasks still exit non-zero. Biome's
+  summary line is silenced by discarding its stdout (`> /dev/null`) — its
+  diagnostics go to stderr, so failures stay visible and exit codes are
+  unaffected. The top `$ …` line pnpm prints for `pnpm format` itself is only
+  avoidable by invoking `pnpm run --silent <script>`
 - **Rust toolchain:** `rust-toolchain.toml` pins `stable`; Dependabot opens
   monthly toolchain update PRs
 
 ### Formatting and Linting
 
 - **Per language:** Biome (JS/TS/JSON), black (Python), cargo fmt (Rust),
-  rubyfmt (Ruby), stylish-haskell (Haskell, zero-config defaults), dotnet
-  format (C#), Fantomas (F#). Each language formatter runs via the
-  `format:<lang>` scripts
+  rubyfmt (Ruby), stylish-haskell (Haskell, zero-config defaults), dotnet format
+  (C#), Fantomas (F#). Each language formatter runs via the `format:<lang>`
+  scripts
 - **Biome** (`@biomejs/biome@^2.6.2`, schema 2.6.2) is the sole tool for
   JS/TS/JSON/CSS/HTML — never introduce Prettier or ESLint
 - `noExplicitAny` is disabled repo-wide by user choice (puzzle code)
@@ -111,8 +111,8 @@ Every change must pass before being considered complete:
   --check
 
 Agents MUST use the `pnpm` scripts rather than invoking the underlying tools
-directly for anything the scripts already take care of (e.g. `pnpm
-format:csharp`, not a hand-typed `dotnet format`). Only step outside the
+directly for anything the scripts already take care of (e.g.
+`pnpm format:csharp`, not a hand-typed `dotnet format`). Only step outside the
 scripts for work no script covers.
 
 ### Git Safety
@@ -170,8 +170,8 @@ project changes. Do not begin implementation until the plan is approved.
 
 ### Testing
 
-- No automated test runner — puzzle answers are verified against the AoC
-  inputs. CI provides lint-only coverage
+- No automated test runner — puzzle answers are verified against the AoC inputs.
+  CI provides lint-only coverage
 
 ### PR Descriptions
 
@@ -196,7 +196,8 @@ legally certify a contribution — the human submitter reviews the AI-generated
 code, takes full responsibility for it, and adds any certification trailers
 themselves. Following the rules the Linux kernel team enforce for AI coding
 assistants, an agent's role in a commit ends at the message body — no
-`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See [AI
+`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See
+[AI
 Coding Assistants — The Linux Kernel documentation]
 (https://docs.kernel.org/process/coding-assistants.html), integrated into this
 ruleset on 2026-09-14.
@@ -235,8 +236,8 @@ Haskell, Rust, C#, F#, PHP, and Elm.
 
 ## Architecture
 
-- `<year>/<day> - <name>/` — puzzle directory with input files (`input.txt`)
-  and the solution in the year's language
+- `<year>/<day> - <name>/` — puzzle directory with input files (`input.txt`) and
+  the solution in the year's language
 - `package.json` — the cross-language script surface (`format:<lang>`,
   `lint:<lang>`)
 - `rust-toolchain.toml` — stable toolchain pin for the Rust puzzles
@@ -257,8 +258,8 @@ Haskell, Rust, C#, F#, PHP, and Elm.
   `workflow_dispatch`. Job: `lint` (all language checks; installs
   stylish-haskell, rubyfmt, dotnet, and black via homebrew, plus fantomas as an
   unpinned dotnet tool whose global tools directory is registered on the
-  workflow PATH, with a `dotnet-fantomas` alias shim created for the
-  `dotnet` verb). Concurrency cancels in-progress runs
+  workflow PATH, with a `dotnet-fantomas` alias shim created for the `dotnet`
+  verb). Concurrency cancels in-progress runs
 - **Dependabot:** Monthly for npm, NuGet, Composer, Cargo, Elm, and
   rust-toolchain ecosystems (wildcard directory scan), each limited to one
   grouped pull request. Semver-major updates are ignored by config
