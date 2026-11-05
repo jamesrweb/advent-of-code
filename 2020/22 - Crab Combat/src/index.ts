@@ -9,7 +9,7 @@ enum Players {
 
 type Player = Array<number>;
 
-function clone(array: Array<any>): Array<any> {
+function clone(array: Array<unknown>): Array<unknown> {
   return JSON.parse(JSON.stringify(array));
 }
 
@@ -33,11 +33,16 @@ function solve_part_one(players: Player[]): number {
   do {
     const first = player_one.shift() || 0;
     const second = player_two.shift() || 0;
-    if (first > second) player_one.push(first, second);
-    else player_two.push(second, first);
+    if (first > second) {
+      player_one.push(first, second);
+    } else {
+      player_two.push(second, first);
+    }
   } while (player_one.length && player_two.length);
 
-  if (player_one.length) return score(player_one);
+  if (player_one.length) {
+    return score(player_one);
+  }
   return score(player_two);
 }
 
@@ -73,11 +78,16 @@ function part_two_helper(players: Player[]): [Players, Player] {
       winner = Players.Two;
     }
 
-    if (winner === Players.One) player_one.push(a, b);
-    else player_two.push(b, a);
+    if (winner === Players.One) {
+      player_one.push(a, b);
+    } else {
+      player_two.push(b, a);
+    }
   }
 
-  if (player_one.length > 0) return [Players.One, player_one];
+  if (player_one.length > 0) {
+    return [Players.One, player_one];
+  }
 
   return [Players.Two, player_two];
 }

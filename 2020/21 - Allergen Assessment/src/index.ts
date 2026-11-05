@@ -75,10 +75,14 @@ function solve_part_two(data: Items): string {
         }
       });
 
-      if (possibilities.length >= 1) allergens.set(first, possibilities);
+      if (possibilities.length >= 1) {
+        allergens.set(first, possibilities);
+      }
     });
 
-    if (![...allergens.values()].some(({ length }) => length > 1)) break;
+    if (![...allergens.values()].some(({ length }) => length > 1)) {
+      break;
+    }
   }
 
   return keys

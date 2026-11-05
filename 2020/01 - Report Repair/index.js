@@ -6,7 +6,9 @@ function solve_part_one(expenses) {
 
   for (const expense of expenses) {
     const target = 2020 - expense;
-    if (checked.has(target)) return target * expense;
+    if (checked.has(target)) {
+      return target * expense;
+    }
     checked.add(expense);
   }
 
@@ -18,8 +20,12 @@ function solve_part_two(expenses) {
 
   for (const outer of expenses) {
     const target = 2020 - outer;
-    if (targets.has(target)) return outer * targets.get(target);
-    for (const inner of expenses) targets.set(outer + inner, outer * inner);
+    if (targets.has(target)) {
+      return outer * targets.get(target);
+    }
+    for (const inner of expenses) {
+      targets.set(outer + inner, outer * inner);
+    }
   }
 
   return null;

@@ -21,7 +21,9 @@ function find_destination_cup(
   while (removed.includes(guess) || !cups.includes(guess)) {
     guess--;
     const smallest = Math.min(...cups);
-    if (guess < smallest) guess = Math.max(...cups);
+    if (guess < smallest) {
+      guess = Math.max(...cups);
+    }
   }
 
   return guess;
@@ -29,7 +31,9 @@ function find_destination_cup(
 
 function find_next_current(cups: Cups, current: number): number {
   const next_index = cups.indexOf(current) + 1;
-  if (next_index >= cups.length) return cups[0];
+  if (next_index >= cups.length) {
+    return cups[0];
+  }
   return cups[next_index];
 }
 
@@ -86,7 +90,9 @@ function part_two_move(lookup: Map<number, ListNode>) {
     } while (lifted.indexOf(next) > -1);
 
     const destination = lookup.get(next);
-    if (typeof destination === "undefined") throw new Error("Impossible!");
+    if (typeof destination === "undefined") {
+      throw new Error("Impossible!");
+    }
 
     const old_next = destination.next;
     destination.next = initial;
@@ -119,10 +125,14 @@ function solve_part_two(cups: Cups): number {
   const run = part_two_move(lookup);
 
   let current: ListNode | undefined = first(data);
-  for (let turn = 1; turn <= 10 ** 7; turn++) current = run(current);
+  for (let turn = 1; turn <= 10 ** 7; turn++) {
+    current = run(current);
+  }
   current = lookup.get(1);
 
-  if (typeof current === "undefined") throw new Error("Impossible!");
+  if (typeof current === "undefined") {
+    throw new Error("Impossible!");
+  }
   return current.next.id * current.next.next.id;
 }
 

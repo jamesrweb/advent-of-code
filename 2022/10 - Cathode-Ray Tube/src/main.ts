@@ -8,11 +8,15 @@ function solve_part_one(instructions: string[]): number {
     const cycles = op === "addx" ? 2 : 1;
 
     for (let i = 0; i < cycles; i++) {
-      if ((cycle - 20) % 40 === 0) sum += cycle * x;
+      if ((cycle - 20) % 40 === 0) {
+        sum += cycle * x;
+      }
       cycle++;
     }
 
-    if (cycles === 2) x += parseInt(v, 10);
+    if (cycles === 2) {
+      x += parseInt(v, 10);
+    }
   }
 
   return sum;
@@ -45,7 +49,9 @@ function solve_part_two(instructions: string[]): string[][] {
       cycle++;
     }
 
-    if (cycles === 2) x += parseInt(v, 10);
+    if (cycles === 2) {
+      x += parseInt(v, 10);
+    }
   }
 
   return image;
@@ -63,7 +69,7 @@ function outputResults(part_one: number, part_two: string[][]): void {
     { part_one, part_two },
     (_, value) => {
       if (Array.isArray(value)) {
-        return value.reduce((accumulator: any[], current: any[]) => {
+        return value.reduce((accumulator: unknown[], current: unknown[]) => {
           accumulator.push(current.join(""));
 
           return accumulator;

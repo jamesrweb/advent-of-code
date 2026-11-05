@@ -39,7 +39,9 @@ function build_rules(
   let regex = "";
   const rule = rules.get(+token);
 
-  if (!rule) return regex;
+  if (!rule) {
+    return regex;
+  }
 
   for (const part of rule.split("|")) {
     regex += "|";
