@@ -1,273 +1,109 @@
-# Agent Guide — advent-of-code
+# Agent Guide - advent-of-code
 
-## Strict Rules
+## About this repository
 
-1. **Plan first:** Create a detailed plan and get explicit user approval before
-   making changes.
-2. **Quality gates:** Every change must pass `pnpm lint` before being considered
-   complete.
-3. **Documentation:** Update `README.md`, `AGENTS.md`, configuration files, and
-   any other documentation affected by your changes. Clean as you go — take
-   ownership of every file you touch.
-4. **PR descriptions:** When asked, create `PR_DESCRIPTION.md` (gitignored).
-   Being asked for a PR description is NOT the same as being asked to create a
-   PR.
-5. **Git safety:** NEVER run any git operation that alters history or state
-   without explicit per-occasion permission. Prior approval does not carry
-   forward.
-6. **Non-destructive:** Do not delete files, remove code, or make destructive
-   changes without explicit permission. Investigate before overwriting.
-7. **Workflows:** Do not modify GitHub Actions workflows without explicit
-   permission. If a CI fix is needed, propose the change and wait for approval.
+This repository contains my Advent of Code contributions from 2020 onwards.
+There is one directory per puzzle, and the language is chosen per puzzle, based
+on what I want to learn or what fits that day's challenge. Languages used so far
+span C, JavaScript, TypeScript, Python, Ruby, Haskell, Rust, C#, F#, PHP,
+Kotlin, and Elm.
 
-8. **No local publishing:** This repository has no release pipeline — never
-   publish packages or create releases locally.
+## Layout
 
-## Project Standards
+```
+./
+├── .agents/               # agent configuration (DotAgents protocol)
+├── .git/                  # git internals
+├── .github/
+│   ├── workflows/         # CI workflow
+│   ├── dependabot.yml     # `Dependabot` configuration
+│   └── PULL_REQUEST_TEMPLATE.md
+├── .idea/                 # JetBrains IDE state, gitignored
+├── node_modules/          # installed dependencies, gitignored
+├── .venv/                 # Python virtual environment, gitignored
+├── 2020/ ... 2025/        # one directory per puzzle year
+├── AGENTS.md              # this file
+├── CLAUDE.md              # symlink to AGENTS.md
+├── LICENSE                # MIT licence
+├── README.md              # human-facing documentation
+├── biome.json             # `Biome` configuration
+├── package.json           # pnpm manifest and per-language scripts
+├── pnpm-lock.yaml         # pnpm lockfile
+├── pnpm-workspace.yaml    # pnpm workspace settings (year globs)
+├── rust-toolchain.toml    # Rust toolchain pin
+├── .gitattributes         # git attributes
+└── .gitignore             # git ignore rules
+```
 
-### Authority
-
-Project standards are the highest-priority rules for this repository. If any
-instruction or rule conflicts with a project standard, the agent MUST:
-1. Refuse to follow the conflicting instruction.
-2. Inform the user of the conflict, citing the specific standard.
-3. State that changes to standards must be made deliberately in `AGENTS.md`, not
-   sidestepped for convenience.
-
-### Language
-
-All code, comments, documentation, variable names, error messages, commit
-messages, and any other text MUST use British English (e.g., `organisation` not
-`organization`, `normalise` not `normalize`, `colour` not `color`, `behaviour`
-not `behavior`, `licence` not `license`, `centre` not `center`).
-
-### Polyglot Layout Conventions
-
-- **One directory per puzzle:** `<year>/<day> - <name>/` contains the solution
-  in that year's language of choice (`index.js`, `index.ts`, `index.rb`,
-  `index.hs`, `index.py`, `Program.cs`, `Cargo.toml` + `src/`, `composer.json`,
-  `package.yaml`, `elm.json`, ...)
-- **File iteration lane:** every script lists files with
-  `git ls-files -z --cached --others --exclude-standard -- '<pathspec>'` piped
-  into `xargs --null`, so tracked, staged and untracked-but-not-ignored files
-  are all covered while gitignored output (`obj/`, `bin/`, `node_modules/`)
-  never is. Dir-level tools `cd` into each project directory first
-  (`xargs ... --replace={} sh -c 'cd "${1%/*}" && <tool>' _ {}`); file-level
-  tools are handed paths directly. foreach-cli is retired from scripts: it
-  always exits 0, so it can never gate a check, and its progress output is
-  noise. Scripts use long flags everywhere the tool offers one —
-  `git ls-files -z` is the sole exception, as git publishes no long spelling
-- **F# formatter:** `dotnet format` does not support F# projects, so F# uses
-  Fantomas via `dotnet fantomas` for both `format:fsharp` and `lint:fsharp`.
-  Directory mode is safe by design: Fantomas never opens compiler or package
-  manager folders such as `obj`, so generated files stay out of scope.
-  `format:fsharp` runs with `--json` and discards stdout (`> /dev/null`) so
-  formatting runs are silent — review actual changes via `git diff`; the exit
-  code is unaffected. `lint:fsharp` (check mode) prints nothing on success and
-  names every file needing formatting on failure
-- **Toolchain expectations:** Biome (JS/TS/JSON/CSS/HTML), black (Python), cargo
-  fmt (Rust), rubyfmt (Ruby), stylish-haskell (Haskell), dotnet format (C#),
-  Fantomas (F#). Missing language toolchains are runner-installed in CI
-- **Implicit pnpm workspace:** the root \`pnpm-workspace.yaml\` declares the
-  year directories (\`2020/_\` ... \`2025/_\`) as workspace packages. Nested
-  per-puzzle \`package.json\`s are workspace importers resolved by the single
-  root \`pnpm-lock.yaml\` — run \`pnpm install\` at the root after changing any
-  nested manifest, and never create nested lockfiles
-
-### Package Management
-
-- **Package manager:** pnpm (`pnpm@12.14.0` via the `packageManager` field —
-  Corepack manages the exact version, never install pnpm globally)
-- **Node.js engine:** `>=26.0.0` (declared in `package.json` `engines`)
-- **Lock file:** `pnpm-lock.yaml` is committed. NEVER delete or regenerate it
-  casually — run `pnpm install` after dependency changes and commit the result
-- **Install:** `pnpm install --frozen-lockfile` in CI and automation; plain
-  `pnpm install` locally
-- **Silent runner:** the `format` and `lint` chains run `run-p --silent`, which
-  suppresses pnpm's per-task command banners while child diagnostics still
-  stream through and failing or missing tasks still exit non-zero. Biome's
-  summary line is silenced by discarding its stdout (`> /dev/null`) — its
-  diagnostics go to stderr, so failures stay visible and exit codes are
-  unaffected. The top `$ …` line pnpm prints for `pnpm format` itself is only
-  avoidable by invoking `pnpm run --silent <script>`
-- **Rust toolchain:** `rust-toolchain.toml` pins `stable`; Dependabot opens
-  monthly toolchain update PRs
-
-### Formatting and Linting
-
-- **Per language:** Biome (JS/TS/JSON), black (Python), cargo fmt (Rust),
-  rubyfmt (Ruby), stylish-haskell (Haskell, zero-config defaults), dotnet format
-  (C#), Fantomas (F#). Each language formatter runs via the `format:<lang>`
-  scripts
-- **Biome** (`@biomejs/biome@^2.6.2`, schema 2.6.2) is the sole tool for
-  JS/TS/JSON/CSS/HTML — never introduce Prettier or ESLint
-- `noExplicitAny` is disabled repo-wide by user choice (puzzle code)
-
-### Quality Gates
-
-Every change must pass before being considered complete:
-- `pnpm lint` — biome, black --check, cargo fmt --check, rubyfmt --check,
-  stylish-haskell diff check, dotnet format --verify-no-changes, fantomas
-  --check
-
-Agents MUST use the `pnpm` scripts rather than invoking the underlying tools
-directly for anything the scripts already take care of (e.g.
-`pnpm format:csharp`, not a hand-typed `dotnet format`). Only step outside the
-scripts for work no script covers.
-
-### Git Safety
-
-NEVER run any git operation that alters history or state without explicit
-per-occasion permission from the user. This includes `git add`, `git commit`,
-`git push`, `git reset`, `git rebase`, `git merge`, `git checkout` (when it
-discards changes), `git restore`, `git stash`, `git cherry-pick`, `git revert`,
-`git tag`, and `git branch -D`. Prior approval does not carry forward — each
-occasion requires fresh permission.
-
-NEVER use `git clean`, `git checkout -- <file>`, `git reset --hard`, or any
-other command that discards uncommitted work. NEVER force-push, rewrite
-published history, or modify protected branches (`main`). Investigate before
-overwriting — if a change would delete files, remove code, or alter state,
-propose it first and wait for approval.
-
-Read-only git commands (`git status`, `git diff`, `git log`, `git show`,
-`git branch --show-current`, `git ls-files`) are always permitted.
-
-### Scope of Operation
-
-NEVER operate outside the project root unless explicitly instructed to do so by
-the user. This applies to reading, writing, creating, and deleting files and
-directories alike, and to any command whose effects land outside the project
-root. Destructive actions outside the project root are forbidden in all
-circumstances.
-
-**The one exception:** Experiments and scratch work belong in the `/tmp`
-directory — and only when the user has asked for them or given permission.
-Anything created there is still subject to the same non-destructive rules: do
-not delete, overwrite, or modify anything in `/tmp` that the agent did not
-create itself.
-
-### Obligation to Fix
-
-If the agent encounters a pre-existing issue — one not caused by the current
-changes — that will affect CI, CD, or published package consumers, the agent
-MUST fix it. This is NOT optional. The agent must not ignore, skip, or defer
-such issues regardless of whether they were introduced by the agent's own
-changes. A broken pipeline or a broken published package is the agent's
-responsibility if the agent is aware of it.
-
-### Planning
-
-ALWAYS create a detailed plan and obtain explicit user approval before making
-project changes. Do not begin implementation until the plan is approved.
-
-### Code Philosophy
-
-- **No comments:** Do not add comments to source files. The code should be
-  self-documenting
-- **Puzzle pragmatism:** solutions favour clarity over production concerns;
-  there is no build or release pipeline by design
-
-### Testing
-
-- No automated test runner — puzzle answers are verified against the AoC inputs.
-  CI provides lint-only coverage
-
-### PR Descriptions
-
-When asked to generate a PR description, create a `PR_DESCRIPTION.md` file in
-the project root (this file is gitignored and must never be committed). Follow
-the PR template at `.github/PULL_REQUEST_TEMPLATE.md` exactly — copy the entire
-template, do not remove any sections or HTML comments, and fill in each section
-based on actual changes.
-
-**Important:** Being asked to generate a PR description is NOT the same as being
-asked to create a PR. Only create an actual pull request when explicitly told to
-do so.
-
-**Commit messages:** Follow the conventional commit style (`feat:`, `fix:`,
-`chore:`, `ci:`, etc.). Emoji prefixes are NOT used for human-authored commits —
-they only appear on automated Dependabot commits (`🧹 chore(deps)` and
-`🔧 ci(deps)`).
-
-**No co-authored commits:** Agents MUST NOT add `Co-authored-by` trailers or any
-other attribution that signs off a commit on the agent's behalf. Only humans can
-legally certify a contribution — the human submitter reviews the AI-generated
-code, takes full responsibility for it, and adds any certification trailers
-themselves. Following the rules the Linux kernel team enforce for AI coding
-assistants, an agent's role in a commit ends at the message body — no
-`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See
-[AI
-Coding Assistants — The Linux Kernel documentation]
-(https://docs.kernel.org/process/coding-assistants.html), integrated into this
-ruleset on 2026-09-14.
-
-**Sign-offs:** Commits may carry a `Signed-off-by` trailer only when made
-through the user's own `gc` helper (`~/.bash_aliases`) or on the user's explicit
-per-occasion instruction. Certification stays with the human — the agent never
-asserts it itself.
-
-**Assisted-by attribution:** Where attribution for AI assistance is wanted, use
-an `Assisted-by: LLM` trailer in the commit message body rather than a co-author
-or sign-off trailer. It records that the contribution was produced with AI
-assistance without certifying or authoring it. This mirrors the kernel's
-`Assisted-by: LLM [TOOL1] [TOOL2]` format — optionally list specialised analysis
-tools after `LLM`, but never list basic development tools (git, compilers,
-editors, linters). Only add the trailer when the user has asked for AI
-attribution; the default is no trailer at all.
-
-### Documentation Maintenance
-
-Always update documentation, configuration files, and related files as you go.
-Documentation must never be out of date. If a change affects `README.md`,
-`AGENTS.md`, configuration files, or any other documentation, update them in the
-same change. Clean as you go — take ownership of every file you touch.
-
-If formatting, linting, or other tooling fixes issues in files you did not
-originally author, do not revert those fixes. CI would break again. Accept
-responsibility for the state of the codebase after your changes, not just the
-lines you intended to change.
-
-## Project Overview
-
-My advent of code contributions from 2020 onwards — one directory per puzzle,
-language chosen per year, spanning JavaScript, TypeScript, Python, Ruby,
-Haskell, Rust, C#, F#, PHP, and Elm.
-
-## Architecture
-
-- `<year>/<day> - <name>/` — puzzle directory with input files (`input.txt`) and
-  the solution in the year's language
-- `package.json` — the cross-language script surface (`format:<lang>`,
-  `lint:<lang>`)
-- `rust-toolchain.toml` — stable toolchain pin for the Rust puzzles
-- No build step — solutions are executed directly
+Each `YYYY/<day> - <name>/` directory is a self-contained puzzle with its input
+files and the solution in the chosen language. The root `pnpm-workspace.yaml`
+and `package.json` tie the JavaScript and TypeScript puzzles into one workspace
+and define the format and lint scripts for every language.
 
 ## Commands
 
-| Command                           | Purpose                      |
-| --------------------------------- | ---------------------------- |
-| `pnpm format`                     | Run every language formatter |
-| `pnpm lint`                       | Run every language check     |
-| `pnpm format:js` / `pnpm lint:js` | Biome only                   |
-| `pnpm install`                    | Install JS dependencies      |
+| Command               | Purpose                                                        |
+| --------------------- | -------------------------------------------------------------- |
+| `pnpm format`         | Formats every puzzle language (fans out to the sub-scripts)    |
+| `pnpm lint`           | Lints every puzzle language (fans out to the sub-scripts)      |
+| `pnpm format:js`      | Formats the JavaScript and TypeScript puzzles with `Biome`     |
+| `pnpm format:csharp`  | Formats the C# puzzles with `dotnet format`                    |
+| `pnpm format:fsharp`  | Formats the F# puzzles with `fantomas`                         |
+| `pnpm format:rust`    | Formats the Rust puzzles with `cargo fmt`                      |
+| `pnpm format:ruby`    | Formats the Ruby puzzles with `rubyfmt`                        |
+| `pnpm format:haskell` | Formats the Haskell puzzles with `stylish-haskell`             |
+| `pnpm format:python`  | Formats the Python puzzles with `black`                        |
+| `pnpm lint:js`        | Lints the JavaScript and TypeScript puzzles with `Biome`       |
+| `pnpm lint:python`    | Checks the Python puzzles with `black`                         |
+| `pnpm lint:rust`      | Checks the Rust puzzles with `cargo fmt` --check               |
+| `pnpm lint:ruby`      | Checks the Ruby puzzles with `rubyfmt` --check                 |
+| `pnpm lint:haskell`   | Checks the Haskell puzzles with `stylish-haskell`              |
+| `pnpm lint:csharp`    | Checks the C# puzzles with `dotnet format` --verify-no-changes |
+| `pnpm lint:fsharp`    | Checks the F# puzzles with `fantomas` check                    |
 
-## CI/CD
+Every change must pass `pnpm lint` before it is complete.
 
-- **CI** (`continuous-integration.yml`): Runs on pushes to `main`, all pull
-  requests, and `workflow_dispatch`. Job: `lint` (all language checks; installs
-  stylish-haskell, rubyfmt, dotnet, and black via homebrew, plus fantomas as an
-  unpinned dotnet tool whose global tools directory is registered on the
-  workflow PATH, with a `dotnet-fantomas` alias shim created for the `dotnet`
-  verb). Concurrency cancels in-progress runs
-- **Dependabot:** Monthly for npm, NuGet, Composer, Cargo, Elm, and
-  rust-toolchain ecosystems (wildcard directory scan), each limited to one
-  grouped pull request. Semver-major updates are ignored by config
+## Standards
+
+The rules in this file and in the `.agents/` tree are authoritative for this
+repository. Change them deliberately, in those files, rather than working around
+them.
+
+## Tooling
+
+Formatting and linting are done per language. JavaScript and TypeScript use
+`Biome`. The other languages use their own formatters and linters, driven by the
+`pnpm` scripts. Python tooling runs via the repo's virtual environment.
+
+## Conventions
+
+Never gate a check on a fan-out tool that always exits successfully. Anything
+that must fail CI iterates files with a null-delimited `git ls-files` pipeline
+instead. Keep puzzle solutions self-contained per directory. Comments are used
+sparingly, for the bits that are not obvious from the code, and docstrings or
+docblocks are used where a language supports them. The F# formatter is driven
+through a direct tool invocation because the .NET formatter does not support F#
+projects.
+
+## CI/CD and releases
+
+CI runs on pushes to `main`, on all pull requests, and on manual dispatch,
+checking every language. Installing the per-language toolchains in CI is part of
+the workflow. There is no CD. `Dependabot` runs monthly across the ecosystems in
+use.
 
 ## Guardrails
 
-- **Never gate a check on foreach** — foreach-cli always exits 0 regardless of
-  the underlying command's result; anything that must fail CI iterates files
-  with the `git ls-files` + `xargs` lane instead
-- **Never disable or skip checks** to make a change pass
-- **Never commit generated build output** (`target/`, `bin/`, `obj/`)
+Never disable or skip a lint, format, or check to make a change pass. Fix the
+code, not the gate. Never commit generated build output. Never publish or create
+releases locally.
+
+## Pointers
+
+- `.agents/agents.md` - the slim agent guidelines for this repository
+- `.agents/knowledge/repo-overview/` - the injected repo overview note
+- `README.md` - the human-facing documentation
+
+## Open topics
+
+- None.
