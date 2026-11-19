@@ -12,6 +12,7 @@ obj/
 elm-stuff/
 node_modules/
 dist/
+dist-newstyle/
 vendor/
 target/
 *.exe
@@ -21,7 +22,6 @@ target/
 tempCodeRunnerFile.*
 .stack-work/
 stack.yaml.lock
-*.cabal
 *.o
 *.hi
 index
