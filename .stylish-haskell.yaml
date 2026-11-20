@@ -1,0 +1,11 @@
+steps:
+  - records:
+      equals: same_line
+      first_field: same_line
+      field_comment: 2
+      deriving: 2
+      via: same_line
+  - simple_align: {}
+  - imports: {}
+  - language_pragmas: {}
+  - trailing_whitespace: {}

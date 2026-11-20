@@ -7,7 +7,7 @@ type Height = Int
 type Visible = Bool
 
 data Tree = Tree Height Visible
-  deriving (Show, Eq)
+  deriving (Eq, Show)
 
 readTree :: Char -> Tree
 readTree h = Tree (read [h]) False
