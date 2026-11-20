@@ -1,0 +1,11 @@
+cabal-version:      3.18
+name:               movie-theater
+version:            0.1.0.0
+build-type:         Simple
+
+executable movie-theater
+    main-is:          Main.hs
+    build-depends:    base
+    hs-source-dirs:   app
+    default-language: GHC2024
+    ghc-options:      -Wall
