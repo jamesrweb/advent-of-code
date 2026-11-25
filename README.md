@@ -67,9 +67,9 @@ the root workspace with `pnpm install`.
 ```
 
 Each puzzle's solution runs with its own language's toolchain. JavaScript
-puzzles run with `node`, TypeScript puzzles via their own manifest, Python
-with `python3`, Ruby with `ruby`, Haskell with `stylish-haskell`, Rust with
-`cargo`, C# and F# with `dotnet`, and Elm puzzles with `elm`.
+puzzles run with `node`, TypeScript puzzles via their own manifest, Python with
+`python3`, Ruby with `ruby`, Haskell with `stylish-haskell`, Rust with `cargo`,
+C# and F# with `dotnet`, and Elm puzzles with `elm`.
 
 ## Development
 
