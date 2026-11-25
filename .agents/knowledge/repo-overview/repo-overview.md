@@ -21,9 +21,8 @@ Python, Ruby, Haskell, Rust, C#, F#, PHP, Kotlin, and Elm.
   solution in the chosen language
 - The root `pnpm-workspace.yaml` ties the puzzles that have a `package.json`
   into a single workspace with one root lockfile. Never create nested lockfiles.
-  Run `pnpm install` at the root after changing any nested manifest. For the
-  other languages the root `package.json` only defines the format and lint
-  scripts.
+  For the other languages the root `package.json` only defines the format and
+  lint scripts.
 - `rust-toolchain.toml` pins the Rust toolchain.
 
 ## Commands
@@ -37,7 +36,8 @@ The root scripts fan out per language:
 - Per-language sub-scripts iterate files with a null-delimited
   `git ls-files -z | xargs --null` pipeline and `cd` into each file's directory.
   Never gate a check on a fan-out tool that always exits 0.
-- `pnpm install` installs the whole workspace from the root lockfile.
+- Run `pnpm install` at the root to install the whole workspace from the root
+  lockfile after changing any nested manifest.
 
 ## CI/CD
 

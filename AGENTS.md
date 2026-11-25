@@ -11,28 +11,31 @@ Kotlin, and Elm.
 ## Layout
 
 ```
-./
+./                         # repository root
 ├── .agents/               # agent configuration (DotAgents protocol)
 ├── .git/                  # git internals
-├── .github/
-│   ├── workflows/         # CI workflow
-│   ├── dependabot.yml     # `Dependabot` configuration
-│   └── PULL_REQUEST_TEMPLATE.md
+├── .github/               # CI workflow, Dependabot config, PR template
 ├── .idea/                 # JetBrains IDE state, gitignored
-├── node_modules/          # installed dependencies, gitignored
 ├── .venv/                 # Python virtual environment, gitignored
-├── 2020/ ... 2025/        # one directory per puzzle year
+├── 2020/                  # puzzles for 2020
+├── 2021/                  # puzzles for 2021
+├── 2022/                  # puzzles for 2022
+├── 2023/                  # puzzles for 2023
+├── 2024/                  # puzzles for 2024
+├── 2025/                  # puzzles for 2025
+├── node_modules/          # installed dependencies, gitignored
+├── .gitattributes         # git attributes
+├── .gitignore             # git ignore rules
+├── .stylish-haskell.yaml  # stylish-haskell configuration
 ├── AGENTS.md              # this file
+├── biome.json             # Biome configuration
 ├── CLAUDE.md              # symlink to AGENTS.md
 ├── LICENSE                # MIT licence
-├── README.md              # human-facing documentation
-├── biome.json             # `Biome` configuration
 ├── package.json           # pnpm manifest and per-language scripts
 ├── pnpm-lock.yaml         # pnpm lockfile
 ├── pnpm-workspace.yaml    # pnpm workspace settings (year globs)
-├── rust-toolchain.toml    # Rust toolchain pin
-├── .gitattributes         # git attributes
-└── .gitignore             # git ignore rules
+├── README.md              # human-facing documentation
+└── rust-toolchain.toml    # Rust toolchain pin
 ```
 
 Each `YYYY/<day> - <name>/` directory is a self-contained puzzle with its input
