@@ -3,9 +3,9 @@
 My Advent of Code contributions. Advent of Code is a yearly Advent calendar of
 small programming puzzles that can be solved in any language. I use it to learn
 languages and practise problem solving, so each puzzle directory under a year
-folder uses whichever language I chose for that day's challenge. Earlier years
-also include a per-year `README.md` summarising each challenge, the language
-used, and the stars earned.
+folder uses whichever language I chose for that day's challenge. Each year also
+includes a per-year `README.md` summarising each challenge, the language used,
+and the stars earned.
 
 ## Features
 
@@ -14,7 +14,7 @@ used, and the stars earned.
 - Languages vary per puzzle by choice. `JavaScript`, `TypeScript`, `Python`,
   `Ruby`, `Haskell`, `Rust`, `C`, `C#`, `F#`, `PHP`, `Kotlin`, and `Elm` have
   all been used
-- Per-year summaries in the earlier years with per-day results tables
+- Per-year summaries with per-day results tables
 
 ## Installation
 
