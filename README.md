@@ -97,9 +97,12 @@ during the event.
 
 ## Documentation
 
-Each puzzle directory is self-contained. The earlier year directories include a
-per-year `README.md` with results tables. Agent-facing docs for this repo live
-in `AGENTS.md` and `.agents/`.
+Each puzzle directory is self-contained. Each year directory includes a per-year
+`README.md` with a results table per challenge and per-day statistics tables.
+Every submitted part has a `Time`/`Rank`/`Score` row, using `>24h` for times
+over a day, `-` when there is no rank, and `0` when there is no score. Parts
+with no submitted solution omit the part table. Agent-facing docs for this repo
+live in `AGENTS.md` and `.agents/`.
 
 ## Licence
 

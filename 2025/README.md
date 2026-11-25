@@ -40,13 +40,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 2
 
@@ -54,13 +54,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 3
 
@@ -68,13 +68,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 4
 
@@ -82,13 +82,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 5
 
@@ -96,13 +96,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 6
 
@@ -110,13 +110,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 7
 
@@ -124,13 +124,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 8
 
@@ -138,13 +138,13 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 ### Day 9
 
@@ -152,10 +152,10 @@ Some items worth nothing here:
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
 
 #### Part Two
 
 | Time | Rank | Score |
 | ---- | ---- | ----- |
-| >24h |      |       |
+| >24h | -    | 0     |
