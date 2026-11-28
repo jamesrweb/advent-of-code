@@ -48,7 +48,7 @@ the root workspace with `pnpm install`.
 ## Repository layout
 
 ```
-./
+./                         # repository root
 ├── .agents/               # agent configuration (DotAgents protocol)
 ├── .github/               # CI workflow, Dependabot config, PR template
 ├── 2020/ ... 2025/        # one directory per puzzle, grouped by year

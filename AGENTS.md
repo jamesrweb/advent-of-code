@@ -17,12 +17,7 @@ Kotlin, and Elm.
 ├── .github/               # CI workflow, Dependabot config, PR template
 ├── .idea/                 # JetBrains IDE state, gitignored
 ├── .venv/                 # Python virtual environment, gitignored
-├── 2020/                  # puzzles for 2020
-├── 2021/                  # puzzles for 2021
-├── 2022/                  # puzzles for 2022
-├── 2023/                  # puzzles for 2023
-├── 2024/                  # puzzles for 2024
-├── 2025/                  # puzzles for 2025
+├── <YYYY>/                # one directory per puzzle year
 ├── node_modules/          # installed dependencies, gitignored
 ├── .gitattributes         # git attributes
 ├── .gitignore             # git ignore rules
